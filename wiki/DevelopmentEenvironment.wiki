@@ -1,13 +1,21 @@
-#summary One-sentence summary of this page.
+#summary Описание конфигурации среды разработки.
 
-= Introduction =
+= Введение =
 
-Add your content here.
+В качестве основной среды разработки используется платформа WindowsXP SP2, с развернутым окружением в виде VisualStudio 2008 Express SP1 и SQL Server 2008\2005 Express.
+
+Но в дальнейшем есть планы сделать поддержку следующей среды разработки: SharpDevelop 3.1, MySQL и XSP для Mono 2.4 в качестве веб-сервера.
 
 
-= Details =
+= Конфигурация среды разработки для Windows =
 
-Add your content here.  Format your content with:
-  * Text in *bold* or _italic_
-  * Headings, paragraphs, and lists
-  * Automatic links to other wiki pages
+Необходимо развернуть следующие компоненты:
+  * VisualStudio 2008 Express SP1
+  * SQL Server 2008 Express (желательно SP1)
+Все эти компоненты можно установить используя [http://www.microsoft.com/web/downloads/default.aspx Microsoft Web Platform Installer].
+
+
+Желательно так же иметь следующие компоненты:
+  * ASP.NET MVC 1.0
+  * T4Toolbox 9.1.20.1
+  * Клиент для Subversion (можно TortoiseSVN 1.6.5)
