@@ -168,11 +168,12 @@ namespace Beavers.Encounter.Web.Controllers
         [ValidateAntiForgeryToken]
         [Transaction]
         [AcceptVerbs(HttpVerbs.Post)]
-        public ActionResult AccelerateTask()
+        public ActionResult AccelerateTask(int activeTaskStateId)
         {
             Team team = teamRepository.Get(User.Team.Id);
             if (team.TeamGameState != null &&
                 team.TeamGameState.ActiveTaskState != null &&
+                team.TeamGameState.ActiveTaskState.Id == activeTaskStateId &&
                 team.TeamGameState.ActiveTaskState.Task.TaskType == (int)TaskTypes.NeedForSpeed)
             {
                 gameService.AccelerateTask(team.TeamGameState.ActiveTaskState);
