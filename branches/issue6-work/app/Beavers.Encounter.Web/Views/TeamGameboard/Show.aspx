@@ -47,7 +47,7 @@
         { %>
             <p/>
             <% 
-            using (Html.BeginForm<TeamGameboardController>(c => c.AccelerateTask(), FormMethod.Post)) 
+            using (Html.BeginForm<TeamGameboardController>(c => c.AccelerateTask(Model.ActiveTaskState.Id), FormMethod.Post)) 
             { %>
                 <%= Html.AntiForgeryToken() %>
                 <div>
