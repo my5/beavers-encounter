@@ -81,6 +81,10 @@ namespace Beavers.Encounter.ApplicationServices
             if (teamGameState == null || teamGameState.ActiveTaskState == null)
                 return;
 
+            // Для заданий с выбором подсказок ничерта не делаем
+            if (teamGameState.ActiveTaskState.Task.TaskType == (int)TaskTypes.RussianRoulette)
+                return;
+
             // время выполнения задания
             TimeSpan taskTime = DateTime.Now - teamGameState.ActiveTaskState.TaskStartTime;
 
