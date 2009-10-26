@@ -394,6 +394,14 @@ namespace Beavers.Encounter.ApplicationServices
             taskService.AccelerateTask(teamTaskState);
         }
 
+        /// <summary>
+        /// Возвращает варианты выбора подсказок, если это необходимо для задания с выбором подсказки.
+        /// </summary>
+        public IEnumerable<Tip> GetSuggestTips(TeamTaskState teamTaskState)
+        {
+            return taskService.GetSuggestTips(teamTaskState);
+        }
+
         #endregion Управление заданиями
     }
 }
