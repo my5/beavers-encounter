@@ -71,21 +71,19 @@
             { %>
                 <span>
                 <%
-                string color = String.Empty;
                 string colorText = String.Empty;
                 int tipPos = Model.ActiveTaskState.Task.Tips.TipPosition(tip);
                 switch (tipPos)
                 {
-                    case 1: { color = "color:Red"; colorText = "Красная"; break; }
-                    case 2: { color = "color:Green"; colorText = "Зеленая"; break; }
-                    case 3: { color = "color:Blue"; colorText = "Синяя"; break; }
+                    case 1: { colorText = "50x50"; break; }
+                    case 2: { colorText = "Звонок другу"; break; }
+                    case 3: { colorText = "Подсказка зала"; break; }
                 }
                 
                 using (Html.BeginForm<TeamGameboardController>(c => c.SelectTip(Model.ActiveTaskState.Id, tip.Id), FormMethod.Post)) 
                 { %>
                     <%= Html.AntiForgeryToken() %>
-                    <%= Html.SubmitButton(String.Format("btnSelectTip{0}", tipPos), colorText,
-                        new Dictionary<string, object> { { "style", color } })%>
+                    <%= Html.SubmitButton(String.Format("btnSelectTip{0}", tipPos), colorText)%>
                 <% 
                 } %> 
                 </span>
