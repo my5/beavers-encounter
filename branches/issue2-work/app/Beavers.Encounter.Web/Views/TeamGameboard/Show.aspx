@@ -52,8 +52,11 @@
             using (Html.BeginForm<TeamGameboardController>(c => c.AccelerateTask(Model.ActiveTaskState.Id), FormMethod.Post)) 
             { %>
                 <%= Html.AntiForgeryToken() %>
+                <div style="color:Yellow">
+                Внимание! После нажатия кнопки, время на выполнение задание останется <%= Model.TeamGameState.Game.TimePerTask - Model.ActiveTaskState.Task.Tips.Last(x => x.SuspendTime > 0).SuspendTime %> минут, вы уверены, что всё готово?
+                </div>
                 <div>
-                    <%= Html.SubmitButton("btnAccelerateTask", "Ускориться", new Dictionary<string, object> { { "onclick", "return confirm('Are you sure?');" } })%>
+                    <%= Html.SubmitButton("btnAccelerateTask", "Все готово!", new Dictionary<string, object> { { "onclick", "return confirm('Are you sure?');" } })%>
                 </div>
             <% 
             } 
