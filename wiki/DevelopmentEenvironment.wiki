@@ -11,11 +11,11 @@
 
 Необходимо развернуть следующие компоненты:
   * VisualStudio 2008 Express SP1
+  * ASP.NET MVC 2.0
   * SQL Server 2008 Express (желательно SP1)
 Все эти компоненты можно установить используя [http://www.microsoft.com/web/downloads/default.aspx Microsoft Web Platform Installer].
 
 
 Желательно так же иметь следующие компоненты:
-  * ASP.NET MVC 1.0
   * T4Toolbox 9.1.20.1
   * Клиент для Subversion (можно TortoiseSVN 1.6.5)
