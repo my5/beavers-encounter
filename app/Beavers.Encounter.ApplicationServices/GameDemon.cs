@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Threading;
 using System.Web;
@@ -18,11 +19,26 @@ namespace Beavers.Encounter.ApplicationServices
         // Не позволяем производить пересчет состояния чаще 2 секунд
         public int MinimalRecalcPeriod = 2;
 
-        public GameDemon(IRecalcGameStateService recalcGameStateService)
+        private GameDemon(IRecalcGameStateService recalcGameStateService)
         {
             Check.Require(recalcGameStateService != null, "recalcGameStateService may not be null");
 
             this.recalcGameStateService = recalcGameStateService;
+        }
+
+        private static readonly Dictionary<int, GameDemon> instance = new Dictionary<int, GameDemon>();
+        private static readonly Object syncRoot = new Object();
+        public static GameDemon GetInstance(IRecalcGameStateService recalcGameStateService)
+        {
+            lock (syncRoot)
+            {
+                if (!instance.ContainsKey(recalcGameStateService.GameId))
+                {
+                    instance.Add(recalcGameStateService.GameId,
+                                 new GameDemon(recalcGameStateService));
+                }
+                return instance[recalcGameStateService.GameId];
+            }
         }
 
         public void Start()

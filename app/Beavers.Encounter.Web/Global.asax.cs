@@ -1,4 +1,6 @@
-﻿using Castle.Windsor;
+﻿using System.Linq;
+using Beavers.Encounter.ApplicationServices;
+using Castle.Windsor;
 using CommonServiceLocator.WindsorAdapter;
 using Microsoft.Practices.ServiceLocation;
 using MvcContrib.Castle;
@@ -16,6 +18,7 @@ using Beavers.Encounter.Web.Controllers;
 using Beavers.Encounter.Data.NHibernateMaps;
 using Beavers.Encounter.Web.CastleWindsor;
 using Beavers.Encounter.Core;
+using SharpArch.Core.PersistenceSupport;
 
 namespace Beavers.Encounter.Web
 {
@@ -94,6 +97,21 @@ namespace Beavers.Encounter.Web
                 new string[] { Server.MapPath("~/bin/Beavers.Encounter.Data.dll") },
                 new AutoPersistenceModelGenerator().Generate(),
                 Server.MapPath("~/NHibernate.config"));
+
+            Repository<Game> gameRepository = new Repository<Game>();
+            foreach (var game in gameRepository.GetAll().Where(x => x.GameState == GameStates.Started))
+            {
+                var sl = ServiceLocator.Current.GetInstance<IServiceLocator>();
+                var taskService = sl.GetInstance<ITaskService>();
+                var teamRepository = sl.GetInstance<IRepository<Team>>();
+                var teamGameStateRepository = sl.GetInstance<IRepository<TeamGameState>>();
+
+                var gameService = new GameService(gameRepository, teamRepository, teamGameStateRepository, taskService); 
+                
+                var demon = GameDemon.GetInstance(new RecalcGameStateService(
+                    game.Id, gameRepository, gameService));
+                demon.Start();
+            }
         }
 
         protected void Application_Error(object sender, EventArgs e)
