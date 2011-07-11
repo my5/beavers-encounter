@@ -1,6 +1,6 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 10.00
-# Visual Studio 2008
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Web Developer Express 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Beavers.Encounter.Core", "app\Beavers.Encounter.Core\Beavers.Encounter.Core.csproj", "{BD0DF4EC-1D1D-42AF-8615-265F7B3820B0}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Beavers.Encounter.ApplicationServices", "app\Beavers.Encounter.ApplicationServices\Beavers.Encounter.ApplicationServices.csproj", "{C29027A1-57B3-4243-8AE4-59683C154473}"
@@ -54,8 +54,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Lib", "Lib", "{11B849C6-F2C
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Beavers.Encounter.Common", "app\Beavers.Encounter.Common\Beavers.Encounter.Common.csproj", "{557BD006-CE4C-408A-9C40-9B8452D8472A}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "db", "db", "{2CB3CE7F-68FB-4568-9662-100966BADE93}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -51,7 +51,7 @@ namespace Beavers.Encounter.ApplicationServices
         private IGameDemon GetGameDemon(int gameId)
         {
             if (gameDemon == null)
-                gameDemon = new GameDemon(new RecalcGameStateService(gameId, gameRepository, this));
+                gameDemon = GameDemon.GetInstance(new RecalcGameStateService(gameId, gameRepository, this));
             return gameDemon;
         }
 

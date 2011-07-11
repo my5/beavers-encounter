@@ -22,9 +22,14 @@ namespace Beavers.Encounter.ApplicationServices
             this.gameService = gameService;
         }
 
+        public int GameId
+        {
+            get { return gameId; }
+        }
+
         public void RecalcGameState(DateTime recalcDateTime)
         {
-            Game game = gameRepository.Get(gameId);
+            Game game = gameRepository.Get(GameId);
             if (game.GameState != GameStates.Started)
                 return;
 
