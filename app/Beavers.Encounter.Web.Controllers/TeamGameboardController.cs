@@ -222,6 +222,11 @@ namespace Beavers.Encounter.Web.Controllers
             Team team = teamRepository.Get(User.Team.Id);
             model.TeamGameState = team.TeamGameState;
 
+            if (model.TeamGameState == null)
+            {
+                return this.RedirectToAction<HomeController>(c => c.Index());
+            }
+
             return View(model);
         }
 
