@@ -471,8 +471,8 @@ namespace Beavers.Encounter.ApplicationServices
                 if (tmpCode.StartsWith(prefixMainCode.ToUpper()))
                 {
                     tmpCode = tmpCode.Substring(prefixMainCode.Length);
-                } 
-                else if (tmpCode.StartsWith(prefixBonusCode.ToUpper()))
+                }
+                else if (!String.IsNullOrEmpty(prefixBonusCode) && tmpCode.StartsWith(prefixBonusCode.ToUpper()))
                 {
                     tmpCode = tmpCode.Substring(prefixBonusCode.Length);
                 }
