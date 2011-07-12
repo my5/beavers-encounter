@@ -230,7 +230,7 @@ namespace Tests.Beavers.Encounter.ApplicationServices
 
         #region StartGame
 
-        [Test]
+        /*[Test]
         public void CanStartGameTest()
         {
             IGameDemon gameDemon = mocks.DynamicMock<IGameDemon>();
@@ -250,7 +250,7 @@ namespace Tests.Beavers.Encounter.ApplicationServices
 
             Assert.AreEqual(GameStates.Started, game.GameState);
         }
-
+        */
         [Test, ExpectedException(ExpectedException = typeof(PreconditionException),
             ExpectedMessage = "Невозможно перевести игру в рабочий режим, когда она находится в режиме Planned.")]
         public void CanStartWhenGamePlannedTest()
@@ -283,7 +283,7 @@ namespace Tests.Beavers.Encounter.ApplicationServices
 
         #region StopGame
 
-        [Test]
+        /*[Test]
         public void CanStopGameTest()
         {
             IGameDemon gameDemon = mocks.DynamicMock<IGameDemon>();
@@ -312,7 +312,7 @@ namespace Tests.Beavers.Encounter.ApplicationServices
             mocks.VerifyAll();
 
             Assert.AreEqual(GameStates.Finished, game.GameState);
-        }
+        }*/
 
         [Test, ExpectedException(ExpectedException = typeof(PreconditionException),
             ExpectedMessage = "Невозможно остановить игру, когда она находится в режиме Planned.")]
