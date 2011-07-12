@@ -35,19 +35,6 @@ namespace Beavers.Encounter.ApplicationServices
             this.taskService = taskService;
         }
 
-        public GameService(
-            IRepository<Game> gameRepository,
-            IRepository<Team> teamRepository,
-            IRepository<TeamGameState> teamGameStateRepository,
-            ITaskService taskService,
-            IGameDemon gameDemon)
-            : this(gameRepository, teamRepository, teamGameStateRepository, taskService)
-        {
-            Check.Require(gameDemon != null, "gameDemon may not be null");
-
-            this.gameDemon = gameDemon;
-        }
-
         private IGameDemon GetGameDemon(int gameId)
         {
             if (gameDemon == null)
