@@ -103,10 +103,9 @@ namespace Beavers.Encounter.Web
             {
                 var sl = ServiceLocator.Current.GetInstance<IServiceLocator>();
                 var taskService = sl.GetInstance<ITaskService>();
-                var teamRepository = sl.GetInstance<IRepository<Team>>();
                 var teamGameStateRepository = sl.GetInstance<IRepository<TeamGameState>>();
 
-                var gameService = new GameService(gameRepository, teamRepository, teamGameStateRepository, taskService); 
+                var gameService = new GameService(gameRepository, teamGameStateRepository, taskService); 
                 
                 var demon = GameDemon.GetInstance(new RecalcGameStateService(
                     game.Id, gameRepository, gameService));

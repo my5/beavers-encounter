@@ -80,7 +80,6 @@ namespace Beavers.Encounter.Web.Controllers
                 }
 
                 teamRepository.SaveOrUpdate(team);
-                UserRepository.SaveOrUpdate(User);
 
                 Message = "Команда успешно создана.";
                 return this.RedirectToAction(c => c.Index());
@@ -115,13 +114,12 @@ namespace Beavers.Encounter.Web.Controllers
                 Message = "Команда успешно изменена.";
                 return this.RedirectToAction(c => c.Index());
             }
-            else {
-                teamRepository.DbContext.RollbackTransaction();
+            
+            teamRepository.DbContext.RollbackTransaction();
 
-				TeamFormViewModel viewModel = TeamFormViewModel.CreateTeamFormViewModel();
-				viewModel.Team = team;
-				return View(viewModel);
-            }
+			TeamFormViewModel viewModel = TeamFormViewModel.CreateTeamFormViewModel();
+			viewModel.Team = team;
+			return View(viewModel);
         }
 
         private void TransferFormValuesTo(Team teamToUpdate, Team teamFromForm) {
@@ -188,9 +186,6 @@ namespace Beavers.Encounter.Web.Controllers
                 if (team.TeamLeader == null)
                     team.TeamLeader = user;
 
-                userRepository.SaveOrUpdate(user);
-                teamRepository.SaveOrUpdate(team);
-                
                 return this.RedirectToAction(c => c.Show(id));
             }
             Message = "Неверный код доступа! Уточните его у вашего капитана.";
@@ -218,15 +213,10 @@ namespace Beavers.Encounter.Web.Controllers
             team.Users.Remove(user);
             user.Team = null;
 
-            userRepository.SaveOrUpdate(user);
-            teamRepository.SaveOrUpdate(team);
-
             // Если команда осталась без капитана, 
             // то делаем первого пользователя из списка членов команды капитаном
             if (team.TeamLeader == null && team.Users.Count > 0)
                 team.TeamLeader = team.Users.First();
-
-            teamRepository.SaveOrUpdate(team);
 
             return this.RedirectToAction(c => c.Show(team.Id));
         }
@@ -257,9 +247,6 @@ namespace Beavers.Encounter.Web.Controllers
             User.Team.Users.Remove(user);
             user.Team = null;
 
-            userRepository.SaveOrUpdate(user);
-            teamRepository.SaveOrUpdate(team);
-
             return this.RedirectToAction(c => c.Show(User.Team.Id));
         }
 
@@ -271,7 +258,6 @@ namespace Beavers.Encounter.Web.Controllers
             Game game = gameRepository.Get(gameId);
             Team team = teamRepository.Get(teamId);
             game.Teams.Add(team);
-            gameRepository.DbContext.CommitChanges();
 
             return this.RedirectToAction(c => c.Index());
         }
@@ -284,7 +270,6 @@ namespace Beavers.Encounter.Web.Controllers
             Game game = gameRepository.Get(gameId);
             Team team = teamRepository.Get(teamId);
             game.Teams.Remove(team);
-            gameRepository.DbContext.CommitChanges();
 
             return this.RedirectToAction<GamesController>(c => c.Edit(gameId));
         }

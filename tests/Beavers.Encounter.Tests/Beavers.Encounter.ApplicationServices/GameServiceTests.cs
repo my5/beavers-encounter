@@ -18,9 +18,7 @@ namespace Tests.Beavers.Encounter.ApplicationServices
         private MockRepository mocks;
         private ITaskService taskService;
         private IRepository<Game> gameRepository;
-        private IRepository<Team> teamRepository;
         private IRepository<TeamGameState> teamGameStateRepository;
-        private IDbContext dbContext;
         private GameService service;
 
         private Task task1;
@@ -34,9 +32,7 @@ namespace Tests.Beavers.Encounter.ApplicationServices
             mocks = new MockRepository();
             taskService = mocks.DynamicMock<ITaskService>();
             gameRepository = mocks.DynamicMock<IRepository<Game>>();
-            teamRepository = mocks.DynamicMock<IRepository<Team>>();
             teamGameStateRepository = mocks.DynamicMock<IRepository<TeamGameState>>();
-            dbContext = mocks.DynamicMock<IDbContext>();
 
             task1 = new Task();
             task1Tip0 = new Tip { SuspendTime = 0, Task = task1 };
@@ -47,7 +43,7 @@ namespace Tests.Beavers.Encounter.ApplicationServices
             task1.Tips.Add(task1Tip2);
             task1.Codes.Add(new Code { Name = "1", Task = task1 });
 
-            service = new GameService(gameRepository, teamRepository, teamGameStateRepository, taskService);
+            service = new GameService(gameRepository, teamGameStateRepository, taskService);
         }
 
         #region Startup
@@ -56,7 +52,6 @@ namespace Tests.Beavers.Encounter.ApplicationServices
         public void CanStartupTest()
         {
             Expect.Call(gameRepository.GetAll()).Return(new List<Game> { new Game() });
-            Expect.Call(teamGameStateRepository.DbContext).Return(dbContext);
 
             mocks.ReplayAll();
 
@@ -137,7 +132,6 @@ namespace Tests.Beavers.Encounter.ApplicationServices
                 new Game { GameState = GameStates.Planned },
                 new Game { GameState = GameStates.Cloused }
             });
-            Expect.Call(teamGameStateRepository.DbContext).Return(dbContext);
             mocks.ReplayAll();
             service.StartupGame(new Game { GameState = GameStates.Planned });
             mocks.VerifyAll();
@@ -150,8 +144,6 @@ namespace Tests.Beavers.Encounter.ApplicationServices
         [Test]
         public void CanCloseGameTest()
         {
-            Expect.Call(teamGameStateRepository.DbContext).Return(dbContext);
-
             Game game = new Game { GameState = GameStates.Finished };
             var team = new Team()
                 .CreateTeamGameState(game);
@@ -202,8 +194,6 @@ namespace Tests.Beavers.Encounter.ApplicationServices
         [Test]
         public void CanResetGameTest()
         {
-            Expect.Call(teamGameStateRepository.DbContext).Return(dbContext);
-
             Game game = new Game { GameState = GameStates.Finished };
             var team = new Team()
                 .CreateTeamGameState(game);
@@ -249,7 +239,7 @@ namespace Tests.Beavers.Encounter.ApplicationServices
             mocks.VerifyAll();
 
             Assert.AreEqual(GameStates.Started, game.GameState);
-        }
+        }*/
         */
         [Test, ExpectedException(ExpectedException = typeof(PreconditionException),
             ExpectedMessage = "Невозможно перевести игру в рабочий режим, когда она находится в режиме Planned.")]

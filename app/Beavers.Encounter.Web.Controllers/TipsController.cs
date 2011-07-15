@@ -46,7 +46,6 @@ namespace Beavers.Encounter.Web.Controllers
             {
                 taskRepository.Get(tip.Task.Id).Tips.Add(tip);
                 tipRepository.SaveOrUpdate(tip);
-                taskRepository.DbContext.CommitChanges();
 
                 Message = "Подсказка успешно создана.";
                 return this.RedirectToAction<TasksController>(c => c.Edit(tip.Task.Id));

@@ -33,16 +33,28 @@ namespace Beavers.Encounter.ApplicationServices
             if (game.GameState != GameStates.Started)
                 return;
 
-            CheckForGameFinish(game, recalcDateTime);
-            foreach (Team team in game.Teams)
+            var dbContext = gameRepository.DbContext;
+            dbContext.BeginTransaction();
+            try
             {
-                if (team.TeamGameState != null)
+
+                CheckForGameFinish(game, recalcDateTime);
+                foreach (Team team in game.Teams)
                 {
-                    CheckForFirstTask(team.TeamGameState, recalcDateTime);
-                    CheckOvertime(team.TeamGameState, recalcDateTime);
-                    CheckExceededBadCodes(team.TeamGameState);
-                    CheckForNextTip(team.TeamGameState, recalcDateTime);
+                    if (team.TeamGameState != null)
+                    {
+                        CheckForFirstTask(team.TeamGameState, recalcDateTime);
+                        CheckOvertime(team.TeamGameState, recalcDateTime);
+                        CheckExceededBadCodes(team.TeamGameState);
+                        CheckForNextTip(team.TeamGameState, recalcDateTime);
+                    }
                 }
+
+                dbContext.CommitTransaction();
+            }
+            catch
+            {
+                dbContext.RollbackTransaction();
             }
         }
 

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.Serialization;
 using Beavers.Encounter.Core;
 using Beavers.Encounter.Core.DataInterfaces;
 using SharpArch.Core;
@@ -16,29 +15,29 @@ namespace Beavers.Encounter.ApplicationServices
         private readonly IRepository<AcceptedCode> acceptedCodeRepository;
         private readonly IRepository<AcceptedBadCode> acceptedBadCodeRepository;
         private readonly IRepository<AcceptedTip> acceptedTipRepository;
-        private readonly IRepository<TeamGameState> teamGameStateRepository;
+        private readonly ITaskDispatcherFactory dispatcherFactory;
 
         public TaskService(
             IRepository<Task> taskRepository,
-            IRepository<TeamGameState> teamGameStateRepository,
             IRepository<TeamTaskState> teamTaskStateRepository,
             IRepository<AcceptedCode> acceptedCodeRepository,
             IRepository<AcceptedBadCode> acceptedBadCodeRepository,
-            IRepository<AcceptedTip> acceptedTipRepository)
+            IRepository<AcceptedTip> acceptedTipRepository,
+            ITaskDispatcherFactory dispatcherFactory)
         {
             Check.Require(taskRepository != null, "taskRepository may not be null");
-            Check.Require(teamGameStateRepository != null, "teamGameStateRepository may not be null");
             Check.Require(teamTaskStateRepository != null, "teamTaskStateRepository may not be null");
             Check.Require(acceptedCodeRepository != null, "acceptedCodeRepository may not be null");
             Check.Require(acceptedBadCodeRepository != null, "acceptedBadCodeRepository may not be null");
             Check.Require(acceptedTipRepository != null, "acceptedTipRepository may not be null");
+            Check.Require(dispatcherFactory != null, "dispatcherFactory may not be null");
 
             this.taskRepository = taskRepository;
-            this.teamGameStateRepository = teamGameStateRepository;
             this.teamTaskStateRepository = teamTaskStateRepository;
             this.acceptedCodeRepository = acceptedCodeRepository;
             this.acceptedBadCodeRepository = acceptedBadCodeRepository;
             this.acceptedTipRepository = acceptedTipRepository;
+            this.dispatcherFactory = dispatcherFactory;
         }
 
         public void AssignNewTaskTip(TeamTaskState teamTaskState, Tip tip)
@@ -55,9 +54,7 @@ namespace Beavers.Encounter.ApplicationServices
             {
                 teamTaskState.AcceptedTips.Add(acceptedTip);
             }
-
             acceptedTipRepository.SaveOrUpdate(acceptedTip);
-            teamTaskStateRepository.SaveOrUpdate(teamTaskState);
         }
 
         public void AssignNewTask(TeamGameState teamGameState, Task oldTask)
@@ -65,7 +62,8 @@ namespace Beavers.Encounter.ApplicationServices
             Check.Require(teamGameState.ActiveTaskState == null, "Невозможно назначить команде новую задачу, т.к. коменде уже назначена задача.");
 
             // Пытаемся получить следующее задание для команды
-            Task newTask = GetNextTaskForTeam(teamGameState, oldTask);
+            Task newTask = dispatcherFactory.CrearteDispatcher(teamGameState.Game)
+                .GetNextTaskForTeam(taskRepository, teamGameState, oldTask);
             
             // Если нет нового задания, то команда завершила игру
             if (newTask == null)
@@ -86,9 +84,6 @@ namespace Beavers.Encounter.ApplicationServices
             teamGameState.ActiveTaskState = teamTaskState;
 
             teamTaskStateRepository.SaveOrUpdate(teamTaskState);
-            teamGameStateRepository.SaveOrUpdate(teamGameState);
-            teamGameStateRepository.DbContext.CommitChanges();
-
             //Сразу же отправляем команде первую подсказку (т.е. текст задания)
             AssignNewTaskTip(teamTaskState, teamTaskState.Task.Tips.First());
         }
@@ -97,25 +92,15 @@ namespace Beavers.Encounter.ApplicationServices
         {
             teamTaskState.TaskFinishTime = DateTime.Now;
             teamTaskState.State = (int) flag;
-            teamTaskStateRepository.SaveOrUpdate(teamTaskState);
             
             teamTaskState.TeamGameState.ActiveTaskState = null;
             teamTaskState.TeamGameState.AcceptedTasks.Add(teamTaskState);
-            teamGameStateRepository.SaveOrUpdate(teamTaskState.TeamGameState);
-
-            teamGameStateRepository.DbContext.CommitChanges();
         }
 
         public void TeamFinishGame(TeamGameState teamGameState)
         {
             teamGameState.GameDoneTime = DateTime.Now;
             teamGameState.ActiveTaskState = null;
-            teamGameStateRepository.SaveOrUpdate(teamGameState);
-            
-            //teamGameState.Team.TeamGameState = null;
-            //teamRepository.SaveOrUpdate(teamGameState.Team);
-
-            teamGameStateRepository.DbContext.CommitChanges();
         }
 
         /// <summary>
@@ -129,7 +114,6 @@ namespace Beavers.Encounter.ApplicationServices
         {
             teamTaskState.AccelerationTaskStartTime = DateTime.Now;
             AssignNewTaskTip(teamTaskState, teamTaskState.Task.Tips.Last(tip => tip.SuspendTime > 0));
-            teamTaskStateRepository.SaveOrUpdate(teamTaskState);
         }
 
         /// <summary>
@@ -156,224 +140,6 @@ namespace Beavers.Encounter.ApplicationServices
             }
          
             return null;
-        }
-
-        private Task GetNextTaskForTeam(TeamGameState teamGameState, Task oldTask)
-        {
-            // Получаем все незаблокированные задания для текущей игры
-            var gameTasks = taskRepository.GetAll()
-                .Where(t => t.Game.Id == teamGameState.Game.Id && !t.Locked);
-
-			// Формируем список номеров групп заданий, с которыми команда уже познакомилась
-			List<int> executedGroupTags = new List<int>();
-			foreach (TeamTaskState acceptedTask in teamGameState.AcceptedTasks.Where(x => x.Task.GroupTag != 0))
-            {
-                if (!executedGroupTags.Contains(acceptedTask.Task.GroupTag))
-					executedGroupTags.Add(acceptedTask.Task.GroupTag);
-            }			
-			
-            // Получаем доступные (невыполненные) для команды задания
-            List<Task> accessibleTasks = new List<Task>();
-            foreach (Task task in gameTasks)
-            {
-                // Если задание не получено
-				// и задание не входит ни в одну "засвеченную" группу,
-				// и не запрещена выдача задания текущей команде,
-                // то добавляем задание в список
-                if (!teamGameState.AcceptedTasks.Any(x => x.Task.Id == task.Id) &&
-					!executedGroupTags.Contains(task.GroupTag) &&
-					!task.NotForTeams.Contains(teamGameState.Team))
-                    accessibleTasks.Add(task);
-            }
-			
-            // Формируем список выполняемых заданий другими командами
-            Dictionary<Task, int> executingTasks = new Dictionary<Task, int>();
-            foreach (Team team in teamGameState.Game.Teams)
-            {
-                if (team.TeamGameState != null && team.TeamGameState.ActiveTaskState != null)
-                {
-                    Task task = team.TeamGameState.ActiveTaskState.Task;
-                    if (executingTasks.ContainsKey(task))
-                    {
-                        executingTasks[task] = executingTasks[task] + 1;
-                    }
-                    else
-                    {
-                        executingTasks.Add(task, 1);
-                    }
-                }
-            }
-
-            // Получаем задания выполненные командами, которые помечены опцией "Анти-слив"
-            var excludeExecutedTasks = new List<Task>();
-            foreach (Team team in teamGameState.Team.PreventTasksAfterTeams)
-            {
-                if (team.TeamGameState != null)
-                {
-                    foreach (var task in team.TeamGameState.AcceptedTasks)
-                    {
-                        if (!excludeExecutedTasks.Contains(task.Task))
-                            excludeExecutedTasks.Add(task.Task);
-                    }
-                }
-            }
-
-            List<Task> tasksWithMaxPoints = new List<Task>();
-            int maxPoints = 0;
-
-            // Рассчитываем приоритет для каждого задания 
-            // и отбираем задания с максимальным приоритетом
-            foreach (Task task in accessibleTasks)
-            {
-                int taskPoints = GetTaskPoints(task, oldTask, executingTasks, excludeExecutedTasks, teamGameState);
-                
-                // Не выдавать задание вообще
-                if (taskPoints == MinPoints)
-                    continue;
-                
-                if (taskPoints > maxPoints)
-                {
-                    maxPoints = taskPoints;
-                    tasksWithMaxPoints.Clear();
-                    tasksWithMaxPoints.Add(task);
-                } 
-                else if (taskPoints == maxPoints)
-                {
-                    tasksWithMaxPoints.Add(task);
-                }
-            }
-
-            // Если заданий с одинаковым приоритетом несколько, 
-            // то берем произвольное
-            if (tasksWithMaxPoints.Count > 1)
-            {
-                // Выбираем новое задание из доступных с максимальным приоритетом
-                Task newTask = null;
-                Random rnd = new Random();
-                int indx = rnd.Next(tasksWithMaxPoints.Count);
-                int i = 0;
-                foreach (Task task in tasksWithMaxPoints)
-                {
-                    if (i == indx)
-                        newTask = task;
-                    i++;
-                }
-
-                return newTask;
-            }
-            return tasksWithMaxPoints.Count == 0 ? null : tasksWithMaxPoints.First();
-        }
-
-        private const int MaxPoints = Int32.MaxValue;
-        private const int MinPoints = Int32.MinValue;
-
-        /// <summary>
-        /// Вычисление приоритета для задания.
-        /// </summary>
-        /// <param name="task">Задание для которого нужно вычислить приоритет.</param>
-        /// <param name="oldTask">Предыдущее задание выполненное командой.</param>
-        /// <param name="executingTasks">Задания выполняемые в данных момент другими командами.</param>
-        /// <param name="excludeExecutedTasks">Задания выполненные командами, которые помечены опцией "Анти-слив".</param>
-        /// <returns>Приоритет задания.</returns>
-        private static int GetTaskPoints(Task task, Task oldTask, Dictionary<Task, int> executingTasks, List<Task> excludeExecutedTasks, TeamGameState teamGameState)
-        {
-            int taskPoints = 1000;
-
-            //--------------------------------------------------------------------
-            // Если задание связано с предыдущим выданным, то +MaxPoints )))
-            if (task.AfterTask != null)
-            {
-                if (oldTask == null)
-                    return MinPoints; // Не выдавать
-
-                if (task.AfterTask == oldTask)
-                {
-                    var oldTeamTaskState = teamGameState.AcceptedTasks.First(x => x.Task == oldTask);
-                    if (task.GiveTaskAfter == GiveTaskAfter.Strictly)
-                    {
-                        if (oldTeamTaskState.State == (int)TeamTaskStateFlag.Success)
-                        {
-                            return MaxPoints; // Выдать незамедлительно
-                        }
-                        return MinPoints; // Не выдавать
-                    }
-                    if (task.GiveTaskAfter == GiveTaskAfter.StrictlyOrFinaly)
-                    {
-                        if (oldTeamTaskState.State == (int)TeamTaskStateFlag.Success)
-                        {
-                            return MaxPoints; // Выдать незамедлительно
-                        }
-                        return -1000; // Выдать с наименьшим приоритетом
-
-                    }
-                    if (task.GiveTaskAfter == GiveTaskAfter.InAnyCase)
-                    {
-                        return MaxPoints; // Выдать незамедлительно
-                    }
-                }
-                return MinPoints;
-            }
-
-            //--------------------------------------------------------------------
-            // Если задание типа Челлендж, то +500
-            if (task.StreetChallendge)
-            {
-                taskPoints += 500;
-                return taskPoints;
-            }
-
-            //--------------------------------------------------------------------
-            // Если задание c агентами выполняется другой командой, то -500
-            // Задание с агентами одновременно может выполняться только одной командой
-            if (task.Agents && executingTasks.ContainsKey(task))
-                taskPoints -= 500;
-
-            //--------------------------------------------------------------------
-            // Если задание выполнено командами, которые помечены опцией "Анти-слив", то -700
-            if (excludeExecutedTasks.Contains(task))
-                taskPoints -= 700;
-
-            //--------------------------------------------------------------------
-            // Если задание выполняет другая команда, то -50
-            if (executingTasks.ContainsKey(task))
-                taskPoints -= 50 * executingTasks[task];
-
-            //--------------------------------------------------------------------
-            // Если предыдущее задание команды входит в список блокировки по предшествованию, то -400
-            if (task.NotAfterTasks.Contains(oldTask))
-                taskPoints -= 400;
-
-            //--------------------------------------------------------------------
-            // Если хотя бы одно задание из списка блокировки по одновременности выполняется, то -200
-            if (task.NotOneTimeTasks.Intersect(executingTasks.Keys).Count() > 0)
-                taskPoints -= 200;
-
-            //--------------------------------------------------------------------
-            // Если задание содержит коды со сложностью "+500", то +30
-            foreach (Code code in task.Codes)
-            {
-                if (code.Danger == "+500")
-                {
-                    taskPoints += 30;
-                    break;
-                }
-            }
-
-            //--------------------------------------------------------------------
-            // Повышаем приоритет для заданий с бонусами
-            // П = П + 10 * (число бонусных кодов в задании)
-            int bonusCodes = 0;
-            foreach (Code code in task.Codes)
-            {
-                bonusCodes += code.IsBonus ? 1 : 0;
-            }
-            taskPoints += bonusCodes * 10;
-
-            //--------------------------------------------------------------------
-            // Применяем собственный приоритет задачи
-            taskPoints += task.Priority;
-
-            return taskPoints;
         }
 
         public void SubmitCode(string codes, TeamGameState teamGameState, User user)
@@ -427,9 +193,6 @@ namespace Beavers.Encounter.ApplicationServices
                 }
             }
 
-            teamTaskStateRepository.SaveOrUpdate(teamGameState.ActiveTaskState);
-            teamTaskStateRepository.DbContext.CommitChanges();
-
             // Если приняты все основные коды, то помечаем задание выполненым и назначаем новое
             if (teamGameState.ActiveTaskState.AcceptedCodes.Count == teamGameState.ActiveTaskState.Task.Codes.Count/*(x => x.IsBonus == 0)*/ &&
                 teamGameState.ActiveTaskState.AcceptedCodes.Count > 0)
@@ -482,28 +245,5 @@ namespace Beavers.Encounter.ApplicationServices
             }
             return codesList;
         }
-    }
-
-    public class MaxCodesCountException : Exception
-    {
-        public MaxCodesCountException()
-			: base()
-		{
-		}
-
-        public MaxCodesCountException(string message)
-            : base(message)
-		{
-		}
-
-        protected MaxCodesCountException(SerializationInfo info, StreamingContext context)
-			: base(info, context)
-		{
-		}
-
-        public MaxCodesCountException(string message, Exception innerException)
-            : base(message, innerException)
-		{
-		}        
     }
 }
