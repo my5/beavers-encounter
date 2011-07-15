@@ -19,6 +19,7 @@ namespace Tests.Beavers.Encounter.ApplicationServices
         private MockRepository mocks;
         private IGameService gameService;
         private IRepository<Game> repository;
+        private IDbContext dbContext;
         private RecalcGameStateService service;
         private Game game;
         private Task task1;
@@ -32,6 +33,7 @@ namespace Tests.Beavers.Encounter.ApplicationServices
             mocks = new MockRepository();
             gameService = mocks.DynamicMock<IGameService>();
             repository = mocks.DynamicMock<IRepository<Game>>();
+            dbContext = mocks.DynamicMock<IDbContext>();
             service = new RecalcGameStateService(1, repository, gameService);
 
             game = new Game
@@ -53,6 +55,10 @@ namespace Tests.Beavers.Encounter.ApplicationServices
             task1.Codes.Add(new Code { Name = "1", Task = task1 });
 
             game.Tasks.Add(task1);
+
+            Expect.Call(repository.DbContext).Return(dbContext).Repeat.Any();
+            Expect.Call(dbContext.BeginTransaction()).Repeat.Any();
+            Expect.Call(() => dbContext.CommitTransaction()).Repeat.Any();
         }
 
         #endregion Setup

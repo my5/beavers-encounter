@@ -147,7 +147,7 @@ namespace Beavers.Encounter.Web.Controllers
             return bagGame;
         }
 
-        //[ValidateAntiForgeryToken]
+        [ValidateAntiForgeryToken]
         [Transaction]
         [AcceptVerbs(HttpVerbs.Post)]
         [GameboardOwner]
@@ -161,7 +161,6 @@ namespace Beavers.Encounter.Web.Controllers
 
                 if (ViewData.ModelState.IsValid && game.IsValid())
                 {
-                    gameRepository.SaveOrUpdate(gameToUpdate);
                     response.Success = true;
                 }
                 else
@@ -224,7 +223,6 @@ namespace Beavers.Encounter.Web.Controllers
                         task.Game = User.Game;
                         Tip tip = new Tip { Name = "Здесь должен быть текст задания...", SuspendTime = 0, Task = task };
                         task.Tips.Add(tip);
-                        taskRepository.SaveOrUpdate(task);
                         tipRepository.SaveOrUpdate(tip);
 
                         response.ExtraParams["newID"] = task.Id.ToString();

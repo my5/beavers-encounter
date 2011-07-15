@@ -12,7 +12,6 @@ namespace Beavers.Encounter.ApplicationServices
     public class GameService : IGameService
     {
         private readonly IRepository<Game> gameRepository;
-        private readonly IRepository<Team> teamRepository;
         private readonly IRepository<TeamGameState> teamGameStateRepository;
         private readonly ITaskService taskService;
 
@@ -20,17 +19,14 @@ namespace Beavers.Encounter.ApplicationServices
 
         public GameService(
             IRepository<Game> gameRepository,
-            IRepository<Team> teamRepository,
             IRepository<TeamGameState> teamGameStateRepository,
             ITaskService taskService)
         {
             Check.Require(gameRepository != null, "gameRepository may not be null");
-            Check.Require(teamRepository != null, "teamRepository may not be null");
             Check.Require(teamGameStateRepository != null, "teamGameStateRepository may not be null");
             Check.Require(taskService != null, "taskService may not be null");
 
             this.gameRepository = gameRepository;
-            this.teamRepository = teamRepository;
             this.teamGameStateRepository = teamGameStateRepository;
             this.taskService = taskService;
         }
@@ -113,9 +109,6 @@ namespace Beavers.Encounter.ApplicationServices
 
             // Переводим игру в предстартовый режим 
             game.GameState = GameStates.Startup;
-
-            gameRepository.SaveOrUpdate(game);
-            teamGameStateRepository.DbContext.CommitChanges();
         }
 
         public void StartGame(Game game)
@@ -127,7 +120,6 @@ namespace Beavers.Encounter.ApplicationServices
 
             // Переводим игру в рабочий режим 
             game.GameState = GameStates.Started;
-            gameRepository.SaveOrUpdate(game);
 
             // Запускаем демона
             GetGameDemon(game.Id).Start();
@@ -149,7 +141,6 @@ namespace Beavers.Encounter.ApplicationServices
 
             // Останавливаем игру
             game.GameState = GameStates.Finished;
-            gameRepository.SaveOrUpdate(game);
 
             // Для каждой команды устанавливаем время окончания игры
             foreach (Team team in game.Teams)
@@ -162,11 +153,8 @@ namespace Beavers.Encounter.ApplicationServices
                     }
 
                     team.TeamGameState.GameDoneTime = DateTime.Now;
-                    teamRepository.SaveOrUpdate(team);
-                    teamGameStateRepository.SaveOrUpdate(team.TeamGameState);
                 }
             }
-            teamGameStateRepository.DbContext.CommitChanges();
         }
 
         public void CloseGame(Game game)
@@ -178,17 +166,13 @@ namespace Beavers.Encounter.ApplicationServices
                 );
 
             game.GameState = GameStates.Cloused;
-            gameRepository.SaveOrUpdate(game);
 
             // Для каждой команды сбрасываем игровое состояние
             foreach (Team team in game.Teams)
             {
                 team.TeamGameState = null;
                 team.Game = null;
-                teamRepository.SaveOrUpdate(team);
             }
-
-            teamGameStateRepository.DbContext.CommitChanges();
         }
 
         /// <summary>
@@ -210,16 +194,12 @@ namespace Beavers.Encounter.ApplicationServices
                 );
 
             game.GameState = GameStates.Planned;
-            gameRepository.SaveOrUpdate(game);
 
             // Для каждой команды сбрасываем игровое состояние
             foreach (Team team in game.Teams)
             {
                 team.TeamGameState = null;
-                teamRepository.SaveOrUpdate(team);
             }
-
-            teamGameStateRepository.DbContext.CommitChanges();
         }
 
         #endregion Управление игрой
