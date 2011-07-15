@@ -240,7 +240,7 @@ namespace Tests.Beavers.Encounter.ApplicationServices
 
             Assert.AreEqual(GameStates.Started, game.GameState);
         }*/
-        */
+
         [Test, ExpectedException(ExpectedException = typeof(PreconditionException),
             ExpectedMessage = "Невозможно перевести игру в рабочий режим, когда она находится в режиме Planned.")]
         public void CanStartWhenGamePlannedTest()
