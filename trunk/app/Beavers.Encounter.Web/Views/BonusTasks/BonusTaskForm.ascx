@@ -1,6 +1,6 @@
-<%@ Control Language="C#" AutoEventWireup="true" Inherits="System.Web.Mvc.ViewUserControl<BonusTasksController.BonusTaskFormViewModel>" %>
+п»ї<%@ Control Language="C#" AutoEventWireup="true" Inherits="System.Web.Mvc.ViewUserControl<BonusTasksController.BonusTaskFormViewModel>" %>
  
-	<h2>Свойства задания</h2>
+	<h2>РЎРІРѕР№СЃС‚РІР° Р·Р°РґР°РЅРёСЏ</h2>
 
 <% if (ViewContext.TempData[ControllerEnums.GlobalViewDataProperty.PageMessage.ToString()] != null) { %>
     <p id="pageMessage"><%= ViewContext.TempData[ControllerEnums.GlobalViewDataProperty.PageMessage.ToString()]%></p>
@@ -19,8 +19,8 @@
     <%= Model.BonusTask.RenderEditable<BonusTask>(Html, x => x.IsIndividual)%>
 
     <div>
-        <%= Html.SubmitButton("btnSave", "Сохранить") %>
-        <%= Html.Button("btnCancel", "Отмена", HtmlButtonType.Button, 
+        <%= Html.SubmitButton("btnSave", "РЎРѕС…СЂР°РЅРёС‚СЊ") %>
+        <%= Html.Button("btnCancel", "РћС‚РјРµРЅР°", HtmlButtonType.Button, 
 		        "window.location.href = '" + Request.UrlReferrer + "';") %>
     </div>		    
 <% } %>

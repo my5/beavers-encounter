@@ -1,4 +1,4 @@
-<%@ Master Language="C#" AutoEventWireup="true" Inherits="System.Web.Mvc.ViewMasterPage" %>
+ï»¿<%@ Master Language="C#" AutoEventWireup="true" Inherits="System.Web.Mvc.ViewMasterPage" %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -26,19 +26,19 @@
             <div id="menucontainer">
             
                 <ul id="menu">              
-                    <li><%= Html.ActionLinkForAreas<HomeController>(c => c.Index(), "Ãëàâíàÿ") %></li>
+                    <li><%= Html.ActionLinkForAreas<HomeController>(c => c.Index(), "Ð“Ð»Ð°Ð²Ð½Ð°Ñ") %></li>
 
                         <%
                             if (Request.IsAuthenticated)
                             {
                         %>
-                                <li><%= Html.ActionLinkForAreas<TeamsController>(c => c.Index(), "Êîìàíäû")%></li>
-                                <li><%= Html.ActionLinkForAreas<GamesController>(c => c.Index(), "Èãðû")%></li>
+                                <li><%= Html.ActionLinkForAreas<TeamsController>(c => c.Index(), "ÐšÐ¾Ð¼Ð°Ð½Ð´Ñ‹")%></li>
+                                <li><%= Html.ActionLinkForAreas<GamesController>(c => c.Index(), "Ð˜Ð³Ñ€Ñ‹")%></li>
                         <%
                                 if (((User)HttpContext.Current.User).Role.IsAdministrator)
                                 {
                         %>
-                                <li><%= Html.ActionLinkForAreas<AdminController>(c => c.Index(), "Àäìèíèñòðèðîâàíèå")%></li>
+                                <li><%= Html.ActionLinkForAreas<AdminController>(c => c.Index(), "ÐÐ´Ð¼Ð¸Ð½Ð¸ÑÑ‚Ñ€Ð¸Ñ€Ð¾Ð²Ð°Ð½Ð¸Ðµ")%></li>
                         <%
                                 }
                             }

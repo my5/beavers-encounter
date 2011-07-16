@@ -1,4 +1,4 @@
-<%@ Control Language="C#" Inherits="System.Web.Mvc.ViewUserControl" %>
+ï»¿<%@ Control Language="C#" Inherits="System.Web.Mvc.ViewUserControl" %>
 <%@ Import Namespace="Beavers.Encounter.Core"%>
 <%@ Register Assembly="Coolite.Ext.Web" Namespace="Coolite.Ext.Web" TagPrefix="ext" %>
 <script runat="server">
@@ -18,9 +18,9 @@
         <TopBar>
             <ext:Toolbar ID="gameToolbar" runat="server">
                 <Items>
-                    <ext:ToolbarButton ID="gameSaveBtn" runat="server" Text="Ñîõðàíèòü" Icon="Disk">
+                    <ext:ToolbarButton ID="gameSaveBtn" runat="server" Text="Ð¡Ð¾Ñ…Ñ€Ð°Ð½Ð¸Ñ‚ÑŒ" Icon="Disk">
                         <Listeners>
-                            <Click Handler="#{gameFormPanel}.form.submit({waitMsg:'Ñîõðàíåíèå...', params:{id: getGameID()}, success: gameSaveSuccessHandler, failure: gameSaveFailureHandler});" />
+                            <Click Handler="#{gameFormPanel}.form.submit({waitMsg:'Ð¡Ð¾Ñ…Ñ€Ð°Ð½ÐµÐ½Ð¸Ðµ...', params:{id: getGameID()}, success: gameSaveSuccessHandler, failure: gameSaveFailureHandler});" />
                         </Listeners>
                     </ext:ToolbarButton>
                 </Items>
@@ -35,14 +35,14 @@
                                 <ext:TextField ID="Game_Id" runat="server" DataIndex="Id" Hidden="true" />
                             </ext:Anchor>
                             <ext:Anchor Horizontal="100%">
-                                <ext:TextField ID="Game_Name" DataIndex="Name" FieldLabel="Íàçâàíèå" Width="250" AllowBlank="false" EmptyText="Ââåäèòå íàçâàíèå èãðû" MaxLengthText="250"/>
+                                <ext:TextField ID="Game_Name" DataIndex="Name" FieldLabel="ÐÐ°Ð·Ð²Ð°Ð½Ð¸Ðµ" Width="250" AllowBlank="false" EmptyText="Ð’Ð²ÐµÐ´Ð¸Ñ‚Ðµ Ð½Ð°Ð·Ð²Ð°Ð½Ð¸Ðµ Ð¸Ð³Ñ€Ñ‹" MaxLengthText="250"/>
                             </ext:Anchor>
                             <ext:Anchor>
-                                <ext:TextField ID="Game_GameDate" runat="server" Hidden="true" DataIndex="GameDate" FieldLabel="Äàòà" Width="180" AllowBlank="true">
+                                <ext:TextField ID="Game_GameDate" runat="server" Hidden="true" DataIndex="GameDate" FieldLabel="Ð”Ð°Ñ‚Ð°" Width="180" AllowBlank="true">
                                 </ext:TextField>
                             </ext:Anchor>
                             <ext:Anchor>
-                                <ext:MultiField ID="MultiField1" FieldLabel="Äàòà è âðåìÿ ïðîâåäåíèÿ" runat="server">
+                                <ext:MultiField ID="MultiField1" FieldLabel="Ð”Ð°Ñ‚Ð° Ð¸ Ð²Ñ€ÐµÐ¼Ñ Ð¿Ñ€Ð¾Ð²ÐµÐ´ÐµÐ½Ð¸Ñ" runat="server">
                                     <Fields>
                                         <ext:DateField ID="Game_GameDateDate" runat="server" DataIndex="GameDate" Width="90" AllowBlank="false">
                                             <Listeners>
@@ -61,26 +61,26 @@
                                 <ext:ComboBox 
                                     ID="Game_TotalTime" 
                                     DataIndex="TotalTime" 
-                                    FieldLabel="Ïðîäîëæèòåëüíîñòü èãðû" 
+                                    FieldLabel="ÐŸÑ€Ð¾Ð´Ð¾Ð»Ð¶Ð¸Ñ‚ÐµÐ»ÑŒÐ½Ð¾ÑÑ‚ÑŒ Ð¸Ð³Ñ€Ñ‹" 
                                     Editable="true"
                                     AllowNegative="false" 
                                     AllowDecimals="false"   
-                                    EmptyText="Âðåìÿ â ìèíóòàõ" 
+                                    EmptyText="Ð’Ñ€ÐµÐ¼Ñ Ð² Ð¼Ð¸Ð½ÑƒÑ‚Ð°Ñ…" 
                                     AllowBlank="false"
                                     Width="173">
                                     <Items>
-                                        <ext:ListItem Value="10" Text="10 ìèíóò" />
-                                        <ext:ListItem Value="20" Text="20 ìèíóò" />
-                                        <ext:ListItem Value="30" Text="30 ìèíóò" />
-                                        <ext:ListItem Value="60" Text="1 ÷àñ" />
-                                        <ext:ListItem Value="120" Text="2 ÷àñà" />
-                                        <ext:ListItem Value="180" Text="3 ÷àñà" />
-                                        <ext:ListItem Value="240" Text="4 ÷àñà" />
-                                        <ext:ListItem Value="300" Text="5 ÷àñîâ" />
-                                        <ext:ListItem Value="360" Text="6 ÷àñîâ" />
-                                        <ext:ListItem Value="420" Text="7 ÷àñîâ" />
-                                        <ext:ListItem Value="480" Text="8 ÷àñîâ" />
-                                        <ext:ListItem Value="540" Text="9 ÷àñîâ" />
+                                        <ext:ListItem Value="10" Text="10 Ð¼Ð¸Ð½ÑƒÑ‚" />
+                                        <ext:ListItem Value="20" Text="20 Ð¼Ð¸Ð½ÑƒÑ‚" />
+                                        <ext:ListItem Value="30" Text="30 Ð¼Ð¸Ð½ÑƒÑ‚" />
+                                        <ext:ListItem Value="60" Text="1 Ñ‡Ð°Ñ" />
+                                        <ext:ListItem Value="120" Text="2 Ñ‡Ð°ÑÐ°" />
+                                        <ext:ListItem Value="180" Text="3 Ñ‡Ð°ÑÐ°" />
+                                        <ext:ListItem Value="240" Text="4 Ñ‡Ð°ÑÐ°" />
+                                        <ext:ListItem Value="300" Text="5 Ñ‡Ð°ÑÐ¾Ð²" />
+                                        <ext:ListItem Value="360" Text="6 Ñ‡Ð°ÑÐ¾Ð²" />
+                                        <ext:ListItem Value="420" Text="7 Ñ‡Ð°ÑÐ¾Ð²" />
+                                        <ext:ListItem Value="480" Text="8 Ñ‡Ð°ÑÐ¾Ð²" />
+                                        <ext:ListItem Value="540" Text="9 Ñ‡Ð°ÑÐ¾Ð²" />
                                     </Items>
                                 </ext:ComboBox>
                             </ext:Anchor>
@@ -88,28 +88,28 @@
                                 <ext:ComboBox 
                                     ID="Game_TimePerTask" 
                                     DataIndex="TimePerTask" 
-                                    FieldLabel="Âðåìÿ íà çàäàíèå" 
+                                    FieldLabel="Ð’Ñ€ÐµÐ¼Ñ Ð½Ð° Ð·Ð°Ð´Ð°Ð½Ð¸Ðµ" 
                                     Editable="true"
                                     AllowNegative="false" 
                                     AllowDecimals="false"   
-                                    EmptyText="Âðåìÿ â ìèíóòàõ" 
+                                    EmptyText="Ð’Ñ€ÐµÐ¼Ñ Ð² Ð¼Ð¸Ð½ÑƒÑ‚Ð°Ñ…" 
                                     AllowBlank="false"
                                     Width="173">
                                     <Items>
-                                        <ext:ListItem Value="1" Text="1 ìèíóòà" />
-                                        <ext:ListItem Value="2" Text="2 ìèíóòû" />
-                                        <ext:ListItem Value="3" Text="3 ìèíóòû" />
-                                        <ext:ListItem Value="5" Text="5 ìèíóò" />
-                                        <ext:ListItem Value="10" Text="10 ìèíóò" />
-                                        <ext:ListItem Value="15" Text="15 ìèíóò" />
-                                        <ext:ListItem Value="20" Text="20 ìèíóò" />
-                                        <ext:ListItem Value="25" Text="25 ìèíóò" />
-                                        <ext:ListItem Value="30" Text="30 ìèíóò" />
-                                        <ext:ListItem Value="40" Text="40 ìèíóò" />
-                                        <ext:ListItem Value="50" Text="50 ìèíóò" />
-                                        <ext:ListItem Value="60" Text="1 ÷àñ" />
-                                        <ext:ListItem Value="90" Text="1 ÷àñ 30 ìèíóò" />
-                                        <ext:ListItem Value="120" Text="2 ÷àñà" />
+                                        <ext:ListItem Value="1" Text="1 Ð¼Ð¸Ð½ÑƒÑ‚Ð°" />
+                                        <ext:ListItem Value="2" Text="2 Ð¼Ð¸Ð½ÑƒÑ‚Ñ‹" />
+                                        <ext:ListItem Value="3" Text="3 Ð¼Ð¸Ð½ÑƒÑ‚Ñ‹" />
+                                        <ext:ListItem Value="5" Text="5 Ð¼Ð¸Ð½ÑƒÑ‚" />
+                                        <ext:ListItem Value="10" Text="10 Ð¼Ð¸Ð½ÑƒÑ‚" />
+                                        <ext:ListItem Value="15" Text="15 Ð¼Ð¸Ð½ÑƒÑ‚" />
+                                        <ext:ListItem Value="20" Text="20 Ð¼Ð¸Ð½ÑƒÑ‚" />
+                                        <ext:ListItem Value="25" Text="25 Ð¼Ð¸Ð½ÑƒÑ‚" />
+                                        <ext:ListItem Value="30" Text="30 Ð¼Ð¸Ð½ÑƒÑ‚" />
+                                        <ext:ListItem Value="40" Text="40 Ð¼Ð¸Ð½ÑƒÑ‚" />
+                                        <ext:ListItem Value="50" Text="50 Ð¼Ð¸Ð½ÑƒÑ‚" />
+                                        <ext:ListItem Value="60" Text="1 Ñ‡Ð°Ñ" />
+                                        <ext:ListItem Value="90" Text="1 Ñ‡Ð°Ñ 30 Ð¼Ð¸Ð½ÑƒÑ‚" />
+                                        <ext:ListItem Value="120" Text="2 Ñ‡Ð°ÑÐ°" />
                                     </Items>
                                 </ext:ComboBox>
                             </ext:Anchor>
@@ -117,44 +117,44 @@
                                 <ext:ComboBox 
                                     ID="Game_TimePerTip" 
                                     DataIndex="TimePerTip" 
-                                    FieldLabel="Âðåìÿ íà ïîäñêàçêó" 
+                                    FieldLabel="Ð’Ñ€ÐµÐ¼Ñ Ð½Ð° Ð¿Ð¾Ð´ÑÐºÐ°Ð·ÐºÑƒ" 
                                     Editable="true"
                                     AllowNegative="false" 
                                     AllowDecimals="false"   
-                                    EmptyText="Âðåìÿ â ìèíóòàõ" 
+                                    EmptyText="Ð’Ñ€ÐµÐ¼Ñ Ð² Ð¼Ð¸Ð½ÑƒÑ‚Ð°Ñ…" 
                                     AllowBlank="false"
                                     Width="173">
                                     <Items>
-                                        <ext:ListItem Value="1" Text="1 ìèíóòà" />
-                                        <ext:ListItem Value="2" Text="2 ìèíóòû" />
-                                        <ext:ListItem Value="3" Text="3 ìèíóòû" />
-                                        <ext:ListItem Value="5" Text="5 ìèíóò" />
-                                        <ext:ListItem Value="10" Text="10 ìèíóò" />
-                                        <ext:ListItem Value="15" Text="15 ìèíóò" />
-                                        <ext:ListItem Value="20" Text="20 ìèíóò" />
-                                        <ext:ListItem Value="25" Text="25 ìèíóò" />
-                                        <ext:ListItem Value="30" Text="30 ìèíóò" />
-                                        <ext:ListItem Value="35" Text="35 ìèíóò" />
-                                        <ext:ListItem Value="40" Text="40 ìèíóò" />
-                                        <ext:ListItem Value="45" Text="45 ìèíóò" />
-                                        <ext:ListItem Value="50" Text="50 ìèíóò" />
-                                        <ext:ListItem Value="55" Text="55 ìèíóò" />
-                                        <ext:ListItem Value="60" Text="1 ÷àñ" />
+                                        <ext:ListItem Value="1" Text="1 Ð¼Ð¸Ð½ÑƒÑ‚Ð°" />
+                                        <ext:ListItem Value="2" Text="2 Ð¼Ð¸Ð½ÑƒÑ‚Ñ‹" />
+                                        <ext:ListItem Value="3" Text="3 Ð¼Ð¸Ð½ÑƒÑ‚Ñ‹" />
+                                        <ext:ListItem Value="5" Text="5 Ð¼Ð¸Ð½ÑƒÑ‚" />
+                                        <ext:ListItem Value="10" Text="10 Ð¼Ð¸Ð½ÑƒÑ‚" />
+                                        <ext:ListItem Value="15" Text="15 Ð¼Ð¸Ð½ÑƒÑ‚" />
+                                        <ext:ListItem Value="20" Text="20 Ð¼Ð¸Ð½ÑƒÑ‚" />
+                                        <ext:ListItem Value="25" Text="25 Ð¼Ð¸Ð½ÑƒÑ‚" />
+                                        <ext:ListItem Value="30" Text="30 Ð¼Ð¸Ð½ÑƒÑ‚" />
+                                        <ext:ListItem Value="35" Text="35 Ð¼Ð¸Ð½ÑƒÑ‚" />
+                                        <ext:ListItem Value="40" Text="40 Ð¼Ð¸Ð½ÑƒÑ‚" />
+                                        <ext:ListItem Value="45" Text="45 Ð¼Ð¸Ð½ÑƒÑ‚" />
+                                        <ext:ListItem Value="50" Text="50 Ð¼Ð¸Ð½ÑƒÑ‚" />
+                                        <ext:ListItem Value="55" Text="55 Ð¼Ð¸Ð½ÑƒÑ‚" />
+                                        <ext:ListItem Value="60" Text="1 Ñ‡Ð°Ñ" />
                                     </Items>
                                 </ext:ComboBox>
                             </ext:Anchor>
                             <ext:Anchor>
-                                <ext:TextField ID="Game_PrefixMainCode" DataIndex="PrefixMainCode" FieldLabel="Ïðåôèêñ îñíîâíîãî êîäà" AllowBlank="false" MaxLength="6" Width="173"/>
+                                <ext:TextField ID="Game_PrefixMainCode" DataIndex="PrefixMainCode" FieldLabel="ÐŸÑ€ÐµÑ„Ð¸ÐºÑ Ð¾ÑÐ½Ð¾Ð²Ð½Ð¾Ð³Ð¾ ÐºÐ¾Ð´Ð°" AllowBlank="false" MaxLength="6" Width="173"/>
                             </ext:Anchor>
                             <ext:Anchor>
-                                <ext:TextField ID="Game_PrefixBonusCode" DataIndex="PrefixBonusCode" FieldLabel="Ïðåôèêñ áîíóñíîãî êîäà" AllowBlank="true" MaxLength="6" Width="173"/>
+                                <ext:TextField ID="Game_PrefixBonusCode" DataIndex="PrefixBonusCode" FieldLabel="ÐŸÑ€ÐµÑ„Ð¸ÐºÑ Ð±Ð¾Ð½ÑƒÑÐ½Ð¾Ð³Ð¾ ÐºÐ¾Ð´Ð°" AllowBlank="true" MaxLength="6" Width="173"/>
                             </ext:Anchor>
                             <ext:Anchor>
                                 <ext:Panel ID="pnlDescription" runat="server" Border="false" BodyStyle="background: transparent;">
                                     <Body>
                                         <ext:FormLayout ID="FormLayout2" runat="server" LabelAlign="Top" StyleSpec="background: transparent">
                                             <ext:Anchor Horizontal="100%">
-                                                <ext:TextArea ID="Game_Description" runat="server" DataIndex="Description" FieldLabel="Îïèñàíèå èãðû" Height="185"></ext:TextArea>
+                                                <ext:TextArea ID="Game_Description" runat="server" DataIndex="Description" FieldLabel="ÐžÐ¿Ð¸ÑÐ°Ð½Ð¸Ðµ Ð¸Ð³Ñ€Ñ‹" Height="185"></ext:TextArea>
                                             </ext:Anchor>
                                         </ext:FormLayout>
                                     </Body>
@@ -164,10 +164,10 @@
                     </Body>
                 </ext:FormPanel>
             </ext:FitLayout>
-            <ext:ToolTip runat="server" Target="Game_Name" Html="Íàçâàíèå èãðû"/>
-            <ext:ToolTip runat="server" Target="MultiField1" Html="Äàòà ïðîâåäåíèÿ èãðû"/>
-            <ext:ToolTip runat="server" Target="Game_PrefixMainCode" Html="Íàïðèìåð, 14DR"/>
-            <ext:ToolTip runat="server" Target="Game_PrefixBonusCode" Html="Íàïðèìåð, 14B"/>
+            <ext:ToolTip runat="server" Target="Game_Name" Html="ÐÐ°Ð·Ð²Ð°Ð½Ð¸Ðµ Ð¸Ð³Ñ€Ñ‹"/>
+            <ext:ToolTip runat="server" Target="MultiField1" Html="Ð”Ð°Ñ‚Ð° Ð¿Ñ€Ð¾Ð²ÐµÐ´ÐµÐ½Ð¸Ñ Ð¸Ð³Ñ€Ñ‹"/>
+            <ext:ToolTip runat="server" Target="Game_PrefixMainCode" Html="ÐÐ°Ð¿Ñ€Ð¸Ð¼ÐµÑ€, 14DR"/>
+            <ext:ToolTip runat="server" Target="Game_PrefixBonusCode" Html="ÐÐ°Ð¿Ñ€Ð¸Ð¼ÐµÑ€, 14B"/>
         </Body>
     </ext:Panel>
 </ext:FitLayout>

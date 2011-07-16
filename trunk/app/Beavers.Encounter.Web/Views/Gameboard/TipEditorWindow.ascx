@@ -1,9 +1,9 @@
-<%@ Control Language="C#" Inherits="System.Web.Mvc.ViewUserControl" %>
+ï»¿<%@ Control Language="C#" Inherits="System.Web.Mvc.ViewUserControl" %>
 <%@ Register Assembly="Coolite.Ext.Web" Namespace="Coolite.Ext.Web" TagPrefix="ext" %>
 <ext:DesktopWindow 
     ID="winTipEditor"
     runat="server"
-    Title="Òåêñò çàäàíèÿ/ïîäñêàçêè"
+    Title="Ð¢ÐµÐºÑÑ‚ Ð·Ð°Ð´Ð°Ð½Ð¸Ñ/Ð¿Ð¾Ð´ÑÐºÐ°Ð·ÐºÐ¸"
     Icon="World"
     Width="400"
     Height="360"
@@ -26,52 +26,52 @@
                             <ext:TextField ID="Tip_Id" runat="server" DataIndex="Id" Hidden="true"></ext:TextField>
                         </ext:Anchor>
                         <ext:Anchor Horizontal="100%">
-                            <ext:TextArea ID="Tip_Name" runat="server" DataIndex="Name" FieldLabel="Òåêñò çàäàíèÿ/ïîäñêàçêè" Height="200"></ext:TextArea>
+                            <ext:TextArea ID="Tip_Name" runat="server" DataIndex="Name" FieldLabel="Ð¢ÐµÐºÑÑ‚ Ð·Ð°Ð´Ð°Ð½Ð¸Ñ/Ð¿Ð¾Ð´ÑÐºÐ°Ð·ÐºÐ¸" Height="200"></ext:TextArea>
                         </ext:Anchor>
                         <ext:Anchor>
                             <ext:ComboBox 
                                 ID="Tip_SuspendTime" 
                                 DataIndex="SuspendTime" 
-                                FieldLabel="Âðåìÿ" 
+                                FieldLabel="Ð’Ñ€ÐµÐ¼Ñ" 
                                 Editable="true"
                                 AllowNegative="false" 
                                 AllowDecimals="false"   
-                                EmptyText="Âðåìÿ â ìèíóòàõ" 
+                                EmptyText="Ð’Ñ€ÐµÐ¼Ñ Ð² Ð¼Ð¸Ð½ÑƒÑ‚Ð°Ñ…" 
                                 AllowBlank="false"
                                 Width="150">
                                 <Items>
-                                    <ext:ListItem Value="0" Text="0 ìèíóò" />
-                                    <ext:ListItem Value="1" Text="1 ìèíóòà" />
-                                    <ext:ListItem Value="2" Text="2 ìèíóòû" />
-                                    <ext:ListItem Value="3" Text="3 ìèíóòû" />
-                                    <ext:ListItem Value="5" Text="5 ìèíóò" />
-                                    <ext:ListItem Value="10" Text="10 ìèíóò" />
-                                    <ext:ListItem Value="15" Text="15 ìèíóò" />
-                                    <ext:ListItem Value="20" Text="20 ìèíóò" />
-                                    <ext:ListItem Value="25" Text="25 ìèíóò" />
-                                    <ext:ListItem Value="30" Text="30 ìèíóò" />
-                                    <ext:ListItem Value="35" Text="35 ìèíóò" />
-                                    <ext:ListItem Value="40" Text="40 ìèíóò" />
-                                    <ext:ListItem Value="45" Text="45 ìèíóò" />
-                                    <ext:ListItem Value="50" Text="50 ìèíóò" />
-                                    <ext:ListItem Value="55" Text="55 ìèíóò" />
-                                    <ext:ListItem Value="60" Text="1 ÷àñ" />
-                                    <ext:ListItem Value="70" Text="1 ÷àñ 10 ìèíóò" />
-                                    <ext:ListItem Value="80" Text="1 ÷àñ 20 ìèíóò" />
-                                    <ext:ListItem Value="90" Text="1 ÷àñ 30 ìèíóò" />
-                                    <ext:ListItem Value="100" Text="1 ÷àñ 40 ìèíóò" />
+                                    <ext:ListItem Value="0" Text="0 Ð¼Ð¸Ð½ÑƒÑ‚" />
+                                    <ext:ListItem Value="1" Text="1 Ð¼Ð¸Ð½ÑƒÑ‚Ð°" />
+                                    <ext:ListItem Value="2" Text="2 Ð¼Ð¸Ð½ÑƒÑ‚Ñ‹" />
+                                    <ext:ListItem Value="3" Text="3 Ð¼Ð¸Ð½ÑƒÑ‚Ñ‹" />
+                                    <ext:ListItem Value="5" Text="5 Ð¼Ð¸Ð½ÑƒÑ‚" />
+                                    <ext:ListItem Value="10" Text="10 Ð¼Ð¸Ð½ÑƒÑ‚" />
+                                    <ext:ListItem Value="15" Text="15 Ð¼Ð¸Ð½ÑƒÑ‚" />
+                                    <ext:ListItem Value="20" Text="20 Ð¼Ð¸Ð½ÑƒÑ‚" />
+                                    <ext:ListItem Value="25" Text="25 Ð¼Ð¸Ð½ÑƒÑ‚" />
+                                    <ext:ListItem Value="30" Text="30 Ð¼Ð¸Ð½ÑƒÑ‚" />
+                                    <ext:ListItem Value="35" Text="35 Ð¼Ð¸Ð½ÑƒÑ‚" />
+                                    <ext:ListItem Value="40" Text="40 Ð¼Ð¸Ð½ÑƒÑ‚" />
+                                    <ext:ListItem Value="45" Text="45 Ð¼Ð¸Ð½ÑƒÑ‚" />
+                                    <ext:ListItem Value="50" Text="50 Ð¼Ð¸Ð½ÑƒÑ‚" />
+                                    <ext:ListItem Value="55" Text="55 Ð¼Ð¸Ð½ÑƒÑ‚" />
+                                    <ext:ListItem Value="60" Text="1 Ñ‡Ð°Ñ" />
+                                    <ext:ListItem Value="70" Text="1 Ñ‡Ð°Ñ 10 Ð¼Ð¸Ð½ÑƒÑ‚" />
+                                    <ext:ListItem Value="80" Text="1 Ñ‡Ð°Ñ 20 Ð¼Ð¸Ð½ÑƒÑ‚" />
+                                    <ext:ListItem Value="90" Text="1 Ñ‡Ð°Ñ 30 Ð¼Ð¸Ð½ÑƒÑ‚" />
+                                    <ext:ListItem Value="100" Text="1 Ñ‡Ð°Ñ 40 Ð¼Ð¸Ð½ÑƒÑ‚" />
                                 </Items>
                             </ext:ComboBox>
                         </ext:Anchor>
                     </ext:FormLayout>
                 </Body>
                 <Buttons>
-                    <ext:Button ID="tipSaveBtn" runat="server" Text="Ñîõðàíèòü" Icon="Disk">
+                    <ext:Button ID="tipSaveBtn" runat="server" Text="Ð¡Ð¾Ñ…Ñ€Ð°Ð½Ð¸Ñ‚ÑŒ" Icon="Disk">
                         <Listeners>
-                            <Click Handler="#{tipFormPanel}.form.submit({waitMsg:'Ñîõðàíåíèå...', params:{id: getTipID()}, success: tipSaveSuccessHandler, failure: tipSaveFailureHandler});" />
+                            <Click Handler="#{tipFormPanel}.form.submit({waitMsg:'Ð¡Ð¾Ñ…Ñ€Ð°Ð½ÐµÐ½Ð¸Ðµ...', params:{id: getTipID()}, success: tipSaveSuccessHandler, failure: tipSaveFailureHandler});" />
                         </Listeners>
                     </ext:Button>
-                    <ext:Button ID="tipCancelBtn" runat="server" Text="Îòìåíà" Icon="Cancel">
+                    <ext:Button ID="tipCancelBtn" runat="server" Text="ÐžÑ‚Ð¼ÐµÐ½Ð°" Icon="Cancel">
                         <Listeners>
                             <Click Fn="onCloseTipWindow" />
                         </Listeners>

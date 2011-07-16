@@ -1,10 +1,10 @@
-<%@ Page Title="Teams" Language="C#" MasterPageFile="~/Views/Shared/Site.Master" AutoEventWireup="true" 
+п»ї<%@ Page Title="Teams" Language="C#" MasterPageFile="~/Views/Shared/Site.Master" AutoEventWireup="true" 
 	Inherits="System.Web.Mvc.ViewPage<IEnumerable<Team>>" %>
  
 
 <asp:Content ContentPlaceHolderID="MainContentPlaceHolder" runat="server">
 
-    <h2>Список команд</h2>
+    <h2>РЎРїРёСЃРѕРє РєРѕРјР°РЅРґ</h2>
 
     <% if (ViewContext.TempData[ControllerEnums.GlobalViewDataProperty.PageMessage.ToString()] != null) { %>
         <p id="pageMessage"><%= ViewContext.TempData[ControllerEnums.GlobalViewDataProperty.PageMessage.ToString()]%></p>
@@ -28,11 +28,11 @@
 				<td><%=Html.ActionLink<TeamsController>( c => c.Show( team.Id ), team.Name) %></td>
 				
                 <% if (((User)User).Role.IsAuthor) { %>
-				<td><%=Html.ActionLink<TeamsController>( c => c.Edit( team.Id ), "Изменить") %></td>
+				<td><%=Html.ActionLink<TeamsController>( c => c.Edit( team.Id ), "РР·РјРµРЅРёС‚СЊ") %></td>
 				<td>
     				<% using (Html.BeginForm<TeamsController>(c => c.Delete(team.Id))) { %>
                         <%= Html.AntiForgeryToken() %>
-    				    <input type="submit" value="Удалить" onclick="return confirm('Вы уверенны, что хотите удалить команду?');" />
+    				    <input type="submit" value="РЈРґР°Р»РёС‚СЊ" onclick="return confirm('Р’С‹ СѓРІРµСЂРµРЅРЅС‹, С‡С‚Рѕ С…РѕС‚РёС‚Рµ СѓРґР°Р»РёС‚СЊ РєРѕРјР°РЅРґСѓ?');" />
                     <% } %>
 				</td>
                 <% } %>
@@ -42,6 +42,6 @@
 
     <% if (((User)User).Role.IsAuthor)
        { %>
-        <p><%= Html.ActionLink<TeamsController>(c => c.Create(), "Создать новую команду") %></p>
+        <p><%= Html.ActionLink<TeamsController>(c => c.Create(), "РЎРѕР·РґР°С‚СЊ РЅРѕРІСѓСЋ РєРѕРјР°РЅРґСѓ") %></p>
 	<%} %>
 </asp:Content>

@@ -1,13 +1,13 @@
-<%@ Control Language="C#" Inherits="System.Web.Mvc.ViewUserControl<System.Data.DataRow[]>" %>
+п»ї<%@ Control Language="C#" Inherits="System.Web.Mvc.ViewUserControl<System.Data.DataRow[]>" %>
 
-<h2>Итоговая таблица</h2>
+<h2>РС‚РѕРіРѕРІР°СЏ С‚Р°Р±Р»РёС†Р°</h2>
 
 <table>
     <thead>
-        <th>Команда</th>
-        <th>Задания</th>
-        <th>Бонусы</th>
-        <th>Время</th>
+        <th>РљРѕРјР°РЅРґР°</th>
+        <th>Р—Р°РґР°РЅРёСЏ</th>
+        <th>Р‘РѕРЅСѓСЃС‹</th>
+        <th>Р’СЂРµРјСЏ</th>
     </thead>
     <tbody>
     <%

@@ -1,10 +1,10 @@
-<%@ Page Title="Edit Game" Language="C#" MasterPageFile="~/Views/Shared/Site.Master" AutoEventWireup="true" 
+п»ї<%@ Page Title="Edit Game" Language="C#" MasterPageFile="~/Views/Shared/Site.Master" AutoEventWireup="true" 
 	Inherits="System.Web.Mvc.ViewPage<GamesController.GameFormViewModel>" %>
 
 <asp:Content ContentPlaceHolderID="MainContentPlaceHolder" runat="server">
 
-<h1 style="color:Red">Тестируем <% = Html.ActionLink<GameboardController>(x => x.Show(Model.Game.Id), "новый редактор")%>!</h1>
-<p>Жду пожеланий и отзывов о новом редакторе.</p>
+<h1 style="color:Red">РўРµСЃС‚РёСЂСѓРµРј <% = Html.ActionLink<GameboardController>(x => x.Show(Model.Game.Id), "РЅРѕРІС‹Р№ СЂРµРґР°РєС‚РѕСЂ")%>!</h1>
+<p>Р–РґСѓ РїРѕР¶РµР»Р°РЅРёР№ Рё РѕС‚Р·С‹РІРѕРІ Рѕ РЅРѕРІРѕРј СЂРµРґР°РєС‚РѕСЂРµ.</p>
 <br />
     <div class="columnsContainer">
 	    

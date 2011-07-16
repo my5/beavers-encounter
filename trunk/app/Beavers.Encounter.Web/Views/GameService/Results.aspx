@@ -1,4 +1,4 @@
-<%@ Page Language="C#" Inherits="System.Web.Mvc.ViewPage<System.Data.DataRow[]>" %>
+п»ї<%@ Page Language="C#" Inherits="System.Web.Mvc.ViewPage<System.Data.DataRow[]>" %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
@@ -8,13 +8,13 @@
 </head>
 <body>
     <div>
-        <h2>Итоговая таблица</h2>
+        <h2>РС‚РѕРіРѕРІР°СЏ С‚Р°Р±Р»РёС†Р°</h2>
         <table>
             <thead>
-                <th>Команда</th>
-                <th>Задания</th>
-                <th>Бонусы</th>
-                <th>Время</th>
+                <th>РљРѕРјР°РЅРґР°</th>
+                <th>Р—Р°РґР°РЅРёСЏ</th>
+                <th>Р‘РѕРЅСѓСЃС‹</th>
+                <th>Р’СЂРµРјСЏ</th>
             </thead>
             <tbody>
             <%

@@ -1,4 +1,4 @@
-<%@ Page Title="Task Details" Language="C#" MasterPageFile="~/Views/Shared/Site.Master" AutoEventWireup="true" 
+п»ї<%@ Page Title="Task Details" Language="C#" MasterPageFile="~/Views/Shared/Site.Master" AutoEventWireup="true" 
 	Inherits="System.Web.Mvc.ViewPage<Task>" %>
 
 <asp:Content ContentPlaceHolderID="MainContentPlaceHolder" runat="server">
@@ -7,7 +7,7 @@
 	    
         <div class="leftColumn">
 	        
-            <h2>Свойства задания</h2>
+            <h2>РЎРІРѕР№СЃС‚РІР° Р·Р°РґР°РЅРёСЏ</h2>
 
             <ul>
 		        <li>
@@ -33,7 +33,7 @@
                     <%= Model.Render<Task>(Html, x => x.GiveTaskAfter)%>
 		        </li>
 		        <li>
-			        <label for="Task_NotAfterTasks">Не после:</label>
+			        <label for="Task_NotAfterTasks">РќРµ РїРѕСЃР»Рµ:</label>
                     <span id="Task_NotAfterTasks">
                     <% foreach (Task task in Model.NotAfterTasks) { %>
                         <%= Html.ActionLink<TasksController>(c => c.Show(task.Id), task.Name)%>
@@ -41,7 +41,7 @@
                     </span>
 		        </li>
 		        <li>
-			        <label for="Task_NotOneTimeTasks">Не вместе:</label>
+			        <label for="Task_NotOneTimeTasks">РќРµ РІРјРµСЃС‚Рµ:</label>
                     <span id="Task_NotOneTimeTasks">
                     <% foreach (Task task in Model.NotOneTimeTasks) { %>
                         <%= Html.ActionLink<TasksController>(c => c.Show(task.Id), task.Name)%>
@@ -50,7 +50,7 @@
 		        </li>
 	        </ul>
         	
-            <p><%= Html.ActionLink<TasksController>(c => c.Edit(Model.Id), "Изменить")%></p>
+            <p><%= Html.ActionLink<TasksController>(c => c.Edit(Model.Id), "РР·РјРµРЅРёС‚СЊ")%></p>
         	
         </div>
 

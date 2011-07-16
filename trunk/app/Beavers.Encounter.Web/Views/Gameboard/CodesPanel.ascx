@@ -1,4 +1,4 @@
-<%@ Control Language="C#" Inherits="System.Web.Mvc.ViewUserControl" %>
+ï»¿<%@ Control Language="C#" Inherits="System.Web.Mvc.ViewUserControl" %>
 <%@ Register Assembly="Coolite.Ext.Web" Namespace="Coolite.Ext.Web" TagPrefix="ext" %>
 <ext:FitLayout ID="codesFitLayout" runat="server">
     <ext:GridPanel 
@@ -13,12 +13,12 @@
         <TopBar>
             <ext:Toolbar runat="server">
                 <Items>
-                    <ext:ToolbarButton ID="btnAddCode" runat="server" Text="Äîáàâèòü êîä" Icon="Add">
+                    <ext:ToolbarButton ID="btnAddCode" runat="server" Text="Ð”Ð¾Ð±Ð°Ð²Ð¸Ñ‚ÑŒ ÐºÐ¾Ð´" Icon="Add">
                         <Listeners>
                             <Click Handler="#{codesGrid}.insertRecord(0, {});#{codesGrid}.getView().focusRow(0);#{codesGrid}.startEditing(1, 0);" />
                         </Listeners>
                     </ext:ToolbarButton>
-                    <ext:ToolbarButton ID="btnSaveCodes" runat="server" Text="Ñîõðàíèòü" Icon="Disk" Disabled="true">
+                    <ext:ToolbarButton ID="btnSaveCodes" runat="server" Text="Ð¡Ð¾Ñ…Ñ€Ð°Ð½Ð¸Ñ‚ÑŒ" Icon="Disk" Disabled="true">
                         <Listeners>
                             <Click Handler="#{dsCodes}.save();#{btnSaveCodes}.setDisabled(true);" />
                         </Listeners>
@@ -31,21 +31,21 @@
                 <ext:ImageCommandColumn ColumnID="cmd" Sortable="false" Width="34">
                     <Commands>
                         <ext:ImageCommand CommandName="Delete" Icon="Cross">
-                            <ToolTip Text="Óäàëèòü êîä" />
+                            <ToolTip Text="Ð£Ð´Ð°Ð»Ð¸Ñ‚ÑŒ ÐºÐ¾Ð´" />
                         </ext:ImageCommand>
                     </Commands>
                 </ext:ImageCommandColumn>
-                <ext:Column ColumnID="Name" DataIndex="Name" Header="Êîä" Width="100">
+                <ext:Column ColumnID="Name" DataIndex="Name" Header="ÐšÐ¾Ð´" Width="100">
                     <Editor>
                         <ext:NumberField AllowBlank="false" AllowDecimals="false" AllowNegative="false" MaxLengthText="4"></ext:NumberField>
                     </Editor>
                 </ext:Column>
-                <ext:Column ColumnID="Danger" DataIndex="Danger" Header="ÊÎ" Width="100">
+                <ext:Column ColumnID="Danger" DataIndex="Danger" Header="ÐšÐž" Width="100">
                     <Editor>
                         <ext:TextField AllowBlank="false" MaxLengthText="50"></ext:TextField>
                     </Editor>
                 </ext:Column>
-                <ext:CheckColumn ColumnID="IsBonus" DataIndex="IsBonus" Header="Áîíóñ?" Width="60" Editable="true">
+                <ext:CheckColumn ColumnID="IsBonus" DataIndex="IsBonus" Header="Ð‘Ð¾Ð½ÑƒÑ?" Width="60" Editable="true">
                 </ext:CheckColumn>
             </Columns>
         </ColumnModel>

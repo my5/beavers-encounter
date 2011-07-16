@@ -1,4 +1,4 @@
-<%@ Control Language="C#" AutoEventWireup="true"
+ï»¿<%@ Control Language="C#" AutoEventWireup="true"
 	Inherits="System.Web.Mvc.ViewUserControl<TipsController.TipFormViewModel>" %>
 
 <% if (ViewContext.TempData[ControllerEnums.GlobalViewDataProperty.PageMessage.ToString()] != null) { %>
@@ -16,8 +16,8 @@
     <%= Model.Tip.RenderEditable<Tip>(Html, x => x.SuspendTime)%>
 
     <div>
-        <%= Html.SubmitButton("btnSave", "Ñîõðàíèòü") %>
-        <%= Html.Button("btnCancel", "Îòìåíà", HtmlButtonType.Button,
+        <%= Html.SubmitButton("btnSave", "Ð¡Ð¾Ñ…Ñ€Ð°Ð½Ð¸Ñ‚ÑŒ") %>
+        <%= Html.Button("btnCancel", "ÐžÑ‚Ð¼ÐµÐ½Ð°", HtmlButtonType.Button,
                         "window.location.href = '" + Html.BuildUrlFromExpression<TasksController>(c => c.Edit(ViewData.Model.TaskId)) + "';")%>
     </div>                    
 <% } %>

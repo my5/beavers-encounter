@@ -1,9 +1,9 @@
-<%@ Page Title="Game Details" Language="C#" MasterPageFile="~/Views/Shared/Site.Master" AutoEventWireup="true" 
+п»ї<%@ Page Title="Game Details" Language="C#" MasterPageFile="~/Views/Shared/Site.Master" AutoEventWireup="true" 
 	Inherits="System.Web.Mvc.ViewPage<Game>" %>
 
 <asp:Content ContentPlaceHolderID="MainContentPlaceHolder" runat="server">
 
-    <h2>Описание игры</h2>
+    <h2>РћРїРёСЃР°РЅРёРµ РёРіСЂС‹</h2>
 
     <ul>
 		<li>
@@ -24,11 +24,11 @@
 	</ul>
 
     <% if (((User)User).Team != null && ((User)User).Team.Game == null && ((User)User).Role.IsTeamLeader) { %>
-        <%= Html.Button("registerTeam", "Будем играть", HtmlButtonType.Button, 
+        <%= Html.Button("registerTeam", "Р‘СѓРґРµРј РёРіСЂР°С‚СЊ", HtmlButtonType.Button, 
             "window.location.href = '" + Html.BuildUrlFromExpression<TeamsController>(c => c.SingInGame(ViewData.Model.Id, ((User)User).Team.Id)) + "';") %>
     <% } %>
 
-    <p><%= Html.ActionLink<GamesController>(c => c.Edit(Model.Id), "Изменить")%></p>
+    <p><%= Html.ActionLink<GamesController>(c => c.Edit(Model.Id), "РР·РјРµРЅРёС‚СЊ")%></p>
 
     <% Html.RenderPartial("RegisteredTeams", Model); %>
 

@@ -1,4 +1,4 @@
-<%@ Page Title="Games" Language="C#" MasterPageFile="~/Views/Shared/Site.Master" AutoEventWireup="true" 
+﻿<%@ Page Title="Games" Language="C#" MasterPageFile="~/Views/Shared/Site.Master" AutoEventWireup="true" 
     Inherits="System.Web.Mvc.ViewPage" %>
 <%@ Import Namespace="log4net"%>
 <%@ Import Namespace="System.Security"%>

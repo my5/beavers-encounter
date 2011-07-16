@@ -1,13 +1,13 @@
-<%@ Page Language="C#" MasterPageFile="~/Views/Shared/Site.Master" AutoEventWireup="true" 
+п»ї<%@ Page Language="C#" MasterPageFile="~/Views/Shared/Site.Master" AutoEventWireup="true" 
     Inherits="System.Web.Mvc.ViewPage" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContentPlaceHolder" runat="server">
     <div>
-        <div>Ахтунг!!</div>
-        <div>Нахрена ты двигло сломал?!</div>
-        <div>Руки прочь от клавиатуры!!</div>
+        <div>РђС…С‚СѓРЅРі!!</div>
+        <div>РќР°С…СЂРµРЅР° С‚С‹ РґРІРёРіР»Рѕ СЃР»РѕРјР°Р»?!</div>
+        <div>Р СѓРєРё РїСЂРѕС‡СЊ РѕС‚ РєР»Р°РІРёР°С‚СѓСЂС‹!!</div>
         <p>
-        Лучше вспомни, что ты только что сделал, и сообщи об этом разработчикам.
+        Р›СѓС‡С€Рµ РІСЃРїРѕРјРЅРё, С‡С‚Рѕ С‚С‹ С‚РѕР»СЊРєРѕ С‡С‚Рѕ СЃРґРµР»Р°Р», Рё СЃРѕРѕР±С‰Рё РѕР± СЌС‚РѕРј СЂР°Р·СЂР°Р±РѕС‚С‡РёРєР°Рј.
         </p>
     </div>
 </asp:Content>

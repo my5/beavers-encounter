@@ -1,16 +1,16 @@
-<%@ Control Language="C#" Inherits="System.Web.Mvc.ViewUserControl<Game>"%>
+п»ї<%@ Control Language="C#" Inherits="System.Web.Mvc.ViewUserControl<Game>"%>
 
-<h2>Состояние игры</h2>
+<h2>РЎРѕСЃС‚РѕСЏРЅРёРµ РёРіСЂС‹</h2>
 
 <table>
     <thead>
         <tr>
-		    <th>Команда</th>
-		    <th><div>Текущее</div><div>задание</div></th>
-		    <th><div>Время</div><div>выполнения</div></th>
-		    <th><div>Заданий:</div><div>получено /</div><div>выполнено /</div><div>просрочено /</div><div>слито /</div><div>забанено</div></th>
-		    <th><div>Выдано</div><div>подсказок</div></th>
-		    <th><div>Кодов:</div><div>необходимо /</div><div>получено</div></th>
+		    <th>РљРѕРјР°РЅРґР°</th>
+		    <th><div>РўРµРєСѓС‰РµРµ</div><div>Р·Р°РґР°РЅРёРµ</div></th>
+		    <th><div>Р’СЂРµРјСЏ</div><div>РІС‹РїРѕР»РЅРµРЅРёСЏ</div></th>
+		    <th><div>Р—Р°РґР°РЅРёР№:</div><div>РїРѕР»СѓС‡РµРЅРѕ /</div><div>РІС‹РїРѕР»РЅРµРЅРѕ /</div><div>РїСЂРѕСЃСЂРѕС‡РµРЅРѕ /</div><div>СЃР»РёС‚Рѕ /</div><div>Р·Р°Р±Р°РЅРµРЅРѕ</div></th>
+		    <th><div>Р’С‹РґР°РЅРѕ</div><div>РїРѕРґСЃРєР°Р·РѕРє</div></th>
+		    <th><div>РљРѕРґРѕРІ:</div><div>РЅРµРѕР±С…РѕРґРёРјРѕ /</div><div>РїРѕР»СѓС‡РµРЅРѕ</div></th>
         </tr>
     </thead>
     

@@ -1,4 +1,4 @@
-<%@ Control Language="C#" AutoEventWireup="true" Inherits="System.Web.Mvc.ViewUserControl<CodesController.CodeFormViewModel>" %>
+ï»¿<%@ Control Language="C#" AutoEventWireup="true" Inherits="System.Web.Mvc.ViewUserControl<CodesController.CodeFormViewModel>" %>
 
 <% if (ViewContext.TempData[ControllerEnums.GlobalViewDataProperty.PageMessage.ToString()] != null) { %>
     <p id="pageMessage"><%= ViewContext.TempData[ControllerEnums.GlobalViewDataProperty.PageMessage.ToString()]%></p>
@@ -17,8 +17,8 @@
     <%= Model.Code.RenderEditable<Code>(Html, x => x.TipAfterCode)%>
 
     <div>
-        <%= Html.SubmitButton("btnSave", "Ñîõðàíèòü") %>
-        <%= Html.Button("btnCancel", "Îòìåíà", HtmlButtonType.Button, 
+        <%= Html.SubmitButton("btnSave", "Ð¡Ð¾Ñ…Ñ€Ð°Ð½Ð¸Ñ‚ÑŒ") %>
+        <%= Html.Button("btnCancel", "ÐžÑ‚Ð¼ÐµÐ½Ð°", HtmlButtonType.Button, 
 		        "window.location.href = '" + Html.BuildUrlFromExpression<TasksController>(c => c.Edit(ViewData.Model.TaskId)) + "';") %>
     </div>		    
 <% } %>

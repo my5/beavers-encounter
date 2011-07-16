@@ -1,4 +1,4 @@
-<%@ Control Language="C#" AutoEventWireup="true"
+ï»¿<%@ Control Language="C#" AutoEventWireup="true"
 	Inherits="System.Web.Mvc.ViewUserControl<TeamsController.TeamFormViewModel>" %>
 
 <% if (ViewContext.TempData[ControllerEnums.GlobalViewDataProperty.PageMessage.ToString()] != null) { %>
@@ -16,14 +16,14 @@
     <%= Model.Team.RenderEditable<Team>(Html, x => x.AccessKey)%>
 
 <% if (Model.Team != null && Model.Team.Game != null) { %>
-    <%= Model.Team.RenderEditable(Html, x => x.PreventTasksAfterTeams, Model.Team.Game.Teams, new Team { Name = "<Íå óêàçàíî>" })%>
+    <%= Model.Team.RenderEditable(Html, x => x.PreventTasksAfterTeams, Model.Team.Game.Teams, new Team { Name = "<ÐÐµ ÑƒÐºÐ°Ð·Ð°Ð½Ð¾>" })%>
 <% } %>
 
     <%= Model.Team.RenderEditable<Team>(Html, x => x.FinalTask)%>
 
     <div>
-        <%= Html.SubmitButton("btnSave", "Ñîõðàíèòü") %>
-        <%= Html.Button("btnCancel", "Îòìåíà", HtmlButtonType.Button, 
+        <%= Html.SubmitButton("btnSave", "Ð¡Ð¾Ñ…Ñ€Ð°Ð½Ð¸Ñ‚ÑŒ") %>
+        <%= Html.Button("btnCancel", "ÐžÑ‚Ð¼ÐµÐ½Ð°", HtmlButtonType.Button, 
 		        "window.location.href = '" + Html.BuildUrlFromExpression<TeamsController>(c => c.Index()) + "';") %>
     </div>		    
 <% } %>

@@ -1,8 +1,8 @@
-<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/Site.Master" Inherits="System.Web.Mvc.ViewPage<TeamsController.TeamFormViewModel1>" %>
+п»ї<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/Site.Master" Inherits="System.Web.Mvc.ViewPage<TeamsController.TeamFormViewModel1>" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContentPlaceHolder" runat="server">
 
-    <h2>Вступление в команду</h2>
+    <h2>Р’СЃС‚СѓРїР»РµРЅРёРµ РІ РєРѕРјР°РЅРґСѓ</h2>
 
 <% if (ViewContext.TempData[ControllerEnums.GlobalViewDataProperty.PageMessage.ToString()] != null) { %>
     <p id="pageMessage"><%= ViewContext.TempData[ControllerEnums.GlobalViewDataProperty.PageMessage.ToString()]%></p>
@@ -14,14 +14,14 @@
         <%= Html.Hidden("id", (ViewData.Model.TeamId != null) ? ViewData.Model.TeamId : 0)%>
         <div>
             <div>
-                <label for="accessKey">Код доступа:</label>
+                <label for="accessKey">РљРѕРґ РґРѕСЃС‚СѓРїР°:</label>
                 <div>
                 <%= Html.TextBox("accessKey")%>
                 <%= Html.ValidationMessage("accessKey")%>
                 </div>
             </div>
             <div>
-                <input type="submit" value="Войти" />
+                <input type="submit" value="Р’РѕР№С‚Рё" />
             </div>
         </div>
     <% } %>

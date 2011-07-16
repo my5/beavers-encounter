@@ -1,4 +1,4 @@
-<%@ Control Language="C#" Inherits="System.Web.Mvc.ViewUserControl<Game>" %>
+п»ї<%@ Control Language="C#" Inherits="System.Web.Mvc.ViewUserControl<Game>" %>
 <%@ Register Assembly="Coolite.Ext.Web" Namespace="Coolite.Ext.Web" TagPrefix="ext" %>
 
 <ext:Store ID="dsTeamsState" runat="server" AutoLoad="false">
@@ -29,7 +29,7 @@
         <ext:Parameter Name="id" Value="gameId.value" Mode="Raw"/>
     </BaseParams>
     <Listeners>
-        <BeforeLoad Handler="gdTeamsState.el.mask('Загрузка...', 'x-mask-loading');" />
+        <BeforeLoad Handler="gdTeamsState.el.mask('Р—Р°РіСЂСѓР·РєР°...', 'x-mask-loading');" />
         <LoadException Handler="gdTeamsState.el.unmask();" />
         <Load Handler="gdTeamsState.el.unmask();" />
     </Listeners>
@@ -38,7 +38,7 @@
 <ext:DesktopWindow
     ID="winGameControl" 
     runat="server" 
-    Title="Управление игрой" 
+    Title="РЈРїСЂР°РІР»РµРЅРёРµ РёРіСЂРѕР№" 
     Icon="Joystick"              
     Width="800"
     Height="480"
@@ -48,7 +48,7 @@
     <Body>
         <ext:BorderLayout runat="server">
             <North>
-                <ext:Panel ID="gameStatePanel" runat="server" Height="114" Border="false" Collapsible="true" Title="Панель управления" TitleCollapse="false">
+                <ext:Panel ID="gameStatePanel" runat="server" Height="114" Border="false" Collapsible="true" Title="РџР°РЅРµР»СЊ СѓРїСЂР°РІР»РµРЅРёСЏ" TitleCollapse="false">
                     <Body>
                         <ext:TableLayout ID="TableLayout1" runat="server" Columns="3">
                             <ext:Cell RowSpan="2">
@@ -56,13 +56,13 @@
                                     <Body>
                                         <ext:FormLayout ID="gameStateFormLayout" runat="server" LabelWidth="100">
                                             <ext:Anchor Horizontal="100%">
-                                                <ext:RadioGroup ID="rgGameState" runat="server" FieldLabel="Состояние игры" ColumnsNumber="1">
+                                                <ext:RadioGroup ID="rgGameState" runat="server" FieldLabel="РЎРѕСЃС‚РѕСЏРЅРёРµ РёРіСЂС‹" ColumnsNumber="1">
                                                     <Items>
-                                                        <ext:Radio ID="radioPlanned" runat="server" BoxLabel="Планирование"/>
-                                                        <ext:Radio ID="radioStartup" runat="server" BoxLabel="Подготовка"/>
-                                                        <ext:Radio ID="radioStarted" runat="server" BoxLabel="Запущена"/>
-                                                        <ext:Radio ID="radioFinished" runat="server" BoxLabel="Завершена"/>
-                                                        <ext:Radio ID="radioCloused" runat="server" BoxLabel="Закрыта"/>
+                                                        <ext:Radio ID="radioPlanned" runat="server" BoxLabel="РџР»Р°РЅРёСЂРѕРІР°РЅРёРµ"/>
+                                                        <ext:Radio ID="radioStartup" runat="server" BoxLabel="РџРѕРґРіРѕС‚РѕРІРєР°"/>
+                                                        <ext:Radio ID="radioStarted" runat="server" BoxLabel="Р—Р°РїСѓС‰РµРЅР°"/>
+                                                        <ext:Radio ID="radioFinished" runat="server" BoxLabel="Р—Р°РІРµСЂС€РµРЅР°"/>
+                                                        <ext:Radio ID="radioCloused" runat="server" BoxLabel="Р—Р°РєСЂС‹С‚Р°"/>
                                                     </Items>
                                                     <Listeners>
                                                         <Change Fn="onChangeGameState" />
@@ -76,14 +76,14 @@
                             <ext:Cell>
                                 <ext:Panel ID="Panel2" runat="server" Height="25" Border="false">
                                     <Body>
-                                        <ext:Button ID="btnDownloadTelemetry" runat="server" Text="Скачать телеметрию" Icon="Television"></ext:Button>
+                                        <ext:Button ID="btnDownloadTelemetry" runat="server" Text="РЎРєР°С‡Р°С‚СЊ С‚РµР»РµРјРµС‚СЂРёСЋ" Icon="Television"></ext:Button>
                                     </Body>
                                 </ext:Panel>
                             </ext:Cell>
                             <ext:Cell>
                                 <ext:Panel ID="Panel3" runat="server" Height="25" Border="false">
                                     <Body>
-                                        <ext:Button ID="btnShowGameRerults" runat="server" Text="Показать результаты" Icon="StarGold"></ext:Button>
+                                        <ext:Button ID="btnShowGameRerults" runat="server" Text="РџРѕРєР°Р·Р°С‚СЊ СЂРµР·СѓР»СЊС‚Р°С‚С‹" Icon="StarGold"></ext:Button>
                                     </Body>
                                 </ext:Panel>
                             </ext:Cell>
@@ -96,26 +96,26 @@
                 </ext:Panel>
             </North>
             <Center>
-                <ext:GridPanel ID="gdTeamsState" runat="server" StoreID="dsTeamsState" Border="false" Title="Панель состояния команд">
+                <ext:GridPanel ID="gdTeamsState" runat="server" StoreID="dsTeamsState" Border="false" Title="РџР°РЅРµР»СЊ СЃРѕСЃС‚РѕСЏРЅРёСЏ РєРѕРјР°РЅРґ">
                     <ColumnModel>
                         <Columns>
-                            <ext:Column ColumnID="Name" DataIndex="Name" Header="Название<br/>команды">
+                            <ext:Column ColumnID="Name" DataIndex="Name" Header="РќР°Р·РІР°РЅРёРµ<br/>РєРѕРјР°РЅРґС‹">
                                 <Renderer Handler="return '<b>'+record.data['Name']" /> 
                             </ext:Column>
-                            <ext:Column ColumnID="Task" DataIndex="Task" Header="Выполняемое<br/>задание"></ext:Column>
-                            <ext:Column ColumnID="Time" DataIndex="Time" Header="Время<br/>выполнения" Width="75">
+                            <ext:Column ColumnID="Task" DataIndex="Task" Header="Р’С‹РїРѕР»РЅСЏРµРјРѕРµ<br/>Р·Р°РґР°РЅРёРµ"></ext:Column>
+                            <ext:Column ColumnID="Time" DataIndex="Time" Header="Р’СЂРµРјСЏ<br/>РІС‹РїРѕР»РЅРµРЅРёСЏ" Width="75">
                                 <Renderer Format="Substr" FormatArgs="1,8" />
                             </ext:Column>
-                            <ext:Column ColumnID="Accpt" DataIndex="Accpt" Header="Заданий<br/>получено" Width="60"></ext:Column>
-                            <ext:Column ColumnID="Success" DataIndex="Success" Header="Заданий<br/>выполнено" Width="60"></ext:Column>
-                            <ext:Column ColumnID="Overtime" DataIndex="Overtime" Header="Заданий<br/>просрочено" Width="60"></ext:Column>
-                            <ext:Column ColumnID="Canceled" DataIndex="Canceled" Header="Заданий<br/>слито" Width="60"></ext:Column>
-                            <ext:Column ColumnID="Cheat" DataIndex="Cheat" Header="Заданий<br/>забанено" Width="60"></ext:Column>
-                            <ext:Column ColumnID="Tips" DataIndex="Tips" Header="Выдано<br/>подсказок" Width="60" Sortable="false"></ext:Column>
-                            <ext:Column ColumnID="CodesMainCount" DataIndex="CodesMainCount" Header="Кодов<br/>необходимо" Width="60" Sortable="false"></ext:Column>
-                            <ext:Column ColumnID="CodesBonusCount" DataIndex="CodesBonusCount" Header="Кодов<br/>бонусных<br/>необходимо" Width="60" Sortable="false"></ext:Column>
-                            <ext:Column ColumnID="CodesAccpt" DataIndex="CodesAccpt" Header="Кодов<br/>получено" Width="60" Sortable="false"></ext:Column>
-                            <ext:Column ColumnID="CodesBonusAccpt" DataIndex="CodesBonusAccpt" Header="Кодов<br/>бонусных<br/>получено" Width="60" Sortable="false"></ext:Column>
+                            <ext:Column ColumnID="Accpt" DataIndex="Accpt" Header="Р—Р°РґР°РЅРёР№<br/>РїРѕР»СѓС‡РµРЅРѕ" Width="60"></ext:Column>
+                            <ext:Column ColumnID="Success" DataIndex="Success" Header="Р—Р°РґР°РЅРёР№<br/>РІС‹РїРѕР»РЅРµРЅРѕ" Width="60"></ext:Column>
+                            <ext:Column ColumnID="Overtime" DataIndex="Overtime" Header="Р—Р°РґР°РЅРёР№<br/>РїСЂРѕСЃСЂРѕС‡РµРЅРѕ" Width="60"></ext:Column>
+                            <ext:Column ColumnID="Canceled" DataIndex="Canceled" Header="Р—Р°РґР°РЅРёР№<br/>СЃР»РёС‚Рѕ" Width="60"></ext:Column>
+                            <ext:Column ColumnID="Cheat" DataIndex="Cheat" Header="Р—Р°РґР°РЅРёР№<br/>Р·Р°Р±Р°РЅРµРЅРѕ" Width="60"></ext:Column>
+                            <ext:Column ColumnID="Tips" DataIndex="Tips" Header="Р’С‹РґР°РЅРѕ<br/>РїРѕРґСЃРєР°Р·РѕРє" Width="60" Sortable="false"></ext:Column>
+                            <ext:Column ColumnID="CodesMainCount" DataIndex="CodesMainCount" Header="РљРѕРґРѕРІ<br/>РЅРµРѕР±С…РѕРґРёРјРѕ" Width="60" Sortable="false"></ext:Column>
+                            <ext:Column ColumnID="CodesBonusCount" DataIndex="CodesBonusCount" Header="РљРѕРґРѕРІ<br/>Р±РѕРЅСѓСЃРЅС‹С…<br/>РЅРµРѕР±С…РѕРґРёРјРѕ" Width="60" Sortable="false"></ext:Column>
+                            <ext:Column ColumnID="CodesAccpt" DataIndex="CodesAccpt" Header="РљРѕРґРѕРІ<br/>РїРѕР»СѓС‡РµРЅРѕ" Width="60" Sortable="false"></ext:Column>
+                            <ext:Column ColumnID="CodesBonusAccpt" DataIndex="CodesBonusAccpt" Header="РљРѕРґРѕРІ<br/>Р±РѕРЅСѓСЃРЅС‹С…<br/>РїРѕР»СѓС‡РµРЅРѕ" Width="60" Sortable="false"></ext:Column>
                         </Columns>
                     </ColumnModel>
                     <SelectionModel>
@@ -124,25 +124,25 @@
                     <TopBar>
                         <ext:Toolbar>
                             <Items>
-                                <ext:ToolbarButton ID="btnStartRefresh" runat="server" Text="Запустить автообновление" Icon="ControlPlayBlue" Disabled="true">
+                                <ext:ToolbarButton ID="btnStartRefresh" runat="server" Text="Р—Р°РїСѓСЃС‚РёС‚СЊ Р°РІС‚РѕРѕР±РЅРѕРІР»РµРЅРёРµ" Icon="ControlPlayBlue" Disabled="true">
                                     <Listeners>
                                         <Click Handler="el.disable();#{gameTaskManager}.startTask(gameTaskManager.tasks[0]);#{btnStopRefresh}.enable()"/>
                                     </Listeners>
                                 </ext:ToolbarButton>
-                                <ext:ToolbarButton ID="btnStopRefresh" runat="server" Text="Остановить автообновление" Icon="ControlStopBlue">
+                                <ext:ToolbarButton ID="btnStopRefresh" runat="server" Text="РћСЃС‚Р°РЅРѕРІРёС‚СЊ Р°РІС‚РѕРѕР±РЅРѕРІР»РµРЅРёРµ" Icon="ControlStopBlue">
                                     <Listeners>
                                         <Click Handler="el.disable();#{gameTaskManager}.stopTask(gameTaskManager.tasks[0]);#{btnStartRefresh}.enable()"/>
                                     </Listeners>
                                 </ext:ToolbarButton>
                                 <ext:ComboBox ID="cbRefreshInterval" runat="server" Editable="false">
                                     <Items>
-                                        <ext:ListItem Value="5000" Text="5 секунд" />
-                                        <ext:ListItem Value="10000" Text="10 секунд" />
-                                        <ext:ListItem Value="15000" Text="15 секунд" />
-                                        <ext:ListItem Value="30000" Text="30 секунд" />
-                                        <ext:ListItem Value="60000" Text="1 минута" />
-                                        <ext:ListItem Value="300000" Text="5 минут" />
-                                        <ext:ListItem Value="600000" Text="10 минут" />
+                                        <ext:ListItem Value="5000" Text="5 СЃРµРєСѓРЅРґ" />
+                                        <ext:ListItem Value="10000" Text="10 СЃРµРєСѓРЅРґ" />
+                                        <ext:ListItem Value="15000" Text="15 СЃРµРєСѓРЅРґ" />
+                                        <ext:ListItem Value="30000" Text="30 СЃРµРєСѓРЅРґ" />
+                                        <ext:ListItem Value="60000" Text="1 РјРёРЅСѓС‚Р°" />
+                                        <ext:ListItem Value="300000" Text="5 РјРёРЅСѓС‚" />
+                                        <ext:ListItem Value="600000" Text="10 РјРёРЅСѓС‚" />
                                     </Items>
                                     <SelectedItem Value="5000" />
                                     <Listeners>

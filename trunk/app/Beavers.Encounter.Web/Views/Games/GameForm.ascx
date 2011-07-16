@@ -1,7 +1,7 @@
-<%@ Control Language="C#" AutoEventWireup="true"
+п»ї<%@ Control Language="C#" AutoEventWireup="true"
 	Inherits="System.Web.Mvc.ViewUserControl<GamesController.GameFormViewModel>" %>
  
-	<h2>Редактирование свойств игры</h2>
+	<h2>Р РµРґР°РєС‚РёСЂРѕРІР°РЅРёРµ СЃРІРѕР№СЃС‚РІ РёРіСЂС‹</h2>
 
 <% if (ViewContext.TempData[ControllerEnums.GlobalViewDataProperty.PageMessage.ToString()] != null) { %>
     <p id="pageMessage"><%= ViewContext.TempData[ControllerEnums.GlobalViewDataProperty.PageMessage.ToString()]%></p>
@@ -23,8 +23,8 @@
     <%= Model.Game.RenderEditable<Game>(Html, x => x.PrefixBonusCode)%>
 	
 	<div>
-        <%= Html.SubmitButton("btnSave", "Сохранить") %>
-        <%= Html.Button("btnCancel", "Отмена", HtmlButtonType.Button, 
+        <%= Html.SubmitButton("btnSave", "РЎРѕС…СЂР°РЅРёС‚СЊ") %>
+        <%= Html.Button("btnCancel", "РћС‚РјРµРЅР°", HtmlButtonType.Button, 
 			    "window.location.href = '" + Html.BuildUrlFromExpression<GamesController>(c => c.Index()) + "';") %>
 	</div>
 <% } %>

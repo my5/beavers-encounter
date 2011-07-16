@@ -1,9 +1,9 @@
-<%@ Page Language="C#" MasterPageFile="~/Views/Shared/Site.Master" Inherits="System.Web.Mvc.ViewPage<Game>" %>
+п»ї<%@ Page Language="C#" MasterPageFile="~/Views/Shared/Site.Master" Inherits="System.Web.Mvc.ViewPage<Game>" %>
 <%@ Import Namespace="Beavers.Encounter.Web.Controllers" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContentPlaceHolder" runat="server">
 
-	<h2>Свойства игры</h2>
+	<h2>РЎРІРѕР№СЃС‚РІР° РёРіСЂС‹</h2>
 
 <% if (ViewContext.TempData[ControllerEnums.GlobalViewDataProperty.PageMessage.ToString()] != null) { %>
     <p id="pageMessage"><%= ViewContext.TempData[ControllerEnums.GlobalViewDataProperty.PageMessage.ToString()]%></p>
@@ -21,8 +21,8 @@
     <%= Model.RenderEditable<Game>(Html, x => x.TotalTime)%>
 
     <div>
-        <%= Html.SubmitButton("btnSave", "Сохранить") %>
-        <%= Html.Button("btnCancel", "Отмена", HtmlButtonType.Button,
+        <%= Html.SubmitButton("btnSave", "РЎРѕС…СЂР°РЅРёС‚СЊ") %>
+        <%= Html.Button("btnCancel", "РћС‚РјРµРЅР°", HtmlButtonType.Button,
                         "window.location.href = '" + Html.BuildUrlFromExpression<AdminGamesController>(c => c.Index()) + "';")%>
     </div>                    
 <% } %>
