@@ -208,8 +208,6 @@
     <Content Include="Scripts\Gameboard\Task.js" />
     <Content Include="Scripts\Gameboard\Tips.js" />
     <Content Include="Scripts\Gameboard\Utils.js" />
-    <Content Include="Scripts\jquery-1.4.2.js" />
-    <Content Include="Scripts\jquery-1.4.2.min.js" />
     <Content Include="Scripts\MicrosoftAjax.debug.js" />
     <Content Include="Scripts\MicrosoftAjax.js" />
     <Content Include="Scripts\MicrosoftMvcAjax.debug.js" />
