@@ -112,7 +112,7 @@ namespace Beavers.Encounter.Web.Controllers
             {
                 try
                 {
-                    gameService.SubmitCode(codes, team.TeamGameState, User);
+                    gameService.SubmitCode(codes, team.TeamGameState, User, DateTime.Now);
                 }
                 catch (MaxCodesCountException e)
                 {
@@ -140,7 +140,7 @@ namespace Beavers.Encounter.Web.Controllers
                 if (team.TeamGameState.ActiveTaskState.AcceptedCodes.Count(x => !x.Code.IsBonus) == team.TeamGameState.ActiveTaskState.Task.Codes.Count(x => !x.IsBonus))
                 {
                     gameService.CloseTaskForTeam(team.TeamGameState.ActiveTaskState, TeamTaskStateFlag.Success);
-                    gameService.AssignNewTask(team.TeamGameState, oldTask);
+                    gameService.AssignNewTask(team.TeamGameState, oldTask, DateTime.Now);
                 }
             }
 
@@ -162,7 +162,7 @@ namespace Beavers.Encounter.Web.Controllers
             { // TODO: Перенести в gameService
                 Task oldTask = team.TeamGameState.ActiveTaskState.Task;
                 gameService.CloseTaskForTeam(team.TeamGameState.ActiveTaskState, TeamTaskStateFlag.Canceled);
-                gameService.AssignNewTask(team.TeamGameState, oldTask);
+                gameService.AssignNewTask(team.TeamGameState, oldTask, DateTime.Now);
             }
 
             return this.RedirectToAction(c => c.Show());
@@ -181,7 +181,7 @@ namespace Beavers.Encounter.Web.Controllers
                 team.TeamGameState.ActiveTaskState.Id == activeTaskStateId &&
                 team.TeamGameState.ActiveTaskState.Task.TaskType == TaskTypes.NeedForSpeed)
             {
-                gameService.AccelerateTask(team.TeamGameState.ActiveTaskState);
+                gameService.AccelerateTask(team.TeamGameState.ActiveTaskState, DateTime.Now);
             }
 
             return this.RedirectToAction(c => c.Show());
@@ -202,7 +202,8 @@ namespace Beavers.Encounter.Web.Controllers
             {
                 gameService.AssignNewTaskTip(
                     team.TeamGameState.ActiveTaskState,
-                    team.TeamGameState.ActiveTaskState.Task.Tips.Single(tip => tip.Id == tipId));
+                    team.TeamGameState.ActiveTaskState.Task.Tips.Single(tip => tip.Id == tipId),
+                    DateTime.Now);
             }
 
             return this.RedirectToAction(c => c.Show());
