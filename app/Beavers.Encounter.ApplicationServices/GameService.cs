@@ -212,15 +212,17 @@ namespace Beavers.Encounter.ApplicationServices
         /// <param name="codes">Принятый код.</param>
         /// <param name="teamGameState">Команда отправившая код.</param>
         /// <param name="user">Игрок отправившый код.</param>
-        public void SubmitCode(string codes, TeamGameState teamGameState, User user)
+        /// <param name="dateTimeNow"></param>
+        public void SubmitCode(string codes, TeamGameState teamGameState, User user, DateTime dateTimeNow)
         {
-            taskService.SubmitCode(codes, teamGameState, user);
+            taskService.SubmitCode(codes, teamGameState, user, dateTimeNow);
         }
 
         /// <summary>
         /// Помечает задание как успешно выполненное.
         /// </summary>
         /// <param name="teamTaskState"></param>
+        /// <param name="flag"></param>
         public void CloseTaskForTeam(TeamTaskState teamTaskState, TeamTaskStateFlag flag)
         {
             taskService.CloseTaskForTeam(teamTaskState, flag);
@@ -229,9 +231,9 @@ namespace Beavers.Encounter.ApplicationServices
         /// <summary>
         /// Назначение нового задания команде.
         /// </summary>
-        public void AssignNewTask(TeamGameState teamGameState, Task oldTask)
+        public void AssignNewTask(TeamGameState teamGameState, Task oldTask, DateTime dateTimeNow)
         {
-            taskService.AssignNewTask(teamGameState, oldTask);
+            taskService.AssignNewTask(teamGameState, oldTask, dateTimeNow);
         }
 
         /// <summary>
@@ -239,26 +241,28 @@ namespace Beavers.Encounter.ApplicationServices
         /// </summary>
         /// <param name="teamTaskState"></param>
         /// <param name="tip"></param>
-        public void AssignNewTaskTip(TeamTaskState teamTaskState, Tip tip)
+        /// <param name="dateTimeNow"></param>
+        public void AssignNewTaskTip(TeamTaskState teamTaskState, Tip tip, DateTime dateTimeNow)
         {
-            taskService.AssignNewTaskTip(teamTaskState, tip);
+            taskService.AssignNewTaskTip(teamTaskState, tip, dateTimeNow);
         }
 
         /// <summary>
         /// "Ускориться".
         /// </summary>
         /// <param name="teamTaskState">Состояние команды затребовавшая ускорение.</param>
-        public void AccelerateTask(TeamTaskState teamTaskState)
+        /// <param name="dateTimeNow"></param>
+        public void AccelerateTask(TeamTaskState teamTaskState, DateTime dateTimeNow)
         {
-            taskService.AccelerateTask(teamTaskState);
+            taskService.AccelerateTask(teamTaskState, dateTimeNow);
         }
 
         /// <summary>
         /// Проверка на превышение количества левых кодов. При превышении задание закрывается сразу перед первой подсказкой.
         /// </summary>
-        public void CheckExceededBadCodes(TeamGameState teamGameState)
+        public void CheckExceededBadCodes(TeamGameState teamGameState, DateTime dateTimeNow)
         {
-            taskService.CheckExceededBadCodes(teamGameState);
+            taskService.CheckExceededBadCodes(teamGameState, dateTimeNow);
         }
 
         /// <summary>

@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using Beavers.Encounter.ApplicationServices;
 using Beavers.Encounter.Core;
 using NUnit.Framework;
@@ -104,17 +102,19 @@ namespace Tests.Beavers.Encounter.ApplicationServices
         [Test]
         public void CanAssignFirstTaskTest()
         {
+            var recalcDateTime = new DateTime(2010, 1, 1, 21, 0, 0);
+
             var tgs = new TeamGameState { Game = game };
             game.Teams.Add(new Team { TeamGameState = tgs });
 
             Expect.Call(repository.Get(1))
                 .Return(game).Repeat.Any();
 
-            Expect.Call(() => gameService.AssignNewTask(tgs, null));
+            Expect.Call(() => gameService.AssignNewTask(tgs, null, recalcDateTime));
 
             mocks.ReplayAll();
 
-            service.RecalcGameState(new DateTime(2010, 1, 1, 21, 0, 0));
+            service.RecalcGameState(recalcDateTime);
 
             mocks.VerifyAll();
         }
@@ -122,6 +122,8 @@ namespace Tests.Beavers.Encounter.ApplicationServices
         [Test]
         public void ShouldNotAssignFirstTaskTest()
         {
+            var recalcDateTime = new DateTime(2010, 1, 1, 20, 59, 59);
+
             var team = new Team();
             var tgs = new TeamGameState { Game = game, Team = team };
             team.TeamGameState = tgs;
@@ -130,11 +132,11 @@ namespace Tests.Beavers.Encounter.ApplicationServices
             Expect.Call(repository.Get(1))
                 .Return(game).Repeat.Any();
 
-            DoNotExpect.Call(() => gameService.AssignNewTask(tgs, null));
+            DoNotExpect.Call(() => gameService.AssignNewTask(tgs, null, recalcDateTime));
 
             mocks.ReplayAll();
 
-            service.RecalcGameState(new DateTime(2010, 1, 1, 20, 59, 59));
+            service.RecalcGameState(recalcDateTime);
 
             mocks.VerifyAll();
         }
@@ -142,6 +144,8 @@ namespace Tests.Beavers.Encounter.ApplicationServices
         [Test]
         public void ShouldNotAssignFirstTaskTest2()
         {
+            var recalcDateTime = new DateTime(2010, 1, 1, 22, 0, 0);
+
             var team = new Team();
             var tts = new TeamTaskState { Task = task1 };
             var tgs = new TeamGameState { Game = game, Team = team, ActiveTaskState = tts };
@@ -151,11 +155,11 @@ namespace Tests.Beavers.Encounter.ApplicationServices
             Expect.Call(repository.Get(1))
                 .Return(game).Repeat.Any();
 
-            DoNotExpect.Call(() => gameService.AssignNewTask(tgs, null));
+            DoNotExpect.Call(() => gameService.AssignNewTask(tgs, null, recalcDateTime));
 
             mocks.ReplayAll();
 
-            service.RecalcGameState(new DateTime(2010, 1, 1, 22, 0, 0));
+            service.RecalcGameState(recalcDateTime);
 
             mocks.VerifyAll();
         }
@@ -163,6 +167,8 @@ namespace Tests.Beavers.Encounter.ApplicationServices
         [Test]
         public void ShouldNotAssignFirstTaskTest3()
         {
+            var recalcDateTime = new DateTime(2010, 1, 1, 22, 0, 0);
+
             var team = new Team();
             var tts = new TeamTaskState { Task = task1 };
             var tgs = new TeamGameState { Game = game, Team = team };
@@ -173,11 +179,11 @@ namespace Tests.Beavers.Encounter.ApplicationServices
             Expect.Call(repository.Get(1))
                 .Return(game).Repeat.Any();
 
-            DoNotExpect.Call(() => gameService.AssignNewTask(tgs, null));
+            DoNotExpect.Call(() => gameService.AssignNewTask(tgs, null, recalcDateTime));
 
             mocks.ReplayAll();
 
-            service.RecalcGameState(new DateTime(2010, 1, 1, 22, 0, 0));
+            service.RecalcGameState(recalcDateTime);
 
             mocks.VerifyAll();
         }
@@ -185,6 +191,8 @@ namespace Tests.Beavers.Encounter.ApplicationServices
         [Test]
         public void ShouldNotAssignFirstTaskTest4()
         {
+            var recalcDateTime = new DateTime(2010, 1, 1, 22, 0, 0);
+
             var team = new Team();
             var tts = new TeamTaskState { Task = task1 };
             var tgs = new TeamGameState { Game = game, Team = team, ActiveTaskState = tts };
@@ -195,11 +203,11 @@ namespace Tests.Beavers.Encounter.ApplicationServices
             Expect.Call(repository.Get(1))
                 .Return(game).Repeat.Any();
 
-            DoNotExpect.Call(() => gameService.AssignNewTask(tgs, null));
+            DoNotExpect.Call(() => gameService.AssignNewTask(tgs, null, recalcDateTime));
 
             mocks.ReplayAll();
 
-            service.RecalcGameState(new DateTime(2010, 1, 1, 22, 0, 0));
+            service.RecalcGameState(recalcDateTime);
 
             mocks.VerifyAll();
         }
@@ -211,24 +219,27 @@ namespace Tests.Beavers.Encounter.ApplicationServices
         [Test]
         public void CanAssignFirstTaskTipTest()
         {
+            var recalcDateTime = new DateTime(2010, 1, 1, 21, 0, 0);
+            
             var team = new Team()
                 .CreateTeamGameState(game)
-                .AssignTask(task1, new DateTime(2010, 1, 1, 21, 0, 0));
+                .AssignTask(task1, recalcDateTime);
 
             Expect.Call(repository.Get(1))
                 .Return(game);
 
-            Expect.Call(() => gameService.AssignNewTaskTip(team.TeamGameState.ActiveTaskState, task1Tip0))
-                .Do((Action<TeamTaskState, Tip>)((ts, tip) 
+            Expect.Call(() => gameService.AssignNewTaskTip(team.TeamGameState.ActiveTaskState, task1Tip0, recalcDateTime))
+                .Do((Action<TeamTaskState, Tip, DateTime>)((ts, tip, time) 
                     => team.TeamGameState.ActiveTaskState.AcceptedTips.Add(new AcceptedTip { 
                             Tip = tip, 
-                            TeamTaskState = ts 
+                            TeamTaskState = ts,
+                            AcceptTime = time
                         }))
                 );
 
             mocks.ReplayAll();
 
-            service.RecalcGameState(new DateTime(2010, 1, 1, 21, 0, 0));
+            service.RecalcGameState(recalcDateTime);
 
             mocks.VerifyAll();
 
@@ -238,6 +249,8 @@ namespace Tests.Beavers.Encounter.ApplicationServices
         [Test]
         public void CanAssignSecondTaskTipTest()
         {
+            var recalcDateTime = new DateTime(2010, 1, 1, 21, 30, 0);
+            
             var team = new Team()
                 .CreateTeamGameState(game)
                 .AssignTask(task1, new DateTime(2010, 1, 1, 21, 0, 0))
@@ -246,17 +259,18 @@ namespace Tests.Beavers.Encounter.ApplicationServices
             Expect.Call(repository.Get(1))
                 .Return(game);
 
-            Expect.Call(() => gameService.AssignNewTaskTip(team.TeamGameState.ActiveTaskState, task1Tip0))
-                .Do((Action<TeamTaskState, Tip>)((ts, tip)
+            Expect.Call(() => gameService.AssignNewTaskTip(team.TeamGameState.ActiveTaskState, task1Tip0, recalcDateTime))
+                .Do((Action<TeamTaskState, Tip, DateTime>)((ts, tip, time)
                     => team.TeamGameState.ActiveTaskState.AcceptedTips.Add(new AcceptedTip {
                         Tip = tip,
-                        TeamTaskState = ts
+                        TeamTaskState = ts,
+                        AcceptTime = time
                     }))
                 );
 
             mocks.ReplayAll();
 
-            service.RecalcGameState(new DateTime(2010, 1, 1, 21, 30, 0));
+            service.RecalcGameState(recalcDateTime);
 
             mocks.VerifyAll();
 
@@ -266,6 +280,8 @@ namespace Tests.Beavers.Encounter.ApplicationServices
         [Test]
         public void SouldNotAssignTip4RussianRouletteTaskTest()
         {
+            var recalcDateTime = new DateTime(2010, 1, 1, 21, 0, 0);
+
             var russianRouletteTask = new Task { TaskType = TaskTypes.RussianRoulette };
             russianRouletteTask.Tips.Add(new Tip { SuspendTime = 0, Task = russianRouletteTask });
             russianRouletteTask.Tips.Add(new Tip { SuspendTime = 30, Task = russianRouletteTask });
@@ -278,11 +294,11 @@ namespace Tests.Beavers.Encounter.ApplicationServices
             Expect.Call(repository.Get(1))
                 .Return(game);
 
-            DoNotExpect.Call(() => gameService.AssignNewTaskTip(null, null));
+            DoNotExpect.Call(() => gameService.AssignNewTaskTip(null, null, recalcDateTime));
 
             mocks.ReplayAll();
 
-            service.RecalcGameState(new DateTime(2010, 1, 1, 21, 0, 0));
+            service.RecalcGameState(recalcDateTime);
 
             mocks.VerifyAll();
 
@@ -296,6 +312,8 @@ namespace Tests.Beavers.Encounter.ApplicationServices
         [Test]
         public void CanCheckExceededBadCodesTest()
         {
+            var recalcDateTime = new DateTime(2010, 1, 1, 21, 30, 0);
+
             var team = new Team()
                 .CreateTeamGameState(game)
                 .AssignTask(task1, new DateTime(2010, 1, 1, 21, 0, 0))
@@ -304,11 +322,11 @@ namespace Tests.Beavers.Encounter.ApplicationServices
             Expect.Call(repository.Get(1))
                 .Return(game);
 
-            Expect.Call(() => gameService.CheckExceededBadCodes(team.TeamGameState));
+            Expect.Call(() => gameService.CheckExceededBadCodes(team.TeamGameState, recalcDateTime));
 
             mocks.ReplayAll();
 
-            service.RecalcGameState(new DateTime(2010, 1, 1, 21, 30, 0));
+            service.RecalcGameState(recalcDateTime);
 
             mocks.VerifyAll();
         }
@@ -320,6 +338,8 @@ namespace Tests.Beavers.Encounter.ApplicationServices
         [Test]
         public void CheckSuccessCompleteTest()
         {
+            var recalcDateTime = new DateTime(2010, 1, 1, 22, 30, 0);
+
             var team = new Team()
                 .CreateTeamGameState(game)
                 .AssignTask(task1, new DateTime(2010, 1, 1, 21, 0, 0))
@@ -330,11 +350,11 @@ namespace Tests.Beavers.Encounter.ApplicationServices
             Expect.Call(() => gameService.CloseTaskForTeam(
                 team.TeamGameState.ActiveTaskState, 
                 TeamTaskStateFlag.Success));
-            Expect.Call(() => gameService.AssignNewTask(team.TeamGameState, task1));
+            Expect.Call(() => gameService.AssignNewTask(team.TeamGameState, task1, recalcDateTime));
 
             mocks.ReplayAll();
 
-            service.RecalcGameState(new DateTime(2010, 1, 1, 22, 30, 0));
+            service.RecalcGameState(recalcDateTime);
 
             mocks.VerifyAll();
         }
@@ -342,6 +362,8 @@ namespace Tests.Beavers.Encounter.ApplicationServices
         [Test]
         public void CheckOvertimeTest()
         {
+            var recalcDateTime = new DateTime(2010, 1, 1, 22, 30, 0);
+
             var team = new Team()
                 .CreateTeamGameState(game)
                 .AssignTask(task1, new DateTime(2010, 1, 1, 21, 0, 0))
@@ -351,11 +373,11 @@ namespace Tests.Beavers.Encounter.ApplicationServices
             Expect.Call(() => gameService.CloseTaskForTeam(
                 team.TeamGameState.ActiveTaskState,
                 TeamTaskStateFlag.Overtime));
-            Expect.Call(() => gameService.AssignNewTask(team.TeamGameState, task1));
+            Expect.Call(() => gameService.AssignNewTask(team.TeamGameState, task1, recalcDateTime));
 
             mocks.ReplayAll();
 
-            service.RecalcGameState(new DateTime(2010, 1, 1, 22, 30, 0));
+            service.RecalcGameState(recalcDateTime);
 
             mocks.VerifyAll();
         }
@@ -363,6 +385,8 @@ namespace Tests.Beavers.Encounter.ApplicationServices
         [Test]
         public void ShouldNotOvertimeTest()
         {
+            var recalcDateTime = new DateTime(2010, 1, 1, 22, 29, 59);
+
             var team = new Team()
                 .CreateTeamGameState(game)
                 .AssignTask(task1, new DateTime(2010, 1, 1, 21, 0, 0))
@@ -372,11 +396,11 @@ namespace Tests.Beavers.Encounter.ApplicationServices
             DoNotExpect.Call(() => gameService.CloseTaskForTeam(
                 team.TeamGameState.ActiveTaskState,
                 TeamTaskStateFlag.Overtime));
-            DoNotExpect.Call(() => gameService.AssignNewTask(team.TeamGameState, task1));
+            DoNotExpect.Call(() => gameService.AssignNewTask(team.TeamGameState, task1, recalcDateTime));
 
             mocks.ReplayAll();
 
-            service.RecalcGameState(new DateTime(2010, 1, 1, 22, 29, 59));
+            service.RecalcGameState(recalcDateTime);
 
             mocks.VerifyAll();
         }
@@ -384,6 +408,8 @@ namespace Tests.Beavers.Encounter.ApplicationServices
         [Test]
         public void CanOvertime4NeedForSpeedTaskTest()
         {
+            var recalcDateTime = new DateTime(2010, 1, 1, 22, 20, 0);
+
             var needForSpeedTask = new Task { TaskType = TaskTypes.NeedForSpeed };
             needForSpeedTask.Tips.Add(new Tip { SuspendTime = 60+10, Task = needForSpeedTask });
             needForSpeedTask.Codes.Add(new Code { Name = "1", Task = needForSpeedTask });
@@ -397,11 +423,11 @@ namespace Tests.Beavers.Encounter.ApplicationServices
             Expect.Call(() => gameService.CloseTaskForTeam(
                 team.TeamGameState.ActiveTaskState,
                 TeamTaskStateFlag.Overtime));
-            Expect.Call(() => gameService.AssignNewTask(team.TeamGameState, task1));
+            Expect.Call(() => gameService.AssignNewTask(team.TeamGameState, task1, recalcDateTime));
 
             mocks.ReplayAll();
 
-            service.RecalcGameState(new DateTime(2010, 1, 1, 22, 20, 0));
+            service.RecalcGameState(recalcDateTime);
 
             mocks.VerifyAll();
         }
@@ -409,6 +435,8 @@ namespace Tests.Beavers.Encounter.ApplicationServices
         [Test]
         public void ShouldNotOvertime4NeedForSpeedTaskTest()
         {
+            var recalcDateTime = new DateTime(2010, 1, 1, 22, 15, 0);
+
             var needForSpeedTask = new Task { TaskType = TaskTypes.NeedForSpeed };
             needForSpeedTask.Tips.Add(new Tip { SuspendTime = 60 + 10, Task = needForSpeedTask });
             needForSpeedTask.Codes.Add(new Code { Name = "1", Task = needForSpeedTask });
@@ -422,11 +450,11 @@ namespace Tests.Beavers.Encounter.ApplicationServices
             DoNotExpect.Call(() => gameService.CloseTaskForTeam(
                 team.TeamGameState.ActiveTaskState,
                 TeamTaskStateFlag.Overtime));
-            DoNotExpect.Call(() => gameService.AssignNewTask(team.TeamGameState, task1));
+            DoNotExpect.Call(() => gameService.AssignNewTask(team.TeamGameState, task1, recalcDateTime));
 
             mocks.ReplayAll();
 
-            service.RecalcGameState(new DateTime(2010, 1, 1, 22, 15, 0));
+            service.RecalcGameState(recalcDateTime);
 
             mocks.VerifyAll();
         }

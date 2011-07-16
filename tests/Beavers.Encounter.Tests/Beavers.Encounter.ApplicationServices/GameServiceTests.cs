@@ -339,9 +339,9 @@ namespace Tests.Beavers.Encounter.ApplicationServices
         [Test]
         public void CanTaskServiceSubmitCodeTest()
         {
-            Expect.Call(() => taskService.SubmitCode(null, null, null)).IgnoreArguments();
+            Expect.Call(() => taskService.SubmitCode(null, null, null, DateTime.Now)).IgnoreArguments();
             mocks.ReplayAll();
-            service.SubmitCode("1", null, null);
+            service.SubmitCode("1", null, null, DateTime.Now);
             mocks.VerifyAll();
         }
 
@@ -357,36 +357,36 @@ namespace Tests.Beavers.Encounter.ApplicationServices
         [Test]
         public void CanTaskServiceAssignNewTaskTest()
         {
-            Expect.Call(() => taskService.AssignNewTask(null, null)).IgnoreArguments();
+            Expect.Call(() => taskService.AssignNewTask(null, null, DateTime.Now)).IgnoreArguments();
             mocks.ReplayAll();
-            service.AssignNewTask(null, null);
+            service.AssignNewTask(null, null, DateTime.Now);
             mocks.VerifyAll();
         }
 
         [Test]
         public void CanTaskServiceAssignNewTaskTipTest()
         {
-            Expect.Call(() => taskService.AssignNewTaskTip(null, null)).IgnoreArguments();
+            Expect.Call(() => taskService.AssignNewTaskTip(null, null, DateTime.Now)).IgnoreArguments();
             mocks.ReplayAll();
-            service.AssignNewTaskTip(null, null);
+            service.AssignNewTaskTip(null, null, DateTime.Now);
             mocks.VerifyAll();
         }
 
         [Test]
         public void CanTaskServiceAccelerateTaskTest()
         {
-            Expect.Call(() => taskService.AccelerateTask(null)).IgnoreArguments();
+            Expect.Call(() => taskService.AccelerateTask(null, DateTime.Now)).IgnoreArguments();
             mocks.ReplayAll();
-            service.AccelerateTask(null);
+            service.AccelerateTask(null, DateTime.Now);
             mocks.VerifyAll();
         }
 
         [Test]
         public void CanTaskServiceCheckExceededBadCodesTest()
         {
-            Expect.Call(() => taskService.CheckExceededBadCodes(null)).IgnoreArguments();
+            Expect.Call(() => taskService.CheckExceededBadCodes(null, DateTime.Now)).IgnoreArguments();
             mocks.ReplayAll();
-            service.CheckExceededBadCodes(null);
+            service.CheckExceededBadCodes(null, DateTime.Now);
             mocks.VerifyAll();
         }
 

@@ -124,6 +124,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Beavers.Encounter.ApplicationServices\TaskServiceTests.cs" />
     <Compile Include="Beavers.Encounter.Common\BreadcrumbManagerTests.cs" />
     <Compile Include="Beavers.Encounter.Core\BonusTaskTests.cs" />
     <Compile Include="Beavers.Encounter.Core\CodeTests.cs" />

@@ -40,11 +40,11 @@ namespace Beavers.Encounter.ApplicationServices
             this.dispatcherFactory = dispatcherFactory;
         }
 
-        public void AssignNewTaskTip(TeamTaskState teamTaskState, Tip tip)
+        public void AssignNewTaskTip(TeamTaskState teamTaskState, Tip tip, DateTime dateTimeNow)
         {
             AcceptedTip acceptedTip = new AcceptedTip
                 {
-                  AcceptTime = DateTime.Now,
+                  AcceptTime = dateTimeNow,
                   Tip = tip,
                   TeamTaskState = teamTaskState
                 };
@@ -57,7 +57,7 @@ namespace Beavers.Encounter.ApplicationServices
             acceptedTipRepository.SaveOrUpdate(acceptedTip);
         }
 
-        public void AssignNewTask(TeamGameState teamGameState, Task oldTask)
+        public void AssignNewTask(TeamGameState teamGameState, Task oldTask, DateTime dateTimeNow)
         {
             Check.Require(teamGameState.ActiveTaskState == null, "Невозможно назначить команде новую задачу, т.к. коменде уже назначена задача.");
 
@@ -73,7 +73,7 @@ namespace Beavers.Encounter.ApplicationServices
             }
 
             TeamTaskState teamTaskState = new TeamTaskState {
-                    TaskStartTime = DateTime.Now, 
+                    TaskStartTime = dateTimeNow, 
                     TaskFinishTime = null,
                     State = (int) TeamTaskStateFlag.Execute,
                     TeamGameState = teamGameState,
@@ -85,7 +85,7 @@ namespace Beavers.Encounter.ApplicationServices
 
             teamTaskStateRepository.SaveOrUpdate(teamTaskState);
             //Сразу же отправляем команде первую подсказку (т.е. текст задания)
-            AssignNewTaskTip(teamTaskState, teamTaskState.Task.Tips.First());
+            AssignNewTaskTip(teamTaskState, teamTaskState.Task.Tips.First(), dateTimeNow);
         }
 
         public void CloseTaskForTeam(TeamTaskState teamTaskState, TeamTaskStateFlag flag)
@@ -110,10 +110,11 @@ namespace Beavers.Encounter.ApplicationServices
         /// Устанавливает время ускорения в текущее и назначает вторую подсказку.
         /// </remarks>
         /// <param name="teamTaskState">Состояние команды затребовавшая ускорение.</param>
-        public void AccelerateTask(TeamTaskState teamTaskState)
+        /// <param name="dateTimeNow"></param>
+        public void AccelerateTask(TeamTaskState teamTaskState, DateTime dateTimeNow)
         {
             teamTaskState.AccelerationTaskStartTime = DateTime.Now;
-            AssignNewTaskTip(teamTaskState, teamTaskState.Task.Tips.Last(tip => tip.SuspendTime > 0));
+            AssignNewTaskTip(teamTaskState, teamTaskState.Task.Tips.Last(tip => tip.SuspendTime > 0), dateTimeNow);
         }
 
         /// <summary>
@@ -142,7 +143,7 @@ namespace Beavers.Encounter.ApplicationServices
             return null;
         }
 
-        public void SubmitCode(string codes, TeamGameState teamGameState, User user)
+        public void SubmitCode(string codes, TeamGameState teamGameState, User user, DateTime dateTimeNow)
         {
             if (teamGameState.ActiveTaskState == null ||
                 teamGameState.ActiveTaskState.AcceptedBadCodes.Count >= GameConsnt.BadCodesLimit)
@@ -199,16 +200,16 @@ namespace Beavers.Encounter.ApplicationServices
             {
                 Task oldTask = teamGameState.ActiveTaskState.Task;
                 CloseTaskForTeam(teamGameState.ActiveTaskState, TeamTaskStateFlag.Success);
-                AssignNewTask(teamGameState, oldTask);
+                AssignNewTask(teamGameState, oldTask, dateTimeNow);
             }
 
-            CheckExceededBadCodes(teamGameState);
+            CheckExceededBadCodes(teamGameState, dateTimeNow);
         }
 
         /// <summary>
         /// Проверка на превышение количества левых кодов. При превышении задание закрывается сразу перед первой подсказкой.
         /// </summary>
-        public void CheckExceededBadCodes(TeamGameState teamGameState)
+        public void CheckExceededBadCodes(TeamGameState teamGameState, DateTime dateTimeNow)
         {
             if (teamGameState == null || teamGameState.ActiveTaskState == null)
                 return;
@@ -219,7 +220,7 @@ namespace Beavers.Encounter.ApplicationServices
             {
                 Task oldTask = teamGameState.ActiveTaskState.Task;
                 CloseTaskForTeam(teamGameState.ActiveTaskState, TeamTaskStateFlag.Cheat);
-                AssignNewTask(teamGameState, oldTask);
+                AssignNewTask(teamGameState, oldTask, dateTimeNow);
             }
         }
 

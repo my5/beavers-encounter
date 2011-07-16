@@ -45,7 +45,7 @@ namespace Beavers.Encounter.ApplicationServices
                     {
                         CheckForFirstTask(team.TeamGameState, recalcDateTime);
                         CheckOvertime(team.TeamGameState, recalcDateTime);
-                        CheckExceededBadCodes(team.TeamGameState);
+                        CheckExceededBadCodes(team.TeamGameState, recalcDateTime);
                         CheckForNextTip(team.TeamGameState, recalcDateTime);
                     }
                 }
@@ -76,7 +76,7 @@ namespace Beavers.Encounter.ApplicationServices
 
             if (teamGameState.AcceptedTasks.Count == 0 && teamGameState.ActiveTaskState == null)
             {
-                gameService.AssignNewTask(teamGameState, null);
+                gameService.AssignNewTask(teamGameState, null, recalcDateTime);
             }
         }
 
@@ -105,7 +105,7 @@ namespace Beavers.Encounter.ApplicationServices
                     if (!teamGameState.ActiveTaskState.AcceptedTips.Any(t => t.Tip == tip))
                     {
                         // отправляем команде подсказку
-                        gameService.AssignNewTaskTip(teamGameState.ActiveTaskState, tip);
+                        gameService.AssignNewTaskTip(teamGameState.ActiveTaskState, tip, recalcDateTime);
                     }
                 }
             }
@@ -115,9 +115,10 @@ namespace Beavers.Encounter.ApplicationServices
         /// Проверка на превышение количества левых кодов. При превышении задание закрывается сразу перед первой подсказкой.
         /// </summary>
         /// <param name="teamGameState"></param>
-        private void CheckExceededBadCodes(TeamGameState teamGameState)
+        /// <param name="recalcDateTime"></param>
+        private void CheckExceededBadCodes(TeamGameState teamGameState, DateTime recalcDateTime)
         {
-            gameService.CheckExceededBadCodes(teamGameState);
+            gameService.CheckExceededBadCodes(teamGameState, recalcDateTime);
         }
 
         /// <summary>
@@ -152,7 +153,7 @@ namespace Beavers.Encounter.ApplicationServices
 
                 Task oldTask = teamGameState.ActiveTaskState.Task;
                 gameService.CloseTaskForTeam(teamGameState.ActiveTaskState, closeFlag);
-                gameService.AssignNewTask(teamGameState, oldTask);
+                gameService.AssignNewTask(teamGameState, oldTask, recalcDateTime);
             }
         }
     }
