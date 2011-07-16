@@ -1,4 +1,4 @@
-<%@ Page Language="C#" Inherits="System.Web.Mvc.ViewPage<TeamGameboardController.TeamGameboardViewModel>" %>
+п»ї<%@ Page Language="C#" Inherits="System.Web.Mvc.ViewPage<TeamGameboardController.TeamGameboardViewModel>" %>
 <%@ Import Namespace="Beavers.Encounter.Common"%>
 <%@ Import Namespace="Beavers.Encounter.Core.DataInterfaces"%>
 <%@ Import Namespace="System.Data"%>
@@ -8,7 +8,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" >
 <head runat="server">
     <link href="<%= ResolveUrl("~") %>Content/Site.css" rel="stylesheet" type="text/css" />
-    <title>Результаты команды</title>
+    <title>Р РµР·СѓР»СЊС‚Р°С‚С‹ РєРѕРјР°РЅРґС‹</title>
 </head>
 <body>
     <div class="teamGameboardPage">
@@ -19,7 +19,7 @@
         if (Model.TeamGameState.Game.BonusTasks.AvailableNowTasks().Count() > 0)
         { %>
 
-        <h2>Бонусные задания</h2>
+        <h2>Р‘РѕРЅСѓСЃРЅС‹Рµ Р·Р°РґР°РЅРёСЏ</h2>
         
         <ul>
             <%
@@ -27,8 +27,8 @@
             { %>
             <li>
                 <div style="font-weight:bold">
-                    <b>Задание</b>
-                    <span class="note">[Получено: <%= task.StartTime %>, действительно до: <%= task.FinishTime %>]</span>
+                    <b>Р—Р°РґР°РЅРёРµ</b>
+                    <span class="note">[РџРѕР»СѓС‡РµРЅРѕ: <%= task.StartTime %>, РґРµР№СЃС‚РІРёС‚РµР»СЊРЅРѕ РґРѕ: <%= task.FinishTime %>]</span>
                 </div>
                 <div>
                 <% 
@@ -48,13 +48,13 @@
         <% 
         } %>
   
-        <h2>Ваши результаты</h2>
+        <h2>Р’Р°С€Рё СЂРµР·СѓР»СЊС‚Р°С‚С‹</h2>
         
-        <div>Получено заданий: <%= ViewData.Model.TeamGameState.AcceptedTasks.Count%></div>
-        <div>Выполнено заданий: <%= ViewData.Model.TeamGameState.AcceptedTasks.Count(t => t.State == (int)TeamTaskStateFlag.Success)%></div>
-        <div>Провалено заданий: <%= ViewData.Model.TeamGameState.AcceptedTasks.Count(t => t.State == (int)TeamTaskStateFlag.Overtime)%></div>
-        <div>Слито заданий: <%= ViewData.Model.TeamGameState.AcceptedTasks.Count(t => t.State == (int)TeamTaskStateFlag.Canceled)%></div>
-        <div>Дисквалифицировано заданий: <%= ViewData.Model.TeamGameState.AcceptedTasks.Count(t => t.State == (int)TeamTaskStateFlag.Cheat)%></div>
+        <div>РџРѕР»СѓС‡РµРЅРѕ Р·Р°РґР°РЅРёР№: <%= ViewData.Model.TeamGameState.AcceptedTasks.Count%></div>
+        <div>Р’С‹РїРѕР»РЅРµРЅРѕ Р·Р°РґР°РЅРёР№: <%= ViewData.Model.TeamGameState.AcceptedTasks.Count(t => t.State == (int)TeamTaskStateFlag.Success)%></div>
+        <div>РџСЂРѕРІР°Р»РµРЅРѕ Р·Р°РґР°РЅРёР№: <%= ViewData.Model.TeamGameState.AcceptedTasks.Count(t => t.State == (int)TeamTaskStateFlag.Overtime)%></div>
+        <div>РЎР»РёС‚Рѕ Р·Р°РґР°РЅРёР№: <%= ViewData.Model.TeamGameState.AcceptedTasks.Count(t => t.State == (int)TeamTaskStateFlag.Canceled)%></div>
+        <div>Р”РёСЃРєРІР°Р»РёС„РёС†РёСЂРѕРІР°РЅРѕ Р·Р°РґР°РЅРёР№: <%= ViewData.Model.TeamGameState.AcceptedTasks.Count(t => t.State == (int)TeamTaskStateFlag.Cheat)%></div>
 
         <ul>
         
@@ -62,14 +62,14 @@
         foreach (var taskState in ViewData.Model.TeamGameState.AcceptedTasks)
         { %>
             <li>
-                <div>Задание &quot;<%= Html.Encode(taskState.Task.Name) %>&quot;</div> 
-                <div><%= Html.Encode(taskState.TaskStartTime) %> получено</div>
+                <div>Р—Р°РґР°РЅРёРµ &quot;<%= Html.Encode(taskState.Task.Name) %>&quot;</div> 
+                <div><%= Html.Encode(taskState.TaskStartTime) %> РїРѕР»СѓС‡РµРЅРѕ</div>
                 <div> 
                     <%= Html.Encode(taskState.TaskFinishTime) %>
-                    <%= taskState.State == (int) TeamTaskStateFlag.Success ? "выполнено" : String.Empty %>
-                    <%= taskState.State == (int) TeamTaskStateFlag.Canceled ? "слито" : String.Empty %>
-                    <%= taskState.State == (int) TeamTaskStateFlag.Overtime ? "не выполнено" : String.Empty %>
-                    <%= taskState.State == (int) TeamTaskStateFlag.Cheat ? "дисквалифицировано" : String.Empty%>
+                    <%= taskState.State == (int) TeamTaskStateFlag.Success ? "РІС‹РїРѕР»РЅРµРЅРѕ" : String.Empty %>
+                    <%= taskState.State == (int) TeamTaskStateFlag.Canceled ? "СЃР»РёС‚Рѕ" : String.Empty %>
+                    <%= taskState.State == (int) TeamTaskStateFlag.Overtime ? "РЅРµ РІС‹РїРѕР»РЅРµРЅРѕ" : String.Empty %>
+                    <%= taskState.State == (int) TeamTaskStateFlag.Cheat ? "РґРёСЃРєРІР°Р»РёС„РёС†РёСЂРѕРІР°РЅРѕ" : String.Empty%>
                 </div>
             </li>
         <%

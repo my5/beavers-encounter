@@ -1,7 +1,7 @@
-<%@ Control Language="C#" Inherits="Beavers.Encounter.Web.Views.ViewUserControl<Task>" %>
+п»ї<%@ Control Language="C#" Inherits="Beavers.Encounter.Web.Views.ViewUserControl<Task>" %>
 <%@ Import Namespace="Beavers.Encounter.Common"%>
 
-	<h2>Текст задания и подсказки</h2>
+	<h2>РўРµРєСЃС‚ Р·Р°РґР°РЅРёСЏ Рё РїРѕРґСЃРєР°Р·РєРё</h2>
 
 <div class="registeredTeams">
     <ul>
@@ -11,12 +11,12 @@
     {%>
         <li>
         <div style="font-weight:bold">
-            <%= tip.SuspendTime == 0 ? "Задание:" : String.Format("Подсказка №{0}. Время получения: через {1} мин.", indx, tip.SuspendTime)%> 
+            <%= tip.SuspendTime == 0 ? "Р—Р°РґР°РЅРёРµ:" : String.Format("РџРѕРґСЃРєР°Р·РєР° в„–{0}. Р’СЂРµРјСЏ РїРѕР»СѓС‡РµРЅРёСЏ: С‡РµСЂРµР· {1} РјРёРЅ.", indx, tip.SuspendTime)%> 
         </div>
         <div>
         <%= BBCode.ConvertToHtml(tip.Name) %>
         </div>
-        <%= Html.ActionLink<TipsController>(c => c.Edit(tip.Id), "Изменить")%>           
+        <%= Html.ActionLink<TipsController>(c => c.Edit(tip.Id), "РР·РјРµРЅРёС‚СЊ")%>           
 		
 		<% 
         if (tip.SuspendTime > 0)
@@ -24,7 +24,7 @@
             using (Html.BeginForm<TipsController>(c => c.Delete(tip.Id)))
             { %>
             <%= Html.AntiForgeryToken()%>
-		    <input type="submit" value="Удалить" onclick="return confirm('Are you sure?');" />
+		    <input type="submit" value="РЈРґР°Р»РёС‚СЊ" onclick="return confirm('Are you sure?');" />
         <% 
             }
         } %>
@@ -34,7 +34,7 @@
         indx++;
     } %>
     </ul>
-    <p><%= Html.ActionLink<TipsController>(c => c.Create(Model.Id), "Добавить подсказку")%></p>
+    <p><%= Html.ActionLink<TipsController>(c => c.Create(Model.Id), "Р”РѕР±Р°РІРёС‚СЊ РїРѕРґСЃРєР°Р·РєСѓ")%></p>
 </div>
 
 

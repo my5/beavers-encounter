@@ -1,6 +1,6 @@
-<%@ Control Language="C#" AutoEventWireup="true" Inherits="System.Web.Mvc.ViewUserControl<TasksController.TaskFormViewModel>" %>
+п»ї<%@ Control Language="C#" AutoEventWireup="true" Inherits="System.Web.Mvc.ViewUserControl<TasksController.TaskFormViewModel>" %>
  
-	<h2>Свойства задания</h2>
+	<h2>РЎРІРѕР№СЃС‚РІР° Р·Р°РґР°РЅРёСЏ</h2>
 
 <% if (ViewContext.TempData[ControllerEnums.GlobalViewDataProperty.PageMessage.ToString()] != null)
    { %>
@@ -23,19 +23,19 @@
     <%= Model.Task.RenderEditable<Task>(Html, x => x.GroupTag)%>
 <% if (Model.Task != null) { %>    
     <fieldset class="property">
-        <legend>Связка с предыдущим заданием</legend>
-        <%= Model.Task.RenderEditableSingle<Task, Task>(Html, x => x.AfterTask, Model.Task.Game.Tasks, new Task { Name = "<Не указано>" })%>
+        <legend>РЎРІСЏР·РєР° СЃ РїСЂРµРґС‹РґСѓС‰РёРј Р·Р°РґР°РЅРёРµРј</legend>
+        <%= Model.Task.RenderEditableSingle<Task, Task>(Html, x => x.AfterTask, Model.Task.Game.Tasks, new Task { Name = "<РќРµ СѓРєР°Р·Р°РЅРѕ>" })%>
         <%= Model.Task.RenderEditable<Task>(Html, x => x.GiveTaskAfter)%>
     </fieldset>
 
-    <%= Model.Task.RenderEditable(Html, x => x.NotAfterTasks, Model.Task.Game.Tasks, new Task { Name = "<Не указано>" })%>
-    <%= Model.Task.RenderEditable(Html, x => x.NotOneTimeTasks, Model.Task.Game.Tasks, new Task { Name = "<Не указано>" })%>
-    <%= Model.Task.RenderEditableMultiCombo(Html, x => x.NotForTeams, Model.Task.Game.Teams, new Team { Name = "<Не указано>" })%>
+    <%= Model.Task.RenderEditable(Html, x => x.NotAfterTasks, Model.Task.Game.Tasks, new Task { Name = "<РќРµ СѓРєР°Р·Р°РЅРѕ>" })%>
+    <%= Model.Task.RenderEditable(Html, x => x.NotOneTimeTasks, Model.Task.Game.Tasks, new Task { Name = "<РќРµ СѓРєР°Р·Р°РЅРѕ>" })%>
+    <%= Model.Task.RenderEditableMultiCombo(Html, x => x.NotForTeams, Model.Task.Game.Teams, new Team { Name = "<РќРµ СѓРєР°Р·Р°РЅРѕ>" })%>
 <% } %>    
 
     <div>
-        <%= Html.SubmitButton("btnSave", "Сохранить")%>
-        <%= Html.Button("btnCancel", "Отмена", HtmlButtonType.Button,
+        <%= Html.SubmitButton("btnSave", "РЎРѕС…СЂР°РЅРёС‚СЊ")%>
+        <%= Html.Button("btnCancel", "РћС‚РјРµРЅР°", HtmlButtonType.Button,
                 "window.location.href = '" + Request.UrlReferrer + "';")%>
     </div>
 <% } %>

@@ -1,9 +1,9 @@
-<%@ Page Title="Games" Language="C#" MasterPageFile="~/Views/Shared/Site.Master" AutoEventWireup="true" 
+п»ї<%@ Page Title="Games" Language="C#" MasterPageFile="~/Views/Shared/Site.Master" AutoEventWireup="true" 
 	Inherits="System.Web.Mvc.ViewPage<IEnumerable<Game>>" %>
 
 <asp:Content ContentPlaceHolderID="MainContentPlaceHolder" runat="server">
 
-    <h2>Список игр</h2>
+    <h2>РЎРїРёСЃРѕРє РёРіСЂ</h2>
 
     <% if (ViewContext.TempData[ControllerEnums.GlobalViewDataProperty.PageMessage.ToString()] != null) { %>
         <p id="pageMessage"><%= ViewContext.TempData[ControllerEnums.GlobalViewDataProperty.PageMessage.ToString()]%></p>
@@ -12,8 +12,8 @@
     <table>
         <thead>
             <tr>
-			    <th>Название</th>
-			    <th>Дата проведения</th>
+			    <th>РќР°Р·РІР°РЅРёРµ</th>
+			    <th>Р”Р°С‚Р° РїСЂРѕРІРµРґРµРЅРёСЏ</th>
 			    <th colspan="3" style="width:150px"></th>
             </tr>
         </thead>
@@ -28,12 +28,12 @@
 				<td><%= Html.ActionLink<GamesController>(c => c.Show(game.Id), game.Name)%></td>
 				<td><%= game.GameDate %></td>
 				<% if (((User)User).Game == game) { %>
-				    <td align=right><%=Html.ActionLink<GamesController>(c => c.Edit(game.Id), "Изменить")%></td>
+				    <td align=right><%=Html.ActionLink<GamesController>(c => c.Edit(game.Id), "РР·РјРµРЅРёС‚СЊ")%></td>
 				    <td>
     				    <% using (Html.BeginForm<GamesController>(c => c.Delete(game.Id)))
                            { %>
                             <%= Html.AntiForgeryToken()%>
-    				        <input type="submit" value="Удалить" onclick="return confirm('Вы уверены, что хотите удалить игру ''<%= game.Name%>''?');" />
+    				        <input type="submit" value="РЈРґР°Р»РёС‚СЊ" onclick="return confirm('Р’С‹ СѓРІРµСЂРµРЅС‹, С‡С‚Рѕ С…РѕС‚РёС‚Рµ СѓРґР°Р»РёС‚СЊ РёРіСЂСѓ ''<%= game.Name%>''?');" />
                         <% } %>
 				    </td>
 				<% } %>
@@ -43,7 +43,7 @@
 
     <% if (((User)User).Role.IsAdministrator)
        { %>
-    <p><%= Html.ActionLink<AdminGamesController>(c => c.Create(), "Создать новую игру") %></p>
+    <p><%= Html.ActionLink<AdminGamesController>(c => c.Create(), "РЎРѕР·РґР°С‚СЊ РЅРѕРІСѓСЋ РёРіСЂСѓ") %></p>
     <% } %>
 
 </asp:Content>

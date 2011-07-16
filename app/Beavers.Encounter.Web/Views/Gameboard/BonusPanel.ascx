@@ -1,37 +1,37 @@
-<%@ Control Language="C#" Inherits="System.Web.Mvc.ViewUserControl" %>
+ï»¿<%@ Control Language="C#" Inherits="System.Web.Mvc.ViewUserControl" %>
 <%@ Register Assembly="Coolite.Ext.Web" Namespace="Coolite.Ext.Web" TagPrefix="ext" %>
 <ext:FitLayout ID="bonusFitLayoutTopBars" runat="server">
 <ext:Panel runat="server" Border="false">
     <TopBar>
         <ext:Toolbar ID="bonusToolbar" runat="server">
             <Items>
-                <ext:ToolbarButton ID="bonusSaveBtn" runat="server" Text="Ñîõðàíèòü" Icon="Disk">
+                <ext:ToolbarButton ID="bonusSaveBtn" runat="server" Text="Ð¡Ð¾Ñ…Ñ€Ð°Ð½Ð¸Ñ‚ÑŒ" Icon="Disk">
                     <Listeners>
-                        <Click Handler="#{bonusFormPanel}.form.submit({waitMsg:'Ñîõðàíåíèå...', params:{id: getBonusID()}, success: bonusSaveSuccessHandler, failure: bonusSaveFailureHandler});" />
+                        <Click Handler="#{bonusFormPanel}.form.submit({waitMsg:'Ð¡Ð¾Ñ…Ñ€Ð°Ð½ÐµÐ½Ð¸Ðµ...', params:{id: getBonusID()}, success: bonusSaveSuccessHandler, failure: bonusSaveFailureHandler});" />
                     </Listeners>
                 </ext:ToolbarButton>
-                <ext:ToolbarButton ID="bonusNewBtn" runat="server" Text="Íîâûé áîíóñ" Icon="Add">
+                <ext:ToolbarButton ID="bonusNewBtn" runat="server" Text="ÐÐ¾Ð²Ñ‹Ð¹ Ð±Ð¾Ð½ÑƒÑ" Icon="Add">
                     <AjaxEvents>
                         <Click Url="/Gameboard/CreateBonus/"
                             CleanRequest="false"
                             Method="POST"
                             IsUpload="false"
-                            Failure="Ext.Msg.show({title:'Îøèáêà',msg: result.errorMessage + ' ' + result.responseText,buttons: Ext.Msg.OK,icon: Ext.Msg.ERROR});"
+                            Failure="Ext.Msg.show({title:'ÐžÑˆÐ¸Ð±ÐºÐ°',msg: result.errorMessage + ' ' + result.responseText,buttons: Ext.Msg.OK,icon: Ext.Msg.ERROR});"
                             Success="createBonus(response, result, el, type, action, extraParams);"
                             FormID="bonusFormPanel">
                         </Click>
                     </AjaxEvents>
                 </ext:ToolbarButton>
-                <ext:ToolbarButton ID="bonusDeleteBtn" runat="server" Text="Óäàëèòü" Icon="Cross">
+                <ext:ToolbarButton ID="bonusDeleteBtn" runat="server" Text="Ð£Ð´Ð°Ð»Ð¸Ñ‚ÑŒ" Icon="Cross">
                     <AjaxEvents>
                         <Click Url="/Gameboard/DeleteBonus/"
                             CleanRequest="true"
                             Method="POST"
                             IsUpload="false"
-                            Failure="Ext.Msg.show({title:'Îøèáêà',msg: result.errorMessage + ' ' + result.responseText,buttons: Ext.Msg.OK,icon: Ext.Msg.ERROR});"
+                            Failure="Ext.Msg.show({title:'ÐžÑˆÐ¸Ð±ÐºÐ°',msg: result.errorMessage + ' ' + result.responseText,buttons: Ext.Msg.OK,icon: Ext.Msg.ERROR});"
                             Success="successDeleteBonus(response, result, el, type, action, extraParams);"
                             FormID="bonusFormPanel">
-                            <Confirmation Message="Óäàëüòü áîíóñíîå çàäàíèå?" Title="Âíèìàíèå" ConfirmRequest="true" />
+                            <Confirmation Message="Ð£Ð´Ð°Ð»ÑŒÑ‚ÑŒ Ð±Ð¾Ð½ÑƒÑÐ½Ð¾Ðµ Ð·Ð°Ð´Ð°Ð½Ð¸Ðµ?" Title="Ð’Ð½Ð¸Ð¼Ð°Ð½Ð¸Ðµ" ConfirmRequest="true" />
                             <ExtraParams>
                                 <ext:Parameter Name="id" Value="Bonus_Id.value" Mode="Raw"></ext:Parameter>
                             </ExtraParams>
@@ -53,7 +53,7 @@
                             <ext:TextField ID="Bonus_Id" runat="server" DataIndex="Id" Hidden="true" />
                         </ext:Anchor>
                         <ext:Anchor Horizontal="100%">
-                            <ext:TextField ID="Bonus_Name" runat="server" DataIndex="Name" FieldLabel="Êîäîâîå íàçâàíèå" Width="250" AllowBlank="false" EmptyText="Ââåäèòå êîäîâîå íàçâàíèå">
+                            <ext:TextField ID="Bonus_Name" runat="server" DataIndex="Name" FieldLabel="ÐšÐ¾Ð´Ð¾Ð²Ð¾Ðµ Ð½Ð°Ð·Ð²Ð°Ð½Ð¸Ðµ" Width="250" AllowBlank="false" EmptyText="Ð’Ð²ÐµÐ´Ð¸Ñ‚Ðµ ÐºÐ¾Ð´Ð¾Ð²Ð¾Ðµ Ð½Ð°Ð·Ð²Ð°Ð½Ð¸Ðµ">
                                 <Listeners>
                                     <Change Fn="bonusChange" />
                                 </Listeners>
@@ -63,7 +63,7 @@
                             <ext:TextField ID="Bonus_StartTime" runat="server" Hidden="true" DataIndex="StartTime"/>
                         </ext:Anchor>
                         <ext:Anchor>
-                            <ext:MultiField ID="Bonus_StartTimeComplex" FieldLabel="Âðåìÿ âûäà÷è" runat="server">
+                            <ext:MultiField ID="Bonus_StartTimeComplex" FieldLabel="Ð’Ñ€ÐµÐ¼Ñ Ð²Ñ‹Ð´Ð°Ñ‡Ð¸" runat="server">
                                 <Fields>
                                     <ext:DateField ID="Bonus_StartTimeDate" runat="server" DataIndex="StartTimeDate" Width="90" AllowBlank="false">
                                         <Listeners>
@@ -82,7 +82,7 @@
                             <ext:TextField ID="Bonus_FinishTime" runat="server" Hidden="true" DataIndex="FinishTime"/>
                         </ext:Anchor>
                         <ext:Anchor>
-                            <ext:MultiField ID="Bonus_FinishTimeComplex" FieldLabel="Âðåìÿ îêîí÷àíèÿ" runat="server">
+                            <ext:MultiField ID="Bonus_FinishTimeComplex" FieldLabel="Ð’Ñ€ÐµÐ¼Ñ Ð¾ÐºÐ¾Ð½Ñ‡Ð°Ð½Ð¸Ñ" runat="server">
                                 <Fields>
                                     <ext:DateField ID="Bonus_FinishTimeDate" runat="server" DataIndex="FinishTimeDate" Width="90" AllowBlank="false">
                                         <Listeners>
@@ -98,7 +98,7 @@
                             </ext:MultiField>
                         </ext:Anchor>
                         <ext:Anchor>
-                            <ext:Checkbox ID="Bonus_IsIndividual" runat="server" DataIndex="IsIndividual" FieldLabel="Èíäèâèäóàëüíîå çàäàíèå">
+                            <ext:Checkbox ID="Bonus_IsIndividual" runat="server" DataIndex="IsIndividual" FieldLabel="Ð˜Ð½Ð´Ð¸Ð²Ð¸Ð´ÑƒÐ°Ð»ÑŒÐ½Ð¾Ðµ Ð·Ð°Ð´Ð°Ð½Ð¸Ðµ">
                                 <Listeners>
                                     <Change Fn="bonusChange" />
                                 </Listeners>
@@ -109,7 +109,7 @@
                                 <Body>
                                     <ext:FormLayout ID="bonusFormLayout2" runat="server" LabelAlign="Top" StyleSpec="background: transparent">
                                         <ext:Anchor Horizontal="100%">
-                                            <ext:TextArea ID="Bonus_TaskText" runat="server" DataIndex="TaskText" FieldLabel="Ôîðìóëèðîâêà çàäàíèÿ" Height="200"/>
+                                            <ext:TextArea ID="Bonus_TaskText" runat="server" DataIndex="TaskText" FieldLabel="Ð¤Ð¾Ñ€Ð¼ÑƒÐ»Ð¸Ñ€Ð¾Ð²ÐºÐ° Ð·Ð°Ð´Ð°Ð½Ð¸Ñ" Height="200"/>
                                         </ext:Anchor>
                                     </ext:FormLayout>
                                 </Body>

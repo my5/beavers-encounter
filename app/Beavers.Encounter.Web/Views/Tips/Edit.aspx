@@ -1,9 +1,9 @@
-<%@ Page Title="Edit Tip" Language="C#" MasterPageFile="~/Views/Shared/Site.Master" AutoEventWireup="true" 
+п»ї<%@ Page Title="Edit Tip" Language="C#" MasterPageFile="~/Views/Shared/Site.Master" AutoEventWireup="true" 
 	Inherits="System.Web.Mvc.ViewPage<TipsController.TipFormViewModel>" %>
 
 <asp:Content ContentPlaceHolderID="MainContentPlaceHolder" runat="server">
 
-	<h1>Редактирование подсказки</h1>
+	<h1>Р РµРґР°РєС‚РёСЂРѕРІР°РЅРёРµ РїРѕРґСЃРєР°Р·РєРё</h1>
 
 	<% Html.RenderPartial("TipForm", ViewData); %>
 

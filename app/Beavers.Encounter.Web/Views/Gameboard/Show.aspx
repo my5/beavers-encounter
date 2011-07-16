@@ -1,4 +1,4 @@
-<%@ Page Language="C#" Inherits="System.Web.Mvc.ViewPage<Game>" %>
+ï»¿<%@ Page Language="C#" Inherits="System.Web.Mvc.ViewPage<Game>" %>
 <%@ Register Assembly="Coolite.Ext.Web" Namespace="Coolite.Ext.Web" TagPrefix="ext" %>
 <%@ Register src="~/Views/Gameboard/GameEditorWindow.ascx" tagname="GameEditorWindow" tagprefix="uc" %>
 <%@ Register src="~/Views/Gameboard/TipEditorWindow.ascx" tagname="TipEditorWindow" tagprefix="uc" %>
@@ -48,7 +48,7 @@
             <ext:Parameter Name="id" Value="gameId.value" Mode="Raw"></ext:Parameter>
         </BaseParams>
         <Listeners>
-            <BeforeLoad Handler="tabGame.el.mask('Çàãðóçêà...', 'x-mask-loading');" />
+            <BeforeLoad Handler="tabGame.el.mask('Ð—Ð°Ð³Ñ€ÑƒÐ·ÐºÐ°...', 'x-mask-loading');" />
             <LoadException Handler="tabGame.el.unmask();" />
             <Load Fn="gameLoaded" />
         </Listeners>
@@ -88,7 +88,7 @@
             <ext:Parameter Name="taskId" Value="activeTaskId" Mode="Raw"></ext:Parameter>
         </BaseParams>
         <Listeners>
-            <BeforeLoad Handler="tabTask.el.mask('Çàãðóçêà...', 'x-mask-loading');" />
+            <BeforeLoad Handler="tabTask.el.mask('Ð—Ð°Ð³Ñ€ÑƒÐ·ÐºÐ°...', 'x-mask-loading');" />
             <LoadException Handler="tabTask.el.unmask();" />
             <Load Fn="taskLoaded" />
         </Listeners>
@@ -146,7 +146,7 @@
             <ext:Parameter Name="bonusId" Value="activeBonusId" Mode="Raw"></ext:Parameter>
         </BaseParams>
         <Listeners>
-            <BeforeLoad Handler="tabBonus.el.mask('Çàãðóçêà...', 'x-mask-loading');" />
+            <BeforeLoad Handler="tabBonus.el.mask('Ð—Ð°Ð³Ñ€ÑƒÐ·ÐºÐ°...', 'x-mask-loading');" />
             <LoadException Handler="tabBonus.el.unmask();" />
             <Load Fn="bonusLoaded" />
         </Listeners>
@@ -168,17 +168,17 @@
         </Body>
         <StartMenu>
             <Items>
-                <ext:MenuItem Text="Ðåäàêòîð èãðû" Icon="ApplicationFormEdit">
+                <ext:MenuItem Text="Ð ÐµÐ´Ð°ÐºÑ‚Ð¾Ñ€ Ð¸Ð³Ñ€Ñ‹" Icon="ApplicationFormEdit">
                     <Listeners>
                         <Click Handler="#{winGameEditor}.show();" />
                     </Listeners>
                 </ext:MenuItem>
-                <ext:MenuItem Text="Óïðàâëåíèå èãðîé" Icon="Joystick">
+                <ext:MenuItem Text="Ð£Ð¿Ñ€Ð°Ð²Ð»ÐµÐ½Ð¸Ðµ Ð¸Ð³Ñ€Ð¾Ð¹" Icon="Joystick">
                     <Listeners>
                         <Click Handler="#{winGameControl}.show();" />
                     </Listeners>
                 </ext:MenuItem>
-                <ext:MenuItem Text="Ñòàðûé ðåäàêòîð" Icon="ApplicationOsxTerminal">
+                <ext:MenuItem Text="Ð¡Ñ‚Ð°Ñ€Ñ‹Ð¹ Ñ€ÐµÐ´Ð°ÐºÑ‚Ð¾Ñ€" Icon="ApplicationOsxTerminal">
                     <Listeners>
                         <Click Handler="#{winOldEditorBrowser}.show();" />
                     </Listeners>
@@ -194,7 +194,7 @@
     <ext:DesktopWindow 
         ID="winOldEditorBrowser" 
         runat="server" 
-        Title="Ñòàðûé ðåäàêòîð" 
+        Title="Ð¡Ñ‚Ð°Ñ€Ñ‹Ð¹ Ñ€ÐµÐ´Ð°ÐºÑ‚Ð¾Ñ€" 
         Icon="World"              
         Width="1000"
         Height="600"

@@ -1,6 +1,6 @@
-<%@ Control Language="C#" Inherits="Beavers.Encounter.Web.Views.ViewUserControl<Task>" %>
+п»ї<%@ Control Language="C#" Inherits="Beavers.Encounter.Web.Views.ViewUserControl<Task>" %>
 
-	<h2>Список кодов</h2>
+	<h2>РЎРїРёСЃРѕРє РєРѕРґРѕРІ</h2>
 
 <div>
     <ul>
@@ -10,18 +10,18 @@
         <li>
         <%= Html.Encode(code.IsBonus ? Model.Game.PrefixBonusCode : Model.Game.PrefixMainCode) %>
         <b><%= Html.Encode(code.Name)%></b>
-        (КО: <%= Html.Encode(code.Danger)%>)
-        <%= code.IsBonus ? "Бонус" : String.Empty %>
-        <%= Html.ActionLink<CodesController>(c => c.Edit(code.Id), "Изменить")%>           
+        (РљРћ: <%= Html.Encode(code.Danger)%>)
+        <%= code.IsBonus ? "Р‘РѕРЅСѓСЃ" : String.Empty %>
+        <%= Html.ActionLink<CodesController>(c => c.Edit(code.Id), "РР·РјРµРЅРёС‚СЊ")%>           
 		<% using (Html.BeginForm<CodesController>(c => c.Delete(code.Id)))
            { %>
             <%= Html.AntiForgeryToken() %>
-		    <input type="submit" value="Удалить код" onclick="return confirm('Вы действительно хотите удалить код?');" />
+		    <input type="submit" value="РЈРґР°Р»РёС‚СЊ РєРѕРґ" onclick="return confirm('Р’С‹ РґРµР№СЃС‚РІРёС‚РµР»СЊРЅРѕ С…РѕС‚РёС‚Рµ СѓРґР°Р»РёС‚СЊ РєРѕРґ?');" />
         <% } %>
         </li>
 	<% } %>
     </ul>
-    <p><%= Html.ActionLink<CodesController>(c => c.Create(Model.Id), "Добавить новый код")%></p>
+    <p><%= Html.ActionLink<CodesController>(c => c.Create(Model.Id), "Р”РѕР±Р°РІРёС‚СЊ РЅРѕРІС‹Р№ РєРѕРґ")%></p>
 </div>
 
 

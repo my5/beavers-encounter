@@ -1,13 +1,13 @@
-<%@ Page Title="Team Details" Language="C#" MasterPageFile="~/Views/Shared/Site.Master" AutoEventWireup="true" 
+п»ї<%@ Page Title="Team Details" Language="C#" MasterPageFile="~/Views/Shared/Site.Master" AutoEventWireup="true" 
 	Inherits="System.Web.Mvc.ViewPage<Team>" %>
 
 <asp:Content ContentPlaceHolderID="MainContentPlaceHolder" runat="server">
 
-    <h2>Профиль команды</h2>
+    <h2>РџСЂРѕС„РёР»СЊ РєРѕРјР°РЅРґС‹</h2>
 
     <ul>
 		<li>
-			<label for="Team_Name">Название:</label>
+			<label for="Team_Name">РќР°Р·РІР°РЅРёРµ:</label>
             <% if (((User)User).Team == ViewData.Model)
                { %>
                     <span id="My_Team_Name"><%= "<b>" + Server.HtmlEncode(ViewData.Model.Name) + "</b>"%></span>
@@ -18,14 +18,14 @@
         <% if (((User)User).Team == null && ((User)User).Role.IsPlayer && ViewData.Model.Users.Count < 6)
            { %>
 	    <li class="buttons">
-            <%= Html.Button("btnSignIn", "Войти в команду", HtmlButtonType.Button,
+            <%= Html.Button("btnSignIn", "Р’РѕР№С‚Рё РІ РєРѕРјР°РЅРґСѓ", HtmlButtonType.Button,
                                 "window.location.href = '" + Html.BuildUrlFromExpression<TeamsController>(c => c.SingIn(ViewData.Model.Id)) + "';")%>
         </li>
         <% } %>
         <% if (((User)User).Team == ViewData.Model && (((User)User).Role.IsPlayer || ((User)User).Role.IsTeamLeader))
            { %>
 	    <li class="buttons">
-            <%= Html.Button("btnSignOut", "Покинуть команду", HtmlButtonType.Button,
+            <%= Html.Button("btnSignOut", "РџРѕРєРёРЅСѓС‚СЊ РєРѕРјР°РЅРґСѓ", HtmlButtonType.Button,
                                 "window.location.href = '" + Html.BuildUrlFromExpression<TeamsController>(c => c.SingOut()) + "';")%>
         </li>
         <% } %>
@@ -35,7 +35,7 @@
        { 
     %>
         <%= Html.Button("btnSingInGame", 
-            String.Format("Зарегистрировать команду в игре:<br/>\"{0}\"", ((User)User).Game.Name), 
+            String.Format("Р—Р°СЂРµРіРёСЃС‚СЂРёСЂРѕРІР°С‚СЊ РєРѕРјР°РЅРґСѓ РІ РёРіСЂРµ:<br/>\"{0}\"", ((User)User).Game.Name), 
             HtmlButtonType.Button,
             "window.location.href = '" + Html.BuildUrlFromExpression<TeamsController>(c => c.SingInGame(((User)User).Game.Id, ViewData.Model.Id)) + "';")%>
     <% } %>
@@ -44,30 +44,30 @@
        {
     %>
         <p>
-        Команда зарегистрирована на участие в игре:
+        РљРѕРјР°РЅРґР° Р·Р°СЂРµРіРёСЃС‚СЂРёСЂРѕРІР°РЅР° РЅР° СѓС‡Р°СЃС‚РёРµ РІ РёРіСЂРµ:
         <%= Html.ActionLink<GamesController>(c => c.Show(ViewData.Model.Game.Id), ViewData.Model.Game.Name)%>
         <% if (ViewData.Model == ((User)User).Team && ((User)User).Role.IsAuthor) { %>
             <%= Html.Button("btnSingOutGame", 
-                "Отказаться от участия", 
+                "РћС‚РєР°Р·Р°С‚СЊСЃСЏ РѕС‚ СѓС‡Р°СЃС‚РёСЏ", 
                 HtmlButtonType.Button,
                 "window.location.href = '" + Html.BuildUrlFromExpression<TeamsController>(c => c.SingOutGame(ViewData.Model.Game.Id, ViewData.Model.Id)) + "';")%>
         <%} %>
         </p>
     <%} %>
     
-    <h2>Список участников</h2>
+    <h2>РЎРїРёСЃРѕРє СѓС‡Р°СЃС‚РЅРёРєРѕРІ</h2>
     
     <table>
         <%
         foreach (User user in ViewData.Model.Users)
         { %>
         <tr>
-            <td><%= Html.Encode(user.Login) %> <%= user.Role.IsTeamLeader ? "(Капитан)" : String.Empty%></td>
+            <td><%= Html.Encode(user.Login) %> <%= user.Role.IsTeamLeader ? "(РљР°РїРёС‚Р°РЅ)" : String.Empty%></td>
             <td>
             <% if (ViewData.Model == ((User)User).Team && ((User)User).Role.IsTeamLeader && ((User)User).Id != user.Id)
                { %>
                 <%= Html.Button(
-                    "btnRemove", "Удалить", HtmlButtonType.Button,
+                    "btnRemove", "РЈРґР°Р»РёС‚СЊ", HtmlButtonType.Button,
                     "window.location.href = '" + Html.BuildUrlFromExpression<TeamsController>(c => c.SingOutUser(ViewData.Model.Id, user.Id)) + "';")%>
             <%} %>
             </td>
@@ -79,13 +79,13 @@
     <% 
     if (((User)User).Role.IsAuthor)
     { %>
-    <h2>Индивидуальное задание</h2>
+    <h2>РРЅРґРёРІРёРґСѓР°Р»СЊРЅРѕРµ Р·Р°РґР°РЅРёРµ</h2>
 
     <%= Beavers.Encounter.Common.BBCode.ConvertToHtml(Model.FinalTask) %>
     
     <br/>
 
-    <p><%= Html.ActionLink<TeamsController>(c => c.Edit(Model.Id), "Изменить")%></p>
+    <p><%= Html.ActionLink<TeamsController>(c => c.Edit(Model.Id), "РР·РјРµРЅРёС‚СЊ")%></p>
     
     <%
     } %>

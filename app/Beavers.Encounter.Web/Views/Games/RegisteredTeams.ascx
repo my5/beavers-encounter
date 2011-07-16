@@ -1,8 +1,8 @@
-<%@ Control Language="C#" Inherits="System.Web.Mvc.ViewUserControl<Game>" %>
+п»ї<%@ Control Language="C#" Inherits="System.Web.Mvc.ViewUserControl<Game>" %>
 
 <div class="registeredTeams">
 
-    <h2>Зарегистрированные команды</h2>
+    <h2>Р—Р°СЂРµРіРёСЃС‚СЂРёСЂРѕРІР°РЅРЅС‹Рµ РєРѕРјР°РЅРґС‹</h2>
 	
     <ul>
     <%
@@ -13,7 +13,7 @@
         <% if (((User)Page.User).Role.IsAuthor)
            {%>
             <%= Html.Button("btnSingOutGame",
-                "Удалить",
+                "РЈРґР°Р»РёС‚СЊ",
                 HtmlButtonType.Button,
                 "window.location.href = '" + Html.BuildUrlFromExpression<TeamsController>(c => c.SingOutGame(Model.Id, team.Id)) + "';")%>
         <% } %>

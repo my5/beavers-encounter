@@ -1,4 +1,4 @@
-<%@ Control Language="C#" Inherits="System.Web.Mvc.ViewUserControl" %>
+ï»¿<%@ Control Language="C#" Inherits="System.Web.Mvc.ViewUserControl" %>
 <%@ Register Assembly="Coolite.Ext.Web" Namespace="Coolite.Ext.Web" TagPrefix="ext" %>
 <ext:FitLayout ID="TipsFitLayout" runat="server">
     <ext:GridPanel 
@@ -12,7 +12,7 @@
         <TopBar>
             <ext:Toolbar ID="Toolbar1" runat="server">
                 <Items>
-                    <ext:Button ID="btnAddTip" runat="server" Text="Äîáàâèòü ïîäñêàçêó" Icon="Add">
+                    <ext:Button ID="btnAddTip" runat="server" Text="Ð”Ð¾Ð±Ð°Ð²Ð¸Ñ‚ÑŒ Ð¿Ð¾Ð´ÑÐºÐ°Ð·ÐºÑƒ" Icon="Add">
                         <Listeners>
                             <Click Fn="onClickAddTip" />
                         </Listeners>
@@ -25,18 +25,18 @@
                 <ext:ImageCommandColumn ColumnID="cmd" Sortable="false" Width="64">
                     <Commands>
                         <ext:ImageCommand CommandName="Edit" Icon="Pencil">
-                            <ToolTip Text="Èçìåíèòü" />
+                            <ToolTip Text="Ð˜Ð·Ð¼ÐµÐ½Ð¸Ñ‚ÑŒ" />
                         </ext:ImageCommand>
                         <ext:ImageCommand CommandName="Delete" Icon="Cross">
-                            <ToolTip Text="Óäàëèòü" />
+                            <ToolTip Text="Ð£Ð´Ð°Ð»Ð¸Ñ‚ÑŒ" />
                         </ext:ImageCommand>
                     </Commands>
                 </ext:ImageCommandColumn>
-                <ext:Column ColumnID="Title" DataIndex="SuspendTime" Header="Òèï" Sortable="false" Width="400">
+                <ext:Column ColumnID="Title" DataIndex="SuspendTime" Header="Ð¢Ð¸Ð¿" Sortable="false" Width="400">
                     <Renderer Fn="tipRecordTitleTmpl"/>
                 </ext:Column>
-                <ext:Column ColumnID="SuspendTime" DataIndex="SuspendTime" Header="Âðåìÿ" Sortable="false" Width="80">
-                    <Renderer Handler="return '' + record.data.SuspendTime + ' ìèíóò'" />
+                <ext:Column ColumnID="SuspendTime" DataIndex="SuspendTime" Header="Ð’Ñ€ÐµÐ¼Ñ" Sortable="false" Width="80">
+                    <Renderer Handler="return '' + record.data.SuspendTime + ' Ð¼Ð¸Ð½ÑƒÑ‚'" />
                 </ext:Column>
             </Columns>
         </ColumnModel>

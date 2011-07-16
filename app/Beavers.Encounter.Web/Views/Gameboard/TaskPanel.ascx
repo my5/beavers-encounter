@@ -1,4 +1,4 @@
-<%@ Control Language="C#" Inherits="System.Web.Mvc.ViewUserControl" %>
+ï»¿<%@ Control Language="C#" Inherits="System.Web.Mvc.ViewUserControl" %>
 <%@ Register Assembly="Coolite.Ext.Web" Namespace="Coolite.Ext.Web" TagPrefix="ext" %>
 <%@ Register src="~/Views/Gameboard/TipsPanel.ascx" tagname="TipsPanel" tagprefix="uc" %>
 <%@ Register src="~/Views/Gameboard/CodesPanel.ascx" tagname="CodesPanel" tagprefix="uc" %>
@@ -6,37 +6,37 @@
 <ext:Panel runat="server" Border="false">
 <Body>
 <ext:Accordion ID="taskAccordion" runat="server" Animate="true"  >
-    <ext:Panel ID="taskPanelTopBars" runat="server" Border="false" Title="Ñâîéñòâà çàäàíèÿ" Icon="Report">
+    <ext:Panel ID="taskPanelTopBars" runat="server" Border="false" Title="Ð¡Ð²Ð¾Ð¹ÑÑ‚Ð²Ð° Ð·Ð°Ð´Ð°Ð½Ð¸Ñ" Icon="Report">
         <TopBar>
             <ext:Toolbar ID="taskToolbar" runat="server">
                 <Items>
-                    <ext:ToolbarButton ID="taskSaveBtn" runat="server" Text="Ñîõðàíèòü" Icon="Disk">
+                    <ext:ToolbarButton ID="taskSaveBtn" runat="server" Text="Ð¡Ð¾Ñ…Ñ€Ð°Ð½Ð¸Ñ‚ÑŒ" Icon="Disk">
                         <Listeners>
-                            <Click Handler="#{taskFormPanel}.form.submit({waitMsg:'Ñîõðàíåíèå...', params:{id: getTaskID()}, success: taskSaveSuccessHandler, failure: taskSaveFailureHandler});" />
+                            <Click Handler="#{taskFormPanel}.form.submit({waitMsg:'Ð¡Ð¾Ñ…Ñ€Ð°Ð½ÐµÐ½Ð¸Ðµ...', params:{id: getTaskID()}, success: taskSaveSuccessHandler, failure: taskSaveFailureHandler});" />
                         </Listeners>
                     </ext:ToolbarButton>
-                    <ext:ToolbarButton ID="taskNewBtn" runat="server" Text="Íîâîå çàäàíèå" Icon="Add">
+                    <ext:ToolbarButton ID="taskNewBtn" runat="server" Text="ÐÐ¾Ð²Ð¾Ðµ Ð·Ð°Ð´Ð°Ð½Ð¸Ðµ" Icon="Add">
                         <AjaxEvents>
                             <Click Url="/Gameboard/CreateTask/"
                                 CleanRequest="false"
                                 Method="POST"
                                 IsUpload="false"
-                                Failure="Ext.Msg.show({title:'Îøèáêà',msg: result.errorMessage + ' ' + result.responseText,buttons: Ext.Msg.OK,icon: Ext.Msg.ERROR});"
+                                Failure="Ext.Msg.show({title:'ÐžÑˆÐ¸Ð±ÐºÐ°',msg: result.errorMessage + ' ' + result.responseText,buttons: Ext.Msg.OK,icon: Ext.Msg.ERROR});"
                                 Success="createTask(response, result, el, type, action, extraParams);"
                                 FormID="taskFormPanel">
                             </Click>
                         </AjaxEvents>
                     </ext:ToolbarButton>
-                    <ext:ToolbarButton ID="taskDeleteBtn" runat="server" Text="Óäàëèòü" Icon="Cross">
+                    <ext:ToolbarButton ID="taskDeleteBtn" runat="server" Text="Ð£Ð´Ð°Ð»Ð¸Ñ‚ÑŒ" Icon="Cross">
                         <AjaxEvents>
                             <Click Url="/Gameboard/DeleteTask/"
                                 CleanRequest="true"
                                 Method="POST"
                                 IsUpload="false"
-                                Failure="Ext.Msg.show({title:'Îøèáêà',msg: result.errorMessage + ' ' + result.responseText,buttons: Ext.Msg.OK,icon: Ext.Msg.ERROR});"
+                                Failure="Ext.Msg.show({title:'ÐžÑˆÐ¸Ð±ÐºÐ°',msg: result.errorMessage + ' ' + result.responseText,buttons: Ext.Msg.OK,icon: Ext.Msg.ERROR});"
                                 Success="successDeleteTask(response, result, el, type, action, extraParams);"
                                 FormID="taskFormPanel">
-                                <Confirmation Message="Óäàëüòü çàäàíèå?" Title="Âíèìàíèå" ConfirmRequest="true" />
+                                <Confirmation Message="Ð£Ð´Ð°Ð»ÑŒÑ‚ÑŒ Ð·Ð°Ð´Ð°Ð½Ð¸Ðµ?" Title="Ð’Ð½Ð¸Ð¼Ð°Ð½Ð¸Ðµ" ConfirmRequest="true" />
                                 <ExtraParams>
                                     <ext:Parameter Name="id" Value="Task_Id.value" Mode="Raw"></ext:Parameter>
                                 </ExtraParams>
@@ -61,18 +61,18 @@
                                 <ext:TextField ID="Task_Id" runat="server" DataIndex="Id" Hidden="true" />
                             </ext:Anchor>
                             <ext:Anchor Horizontal="100%">
-                                <ext:TextField ID="Task_Name" runat="server" DataIndex="Name" FieldLabel="Êîäîâîå íàçâàíèå" Width="250" AllowBlank="false" EmptyText="Ââåäèòå êîäîâîå íàçâàíèå">
+                                <ext:TextField ID="Task_Name" runat="server" DataIndex="Name" FieldLabel="ÐšÐ¾Ð´Ð¾Ð²Ð¾Ðµ Ð½Ð°Ð·Ð²Ð°Ð½Ð¸Ðµ" Width="250" AllowBlank="false" EmptyText="Ð’Ð²ÐµÐ´Ð¸Ñ‚Ðµ ÐºÐ¾Ð´Ð¾Ð²Ð¾Ðµ Ð½Ð°Ð·Ð²Ð°Ð½Ð¸Ðµ">
                                     <Listeners>
                                         <Change Fn="taskChange" />
                                     </Listeners>
                                 </ext:TextField>
                             </ext:Anchor>
                             <ext:Anchor>
-                                <ext:ComboBox ID="Task_TaskType" runat="server" DataIndex="TaskType" FieldLabel="Òèï çàäàíèÿ" AllowBlank="false" Width="200">
+                                <ext:ComboBox ID="Task_TaskType" runat="server" DataIndex="TaskType" FieldLabel="Ð¢Ð¸Ð¿ Ð·Ð°Ð´Ð°Ð½Ð¸Ñ" AllowBlank="false" Width="200">
                                     <Items>
-                                        <ext:ListItem Value="Classic" Text="Êëàññè÷åñêîå çàäàíèå" />
-                                        <ext:ListItem Value="NeedForSpeed" Text="Çàäàíèå ñ óñêîðåíèåì" />
-                                        <ext:ListItem Value="RussianRoulette" Text="Çàäàíèå ñ âûáîðîì ïîäñêàçêè" />
+                                        <ext:ListItem Value="Classic" Text="ÐšÐ»Ð°ÑÑÐ¸Ñ‡ÐµÑÐºÐ¾Ðµ Ð·Ð°Ð´Ð°Ð½Ð¸Ðµ" />
+                                        <ext:ListItem Value="NeedForSpeed" Text="Ð—Ð°Ð´Ð°Ð½Ð¸Ðµ Ñ ÑƒÑÐºÐ¾Ñ€ÐµÐ½Ð¸ÐµÐ¼" />
+                                        <ext:ListItem Value="RussianRoulette" Text="Ð—Ð°Ð´Ð°Ð½Ð¸Ðµ Ñ Ð²Ñ‹Ð±Ð¾Ñ€Ð¾Ð¼ Ð¿Ð¾Ð´ÑÐºÐ°Ð·ÐºÐ¸" />
                                     </Items>
                                     <Listeners>
                                         <Change Fn="taskChange" />
@@ -80,7 +80,7 @@
                                 </ext:ComboBox>
                             </ext:Anchor>
                             <ext:Anchor>
-                                <ext:NumberField ID="Task_Priority" runat="server" DataIndex="Priority" FieldLabel="Ïðèîðèòåò çàäàíèÿ" AllowDecimals="false" AllowNegative="true">
+                                <ext:NumberField ID="Task_Priority" runat="server" DataIndex="Priority" FieldLabel="ÐŸÑ€Ð¸Ð¾Ñ€Ð¸Ñ‚ÐµÑ‚ Ð·Ð°Ð´Ð°Ð½Ð¸Ñ" AllowDecimals="false" AllowNegative="true">
                                     <Listeners>
                                         <Change Fn="taskChange" />
                                     </Listeners>
@@ -94,14 +94,14 @@
                                 </ext:Checkbox>
                             </ext:Anchor>
                             <ext:Anchor>
-                                <ext:Checkbox ID="Task_Agents" runat="server" DataIndex="Agents" FieldLabel="Çàäàíèå ñ àãåíòàìè" >
+                                <ext:Checkbox ID="Task_Agents" runat="server" DataIndex="Agents" FieldLabel="Ð—Ð°Ð´Ð°Ð½Ð¸Ðµ Ñ Ð°Ð³ÐµÐ½Ñ‚Ð°Ð¼Ð¸" >
                                     <Listeners>
                                         <Change Fn="taskChange" />
                                     </Listeners>
                                 </ext:Checkbox>
                             </ext:Anchor>
                             <ext:Anchor>
-                                <ext:Checkbox ID="Task_Locked" runat="server" DataIndex="Locked" FieldLabel="Çàäàíèå çàáëîêèðîâàííî">
+                                <ext:Checkbox ID="Task_Locked" runat="server" DataIndex="Locked" FieldLabel="Ð—Ð°Ð´Ð°Ð½Ð¸Ðµ Ð·Ð°Ð±Ð»Ð¾ÐºÐ¸Ñ€Ð¾Ð²Ð°Ð½Ð½Ð¾">
                                     <Listeners>
                                         <Change Fn="taskChange" />
                                     </Listeners>
@@ -112,10 +112,10 @@
                                     <Body>
                                         <ext:FormLayout ID="taskFormLayout2" runat="server" LabelAlign="Top" StyleSpec="background: transparent">
                                             <ext:Anchor Horizontal="100%">
-                                                <ext:MultiField FieldLabel="Íå ïîñëå">
+                                                <ext:MultiField FieldLabel="ÐÐµ Ð¿Ð¾ÑÐ»Ðµ">
                                                     <Fields>
                                                         <ext:TextField ID="Task_NotAfterTasks" runat="server" Hidden="true" DataIndex="NotAfterTasks" />
-                                                        <ext:Button ID="NotAfterTasksBtn" runat="server" Text="Èçìåíèòü">
+                                                        <ext:Button ID="NotAfterTasksBtn" runat="server" Text="Ð˜Ð·Ð¼ÐµÐ½Ð¸Ñ‚ÑŒ">
                                                             <Menu>
                                                                 <ext:Menu MinWidth="180">
                                                                     <Listeners>
@@ -130,10 +130,10 @@
                                                 </ext:MultiField>
                                             </ext:Anchor>
                                             <ext:Anchor Horizontal="100%">
-                                                <ext:MultiField FieldLabel="Íå âìåñòå">
+                                                <ext:MultiField FieldLabel="ÐÐµ Ð²Ð¼ÐµÑÑ‚Ðµ">
                                                     <Fields>
                                                         <ext:TextField ID="Task_NotOneTimeTasks" runat="server" Hidden="true" DataIndex="NotOneTimeTasks" />
-                                                        <ext:Button ID="NotOneTimeTasksBtn" runat="server" Text="Èçìåíèòü">
+                                                        <ext:Button ID="NotOneTimeTasksBtn" runat="server" Text="Ð˜Ð·Ð¼ÐµÐ½Ð¸Ñ‚ÑŒ">
                                                             <Menu>
                                                                 <ext:Menu MinWidth="180">
                                                                     <Listeners>
@@ -155,20 +155,20 @@
                     </Body>
                 </ext:FormPanel>
             </ext:FitLayout>
-            <ext:ToolTip runat="server" Target="Task_Name" Html="Â ïðîöåññå èãðû êîìàíäû íå óâèäÿò ýòî íàçâàíèå, êîäîâîå íàçâàíèå çàäàíèÿ äîñòóïíî òîëüêî àâòîðàì èãðû. Íàïðèìåð, ßêóíèêè."></ext:ToolTip>
-            <ext:ToolTip runat="server" Target="Task_StreetChallendge" Html="Äàííûé ïðèçíàê óêàçûâàåò, ÷òî çàäàíèå áóäåò âûäàíî âñåì êîìàíäàì êàê ïåðâîå çàäàíèå â íà÷àëå èãðû."/>
-            <ext:ToolTip runat="server" Target="Task_Agents" Html="Ïðèçíàê èñïîëüçóåòñÿ ïðè ðàñïðåäåëåíèè çàäàíèé òàê, ÷òîáû çàäàíèå ñ àãåíòàìè âûïîëíÿëîñü åäèíîâðåìåííî òîëüêî îäíîé êîìàíäîé. Íàïðèìåð, çàäàíèå ñ +500."/>
-            <ext:ToolTip runat="server" Target="Task_Locked" Html="Åñëè óñòàíîâëåí äàííûé ïðèçíàê, òî çàäàíèå íå áóäåò âûäàâàòüñÿ êîìàíäàì. Ýòîò ïðèçíàê ìîæíî óñòàíàâëèâàòü/ñíèìàòü â ïðîöåññå èãðû."/>
-            <ext:ToolTip runat="server" Target="Task_TaskType" Html="0 - êëàññè÷åñêîå çàäàíèå, 1 - çàäàíèå ñ óñêîðåíèåì, 2 - çàäàíèå ñ âûáîðîì ïîäñêàçêè."/>
-            <ext:ToolTip runat="server" Target="Task_Priority" Title="Ïðèîðèòåò çàäàíèÿ" AutoHide="false" Closable="true" Draggable="true" Html="Ïðèîðèòåò ìîæåò áûòü ïîëîæèòåëüíûì èëè îòðèöàòåëüíûì. Ïðèîðèòåò ðàâíûé 100 ïîçâîëÿåò áûñòðåå ïîëó÷èòü êîìàíäàì ýòî çàäàíèå, ïðè ýòîì îäíîâðåìåííî äàííîå çàäàíèå ïîòåíöèàëüíî ñìîãóò âûïîëíÿòü 3-4 êîìàíäû. Ïðè ïðèîðèòåòå 150 îäíîâðåìåííî çàäàíèå ïîòåíöèàëüíî ìîãóò âûïîëíÿòü 4-5 êîìàíä. Îòðèöàòåëüíûé ïðèîðèòåò óìåíüøàåò âåðîÿòíîñòü âûäà÷è çàäàíèÿ êîìàíäàì."/>
+            <ext:ToolTip runat="server" Target="Task_Name" Html="Ð’ Ð¿Ñ€Ð¾Ñ†ÐµÑÑÐµ Ð¸Ð³Ñ€Ñ‹ ÐºÐ¾Ð¼Ð°Ð½Ð´Ñ‹ Ð½Ðµ ÑƒÐ²Ð¸Ð´ÑÑ‚ ÑÑ‚Ð¾ Ð½Ð°Ð·Ð²Ð°Ð½Ð¸Ðµ, ÐºÐ¾Ð´Ð¾Ð²Ð¾Ðµ Ð½Ð°Ð·Ð²Ð°Ð½Ð¸Ðµ Ð·Ð°Ð´Ð°Ð½Ð¸Ñ Ð´Ð¾ÑÑ‚ÑƒÐ¿Ð½Ð¾ Ñ‚Ð¾Ð»ÑŒÐºÐ¾ Ð°Ð²Ñ‚Ð¾Ñ€Ð°Ð¼ Ð¸Ð³Ñ€Ñ‹. ÐÐ°Ð¿Ñ€Ð¸Ð¼ÐµÑ€, Ð¯ÐºÑƒÐ½Ð¸ÐºÐ¸."></ext:ToolTip>
+            <ext:ToolTip runat="server" Target="Task_StreetChallendge" Html="Ð”Ð°Ð½Ð½Ñ‹Ð¹ Ð¿Ñ€Ð¸Ð·Ð½Ð°Ðº ÑƒÐºÐ°Ð·Ñ‹Ð²Ð°ÐµÑ‚, Ñ‡Ñ‚Ð¾ Ð·Ð°Ð´Ð°Ð½Ð¸Ðµ Ð±ÑƒÐ´ÐµÑ‚ Ð²Ñ‹Ð´Ð°Ð½Ð¾ Ð²ÑÐµÐ¼ ÐºÐ¾Ð¼Ð°Ð½Ð´Ð°Ð¼ ÐºÐ°Ðº Ð¿ÐµÑ€Ð²Ð¾Ðµ Ð·Ð°Ð´Ð°Ð½Ð¸Ðµ Ð² Ð½Ð°Ñ‡Ð°Ð»Ðµ Ð¸Ð³Ñ€Ñ‹."/>
+            <ext:ToolTip runat="server" Target="Task_Agents" Html="ÐŸÑ€Ð¸Ð·Ð½Ð°Ðº Ð¸ÑÐ¿Ð¾Ð»ÑŒÐ·ÑƒÐµÑ‚ÑÑ Ð¿Ñ€Ð¸ Ñ€Ð°ÑÐ¿Ñ€ÐµÐ´ÐµÐ»ÐµÐ½Ð¸Ð¸ Ð·Ð°Ð´Ð°Ð½Ð¸Ð¹ Ñ‚Ð°Ðº, Ñ‡Ñ‚Ð¾Ð±Ñ‹ Ð·Ð°Ð´Ð°Ð½Ð¸Ðµ Ñ Ð°Ð³ÐµÐ½Ñ‚Ð°Ð¼Ð¸ Ð²Ñ‹Ð¿Ð¾Ð»Ð½ÑÐ»Ð¾ÑÑŒ ÐµÐ´Ð¸Ð½Ð¾Ð²Ñ€ÐµÐ¼ÐµÐ½Ð½Ð¾ Ñ‚Ð¾Ð»ÑŒÐºÐ¾ Ð¾Ð´Ð½Ð¾Ð¹ ÐºÐ¾Ð¼Ð°Ð½Ð´Ð¾Ð¹. ÐÐ°Ð¿Ñ€Ð¸Ð¼ÐµÑ€, Ð·Ð°Ð´Ð°Ð½Ð¸Ðµ Ñ +500."/>
+            <ext:ToolTip runat="server" Target="Task_Locked" Html="Ð•ÑÐ»Ð¸ ÑƒÑÑ‚Ð°Ð½Ð¾Ð²Ð»ÐµÐ½ Ð´Ð°Ð½Ð½Ñ‹Ð¹ Ð¿Ñ€Ð¸Ð·Ð½Ð°Ðº, Ñ‚Ð¾ Ð·Ð°Ð´Ð°Ð½Ð¸Ðµ Ð½Ðµ Ð±ÑƒÐ´ÐµÑ‚ Ð²Ñ‹Ð´Ð°Ð²Ð°Ñ‚ÑŒÑÑ ÐºÐ¾Ð¼Ð°Ð½Ð´Ð°Ð¼. Ð­Ñ‚Ð¾Ñ‚ Ð¿Ñ€Ð¸Ð·Ð½Ð°Ðº Ð¼Ð¾Ð¶Ð½Ð¾ ÑƒÑÑ‚Ð°Ð½Ð°Ð²Ð»Ð¸Ð²Ð°Ñ‚ÑŒ/ÑÐ½Ð¸Ð¼Ð°Ñ‚ÑŒ Ð² Ð¿Ñ€Ð¾Ñ†ÐµÑÑÐµ Ð¸Ð³Ñ€Ñ‹."/>
+            <ext:ToolTip runat="server" Target="Task_TaskType" Html="0 - ÐºÐ»Ð°ÑÑÐ¸Ñ‡ÐµÑÐºÐ¾Ðµ Ð·Ð°Ð´Ð°Ð½Ð¸Ðµ, 1 - Ð·Ð°Ð´Ð°Ð½Ð¸Ðµ Ñ ÑƒÑÐºÐ¾Ñ€ÐµÐ½Ð¸ÐµÐ¼, 2 - Ð·Ð°Ð´Ð°Ð½Ð¸Ðµ Ñ Ð²Ñ‹Ð±Ð¾Ñ€Ð¾Ð¼ Ð¿Ð¾Ð´ÑÐºÐ°Ð·ÐºÐ¸."/>
+            <ext:ToolTip runat="server" Target="Task_Priority" Title="ÐŸÑ€Ð¸Ð¾Ñ€Ð¸Ñ‚ÐµÑ‚ Ð·Ð°Ð´Ð°Ð½Ð¸Ñ" AutoHide="false" Closable="true" Draggable="true" Html="ÐŸÑ€Ð¸Ð¾Ñ€Ð¸Ñ‚ÐµÑ‚ Ð¼Ð¾Ð¶ÐµÑ‚ Ð±Ñ‹Ñ‚ÑŒ Ð¿Ð¾Ð»Ð¾Ð¶Ð¸Ñ‚ÐµÐ»ÑŒÐ½Ñ‹Ð¼ Ð¸Ð»Ð¸ Ð¾Ñ‚Ñ€Ð¸Ñ†Ð°Ñ‚ÐµÐ»ÑŒÐ½Ñ‹Ð¼. ÐŸÑ€Ð¸Ð¾Ñ€Ð¸Ñ‚ÐµÑ‚ Ñ€Ð°Ð²Ð½Ñ‹Ð¹ 100 Ð¿Ð¾Ð·Ð²Ð¾Ð»ÑÐµÑ‚ Ð±Ñ‹ÑÑ‚Ñ€ÐµÐµ Ð¿Ð¾Ð»ÑƒÑ‡Ð¸Ñ‚ÑŒ ÐºÐ¾Ð¼Ð°Ð½Ð´Ð°Ð¼ ÑÑ‚Ð¾ Ð·Ð°Ð´Ð°Ð½Ð¸Ðµ, Ð¿Ñ€Ð¸ ÑÑ‚Ð¾Ð¼ Ð¾Ð´Ð½Ð¾Ð²Ñ€ÐµÐ¼ÐµÐ½Ð½Ð¾ Ð´Ð°Ð½Ð½Ð¾Ðµ Ð·Ð°Ð´Ð°Ð½Ð¸Ðµ Ð¿Ð¾Ñ‚ÐµÐ½Ñ†Ð¸Ð°Ð»ÑŒÐ½Ð¾ ÑÐ¼Ð¾Ð³ÑƒÑ‚ Ð²Ñ‹Ð¿Ð¾Ð»Ð½ÑÑ‚ÑŒ 3-4 ÐºÐ¾Ð¼Ð°Ð½Ð´Ñ‹. ÐŸÑ€Ð¸ Ð¿Ñ€Ð¸Ð¾Ñ€Ð¸Ñ‚ÐµÑ‚Ðµ 150 Ð¾Ð´Ð½Ð¾Ð²Ñ€ÐµÐ¼ÐµÐ½Ð½Ð¾ Ð·Ð°Ð´Ð°Ð½Ð¸Ðµ Ð¿Ð¾Ñ‚ÐµÐ½Ñ†Ð¸Ð°Ð»ÑŒÐ½Ð¾ Ð¼Ð¾Ð³ÑƒÑ‚ Ð²Ñ‹Ð¿Ð¾Ð»Ð½ÑÑ‚ÑŒ 4-5 ÐºÐ¾Ð¼Ð°Ð½Ð´. ÐžÑ‚Ñ€Ð¸Ñ†Ð°Ñ‚ÐµÐ»ÑŒÐ½Ñ‹Ð¹ Ð¿Ñ€Ð¸Ð¾Ñ€Ð¸Ñ‚ÐµÑ‚ ÑƒÐ¼ÐµÐ½ÑŒÑˆÐ°ÐµÑ‚ Ð²ÐµÑ€Ð¾ÑÑ‚Ð½Ð¾ÑÑ‚ÑŒ Ð²Ñ‹Ð´Ð°Ñ‡Ð¸ Ð·Ð°Ð´Ð°Ð½Ð¸Ñ ÐºÐ¾Ð¼Ð°Ð½Ð´Ð°Ð¼."/>
         </Body> 
     </ext:Panel>
-    <ext:Panel ID="tipsAccPanel" runat="server" Title="Òåêñò çàäàíèÿ è ïîäñêàçêè" Border="false" Icon="Note">
+    <ext:Panel ID="tipsAccPanel" runat="server" Title="Ð¢ÐµÐºÑÑ‚ Ð·Ð°Ð´Ð°Ð½Ð¸Ñ Ð¸ Ð¿Ð¾Ð´ÑÐºÐ°Ð·ÐºÐ¸" Border="false" Icon="Note">
         <Body>
             <uc:TipsPanel ID="tipsPenel" runat="server" />
         </Body>
     </ext:Panel>
-    <ext:Panel ID="codesAccPanel" runat="server" Title="Êîäû" Border="false" Icon="Pill">
+    <ext:Panel ID="codesAccPanel" runat="server" Title="ÐšÐ¾Ð´Ñ‹" Border="false" Icon="Pill">
         <Body>
             <uc:CodesPanel ID="codesPanel" runat="server" />
         </Body>

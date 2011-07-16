@@ -1,9 +1,9 @@
-<%@ Page Language="C#" MasterPageFile="~/Views/Shared/Site.Master" Inherits="System.Web.Mvc.ViewPage<AdminUsersController.UserFormViewModel>" %>
+п»ї<%@ Page Language="C#" MasterPageFile="~/Views/Shared/Site.Master" Inherits="System.Web.Mvc.ViewPage<AdminUsersController.UserFormViewModel>" %>
 <%@ Import Namespace="Beavers.Encounter.Web.Controllers" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContentPlaceHolder" runat="server">
 
-<h2>Свойства пользователя</h2>
+<h2>РЎРІРѕР№СЃС‚РІР° РїРѕР»СЊР·РѕРІР°С‚РµР»СЏ</h2>
 
 <% if (ViewContext.TempData[ControllerEnums.GlobalViewDataProperty.PageMessage.ToString()] != null) { %>
     <p id="pageMessage"><%= ViewContext.TempData[ControllerEnums.GlobalViewDataProperty.PageMessage.ToString()]%></p>
@@ -21,12 +21,12 @@
     <%= Model.User.RenderEditable<User>(Html, x => x.Nick)%>
     <%= Model.User.RenderEditable<User>(Html, x => x.Icq)%>
     <%= Model.User.RenderEditable<User>(Html, x => x.Phone)%>
-    <%= Model.User.RenderEditableSingle<User, Team>(Html, x => x.Team, Model.Teams, new Team { Name = "<Не указано>" })%>
-    <%= Model.User.RenderEditableSingle<User, Game>(Html, x => x.Game, Model.Games, new Game { Name = "<Не указано>" })%>
+    <%= Model.User.RenderEditableSingle<User, Team>(Html, x => x.Team, Model.Teams, new Team { Name = "<РќРµ СѓРєР°Р·Р°РЅРѕ>" })%>
+    <%= Model.User.RenderEditableSingle<User, Game>(Html, x => x.Game, Model.Games, new Game { Name = "<РќРµ СѓРєР°Р·Р°РЅРѕ>" })%>
 
     <div>
-        <%= Html.SubmitButton("btnSave", "Сохранить") %>
-        <%= Html.Button("btnCancel", "Отмена", HtmlButtonType.Button,
+        <%= Html.SubmitButton("btnSave", "РЎРѕС…СЂР°РЅРёС‚СЊ") %>
+        <%= Html.Button("btnCancel", "РћС‚РјРµРЅР°", HtmlButtonType.Button,
                         "window.location.href = '" + Html.BuildUrlFromExpression<AdminUsersController>(c => c.Index()) + "';")%>
     </div>                    
 <% } %>

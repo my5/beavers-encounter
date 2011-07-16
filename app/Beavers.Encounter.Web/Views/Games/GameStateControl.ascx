@@ -1,30 +1,30 @@
-<%@ Control Language="C#" Inherits="System.Web.Mvc.ViewUserControl<Game>"%>
+п»ї<%@ Control Language="C#" Inherits="System.Web.Mvc.ViewUserControl<Game>"%>
 
-<h2>Управление игрой</h2>
+<h2>РЈРїСЂР°РІР»РµРЅРёРµ РёРіСЂРѕР№</h2>
 
-	<%= Html.ActionLink<GamesController>(c => c.CurrentState(Model.Id), "Состояние игры:")%>
+	<%= Html.ActionLink<GamesController>(c => c.CurrentState(Model.Id), "РЎРѕСЃС‚РѕСЏРЅРёРµ РёРіСЂС‹:")%>
     <%= Html.Encode(Enum.GetName(typeof(GameStates), Model.GameState))%>
     <% 
         if (Model.GameState == GameStates.Planned)
        { %>
    
-        <%= Html.Button("btnStartupGame", "Подготовить к запуску", HtmlButtonType.Button,
+        <%= Html.Button("btnStartupGame", "РџРѕРґРіРѕС‚РѕРІРёС‚СЊ Рє Р·Р°РїСѓСЃРєСѓ", HtmlButtonType.Button,
                         "window.location.href = '" + Html.BuildUrlFromExpression<GamesController>(c => c.StartupGame(Model.Id)) + "';")%>
     <% }
         else if (Model.GameState == GameStates.Started)
        { %>
-        <%= Html.Button("btnStopGame", "Остановить игру", HtmlButtonType.Button,
+        <%= Html.Button("btnStopGame", "РћСЃС‚Р°РЅРѕРІРёС‚СЊ РёРіСЂСѓ", HtmlButtonType.Button,
                         "window.location.href = '" + Html.BuildUrlFromExpression<GamesController>(c => c.StopGame(Model.Id)) + "';")%>
     <% }
         else if (Model.GameState == GameStates.Startup)
        { %>
-        <%= Html.Button("btnStartGame", "Запустить игру", HtmlButtonType.Button,
+        <%= Html.Button("btnStartGame", "Р—Р°РїСѓСЃС‚РёС‚СЊ РёРіСЂСѓ", HtmlButtonType.Button,
                         "window.location.href = '" + Html.BuildUrlFromExpression<GamesController>(c => c.StartGame(Model.Id)) + "';")%>
     <% }
         else if (Model.GameState == GameStates.Finished)
        { %>
 
-        <%= Html.Button("btnCloseGame", "Закрыть игру", HtmlButtonType.Button,
+        <%= Html.Button("btnCloseGame", "Р—Р°РєСЂС‹С‚СЊ РёРіСЂСѓ", HtmlButtonType.Button,
                         "window.location.href = '" + Html.BuildUrlFromExpression<GamesController>(c => c.CloseGame(Model.Id)) + "';")%>
     <% } %>
 
@@ -33,9 +33,9 @@
            Model.GameState == GameStates.Cloused)
        { %>
    
-        <%= Html.Button("btnResetGame", "Перезапуск игры", HtmlButtonType.Button,
+        <%= Html.Button("btnResetGame", "РџРµСЂРµР·Р°РїСѓСЃРє РёРіСЂС‹", HtmlButtonType.Button,
                         "window.location.href = '" + Html.BuildUrlFromExpression<GamesController>(c => c.ResetGame(Model.Id)) + "';")%>
     <% } %>
 
-        <div><%= Html.ActionLink<GameServiceController>(c => c.GetState(Model.Id), "Скачать состояние (текущую телеметрию) в архиве.")%></div>
+        <div><%= Html.ActionLink<GameServiceController>(c => c.GetState(Model.Id), "РЎРєР°С‡Р°С‚СЊ СЃРѕСЃС‚РѕСЏРЅРёРµ (С‚РµРєСѓС‰СѓСЋ С‚РµР»РµРјРµС‚СЂРёСЋ) РІ Р°СЂС…РёРІРµ.")%></div>
     

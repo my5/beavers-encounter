@@ -1,9 +1,9 @@
-<%@ Page Title="BonusTask Details" Language="C#" MasterPageFile="~/Views/Shared/Site.Master" AutoEventWireup="true" 
+п»ї<%@ Page Title="BonusTask Details" Language="C#" MasterPageFile="~/Views/Shared/Site.Master" AutoEventWireup="true" 
 	Inherits="System.Web.Mvc.ViewPage<BonusTask>" %>
 
 <asp:Content ContentPlaceHolderID="MainContentPlaceHolder" runat="server">
 
-    <h1>Свойства бонусного задания</h1>
+    <h1>РЎРІРѕР№СЃС‚РІР° Р±РѕРЅСѓСЃРЅРѕРіРѕ Р·Р°РґР°РЅРёСЏ</h1>
 
     <ul>
 		<li>
