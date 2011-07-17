@@ -161,7 +161,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\MockRepositoryBuilder.cs" />
     <Compile Include="ServiceLocatorInitializer.cs" />
-    <Compile Include="Services\GameServiceTest.cs" />
     <Compile Include="TestExtensions.cs" />
     <Compile Include="TestHelpers\AreaRegistrationTest.cs" />
     <Compile Include="TestHelpers\ControllerTestContext.cs" />

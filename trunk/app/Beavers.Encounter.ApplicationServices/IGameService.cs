@@ -23,7 +23,7 @@ namespace Beavers.Encounter.ApplicationServices
         /// <summary>
         /// Завершить игру. 
         /// </summary>
-        void StopGame(Game game);
+        void StopGame(Game game, DateTime recalcTime);
 
         /// <summary>
         /// Закрыть игру.
@@ -50,7 +50,7 @@ namespace Beavers.Encounter.ApplicationServices
         /// <summary>
         /// Помечает задание как успешно выполненное.
         /// </summary>
-        void CloseTaskForTeam(TeamTaskState teamTaskState, TeamTaskStateFlag flag);
+        void CloseTaskForTeam(TeamTaskState teamTaskState, TeamTaskStateFlag flag, DateTime recalcTime);
 
         /// <summary>
         /// Назначение нового задания команде.
@@ -77,7 +77,7 @@ namespace Beavers.Encounter.ApplicationServices
         /// <summary>
         /// Возвращает варианты выбора подсказок, если это необходимо для задания с выбором подсказки.
         /// </summary>
-        IEnumerable<Tip> GetSuggestTips(TeamTaskState teamTaskState);
+        IEnumerable<Tip> GetSuggestTips(TeamTaskState teamTaskState, DateTime recalcTime);
 
         DataTable GetGameResults(int gameId);
     }

@@ -12,42 +12,42 @@ namespace Beavers.Encounter.ApplicationServices
         /// <param name="codes">Принятый код.</param>
         /// <param name="teamGameState">Команда отправившая код.</param>
         /// <param name="user">Игрок отправившый код.</param>
-        /// <param name="dateTimeNow"></param>
-        void SubmitCode(string codes, TeamGameState teamGameState, User user, DateTime dateTimeNow);
+        /// <param name="recalcTime"></param>
+        void SubmitCode(string codes, TeamGameState teamGameState, User user, DateTime recalcTime);
 
         /// <summary>
         /// Помечает задание как выполненное, назначает причину завершения.
         /// </summary>
-        void CloseTaskForTeam(TeamTaskState teamTaskState, TeamTaskStateFlag flag);
+        void CloseTaskForTeam(TeamTaskState teamTaskState, TeamTaskStateFlag flag, DateTime recalcTime);
 
         /// <summary>
         /// Назначение нового задания команде.
         /// </summary>
-        void AssignNewTask(TeamGameState teamGameState, Task oldTask, DateTime dateTimeNow);
+        void AssignNewTask(TeamGameState teamGameState, Task oldTask, DateTime recalcTime);
 
         /// <summary>
         /// Отправить команде подсказку.
         /// </summary>
         /// <param name="teamTaskState"></param>
         /// <param name="tip"></param>
-        /// <param name="dateTimeNow"></param>
-        void AssignNewTaskTip(TeamTaskState teamTaskState, Tip tip, DateTime dateTimeNow);
+        /// <param name="recalcTime"></param>
+        void AssignNewTaskTip(TeamTaskState teamTaskState, Tip tip, DateTime recalcTime);
 
         /// <summary>
         /// "Ускориться".
         /// </summary>
         /// <param name="teamTaskState">Состояние команды затребовавшая ускорение.</param>
-        /// <param name="dateTimeNow"></param>
-        void AccelerateTask(TeamTaskState teamTaskState, DateTime dateTimeNow);
+        /// <param name="recalcTime"></param>
+        void AccelerateTask(TeamTaskState teamTaskState, DateTime recalcTime);
 
         /// <summary>
         /// Проверка на превышение количества левых кодов. При превышении задание закрывается сразу перед первой подсказкой.
         /// </summary>
-        void CheckExceededBadCodes(TeamGameState teamGameState, DateTime dateTimeNow);
+        void CheckExceededBadCodes(TeamGameState teamGameState, DateTime recalcTime);
 
         /// <summary>
         /// Возвращает варианты выбора подсказок, если это необходимо для задания с выбором подсказки.
         /// </summary>
-        IEnumerable<Tip> GetSuggestTips(TeamTaskState teamTaskState);
+        IEnumerable<Tip> GetSuggestTips(TeamTaskState teamTaskState, DateTime recalcTime);
     }
 }

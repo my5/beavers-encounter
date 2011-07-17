@@ -15,7 +15,7 @@ namespace Beavers.Encounter.ApplicationServices
         {
             // Получаем все незаблокированные задания для текущей игры
             var gameTasks = taskRepository.GetAll()
-                .Where(t => t.Game.Id == teamGameState.Game.Id && !t.Locked);
+                .Where(t => t.Game == teamGameState.Game && !t.Locked);
 
             // Формируем список номеров групп заданий, с которыми команда уже познакомилась
             List<int> executedGroupTags = new List<int>();
@@ -33,7 +33,7 @@ namespace Beavers.Encounter.ApplicationServices
                 // и задание не входит ни в одну "засвеченную" группу,
                 // и не запрещена выдача задания текущей команде,
                 // то добавляем задание в список
-                if (!teamGameState.AcceptedTasks.Any(x => x.Task.Id == task.Id) &&
+                if (!teamGameState.AcceptedTasks.Any(x => x.Task == task) &&
                     !executedGroupTags.Contains(task.GroupTag) &&
                     !task.NotForTeams.Contains(teamGameState.Team))
                     accessibleTasks.Add(task);

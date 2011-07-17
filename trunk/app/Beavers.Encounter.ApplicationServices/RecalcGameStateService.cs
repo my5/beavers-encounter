@@ -62,7 +62,7 @@ namespace Beavers.Encounter.ApplicationServices
         {
             if ((recalcDateTime - game.GameDate).TotalMinutes >= game.TotalTime && game.GameState == GameStates.Started)
             {
-                gameService.StopGame(game);
+                gameService.StopGame(game, recalcDateTime);
             }
         }
 
@@ -152,7 +152,7 @@ namespace Beavers.Encounter.ApplicationServices
                     : TeamTaskStateFlag.Overtime;
 
                 Task oldTask = teamGameState.ActiveTaskState.Task;
-                gameService.CloseTaskForTeam(teamGameState.ActiveTaskState, closeFlag);
+                gameService.CloseTaskForTeam(teamGameState.ActiveTaskState, closeFlag, recalcDateTime);
                 gameService.AssignNewTask(teamGameState, oldTask, recalcDateTime);
             }
         }

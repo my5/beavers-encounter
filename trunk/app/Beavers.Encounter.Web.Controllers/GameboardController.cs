@@ -531,7 +531,7 @@ namespace Beavers.Encounter.Web.Controllers
                         gameService.StartGame(game);
                         break;
                     case "Finished":
-                        gameService.StopGame(game);
+                        gameService.StopGame(game, DateTime.Now);
                         break;
                     case "Cloused":
                         gameService.CloseGame(game);

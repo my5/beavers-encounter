@@ -125,7 +125,7 @@ namespace Beavers.Encounter.ApplicationServices
             GetGameDemon(game.Id).Start();
         }
 
-        public void StopGame(Game game)
+        public void StopGame(Game game, DateTime recalcTime)
         {
             Check.Require(game.GameState == GameStates.Started, String.Format(
                     "Невозможно остановить игру, когда она находится в режиме {0}.",
@@ -149,10 +149,10 @@ namespace Beavers.Encounter.ApplicationServices
                 {
                     if (team.TeamGameState.ActiveTaskState != null)
                     {
-                        taskService.CloseTaskForTeam(team.TeamGameState.ActiveTaskState, TeamTaskStateFlag.Overtime);
+                        taskService.CloseTaskForTeam(team.TeamGameState.ActiveTaskState, TeamTaskStateFlag.Overtime, recalcTime);
                     }
 
-                    team.TeamGameState.GameDoneTime = DateTime.Now;
+                    team.TeamGameState.GameDoneTime = recalcTime;
                 }
             }
         }
@@ -223,9 +223,10 @@ namespace Beavers.Encounter.ApplicationServices
         /// </summary>
         /// <param name="teamTaskState"></param>
         /// <param name="flag"></param>
-        public void CloseTaskForTeam(TeamTaskState teamTaskState, TeamTaskStateFlag flag)
+        /// <param name="recalcTime"></param>
+        public void CloseTaskForTeam(TeamTaskState teamTaskState, TeamTaskStateFlag flag, DateTime recalcTime)
         {
-            taskService.CloseTaskForTeam(teamTaskState, flag);
+            taskService.CloseTaskForTeam(teamTaskState, flag, recalcTime);
         }
 
         /// <summary>
@@ -268,9 +269,9 @@ namespace Beavers.Encounter.ApplicationServices
         /// <summary>
         /// Возвращает варианты выбора подсказок, если это необходимо для задания с выбором подсказки.
         /// </summary>
-        public IEnumerable<Tip> GetSuggestTips(TeamTaskState teamTaskState)
+        public IEnumerable<Tip> GetSuggestTips(TeamTaskState teamTaskState, DateTime recalcTime)
         {
-            return taskService.GetSuggestTips(teamTaskState);
+            return taskService.GetSuggestTips(teamTaskState, recalcTime);
         }
 
         #endregion Управление заданиями
