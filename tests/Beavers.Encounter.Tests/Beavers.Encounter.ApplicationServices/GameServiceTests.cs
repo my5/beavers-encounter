@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using Beavers.Encounter.ApplicationServices;
 using Beavers.Encounter.Core;
 using NUnit.Framework;
@@ -308,28 +306,28 @@ namespace Tests.Beavers.Encounter.ApplicationServices
             ExpectedMessage = "Невозможно остановить игру, когда она находится в режиме Planned.")]
         public void CanStopWhenGamePlannedTest()
         {
-            service.StopGame(new Game { GameState = GameStates.Planned });
+            service.StopGame(new Game { GameState = GameStates.Planned }, DateTime.Now);
         }
 
         [Test, ExpectedException(ExpectedException = typeof(PreconditionException),
             ExpectedMessage = "Невозможно остановить игру, когда она находится в режиме Startup.")]
         public void CanStopWhenGameStartupTest()
         {
-            service.StopGame(new Game { GameState = GameStates.Startup });
+            service.StopGame(new Game { GameState = GameStates.Startup }, DateTime.Now);
         }
 
         [Test, ExpectedException(ExpectedException = typeof(PreconditionException),
             ExpectedMessage = "Невозможно остановить игру, когда она находится в режиме Finished.")]
         public void CanStopWhenGameFinishedTest()
         {
-            service.StopGame(new Game { GameState = GameStates.Finished });
+            service.StopGame(new Game { GameState = GameStates.Finished }, DateTime.Now);
         }
 
         [Test, ExpectedException(ExpectedException = typeof(PreconditionException),
             ExpectedMessage = "Невозможно остановить игру, когда она находится в режиме Cloused.")]
         public void CanStopWhenGameClousedTest()
         {
-            service.StopGame(new Game { GameState = GameStates.Cloused });
+            service.StopGame(new Game { GameState = GameStates.Cloused }, DateTime.Now);
         }
 
         #endregion StopGame
@@ -339,63 +337,72 @@ namespace Tests.Beavers.Encounter.ApplicationServices
         [Test]
         public void CanTaskServiceSubmitCodeTest()
         {
-            Expect.Call(() => taskService.SubmitCode(null, null, null, DateTime.Now)).IgnoreArguments();
+            DateTime dateTimeNow = DateTime.Now;
+            Expect.Call(() => taskService.SubmitCode("1", null, null, dateTimeNow));
             mocks.ReplayAll();
-            service.SubmitCode("1", null, null, DateTime.Now);
+            service.SubmitCode("1", null, null, dateTimeNow);
             mocks.VerifyAll();
         }
 
         [Test]
         public void CanTaskServiceCloseTaskForTeamTest()
         {
-            Expect.Call(() => taskService.CloseTaskForTeam(null, TeamTaskStateFlag.Execute)).IgnoreArguments();
+            DateTime recalcTime = DateTime.Now;
+
+            Expect.Call(() => taskService.CloseTaskForTeam(null, TeamTaskStateFlag.Execute, recalcTime));
             mocks.ReplayAll();
-            service.CloseTaskForTeam(null, TeamTaskStateFlag.Execute);
+            service.CloseTaskForTeam(null, TeamTaskStateFlag.Execute, recalcTime);
             mocks.VerifyAll();
         }
 
         [Test]
         public void CanTaskServiceAssignNewTaskTest()
         {
-            Expect.Call(() => taskService.AssignNewTask(null, null, DateTime.Now)).IgnoreArguments();
+            DateTime dateTimeNow = DateTime.Now;
+            Expect.Call(() => taskService.AssignNewTask(null, null, dateTimeNow));
             mocks.ReplayAll();
-            service.AssignNewTask(null, null, DateTime.Now);
+            service.AssignNewTask(null, null, dateTimeNow);
             mocks.VerifyAll();
         }
 
         [Test]
         public void CanTaskServiceAssignNewTaskTipTest()
         {
-            Expect.Call(() => taskService.AssignNewTaskTip(null, null, DateTime.Now)).IgnoreArguments();
+            DateTime dateTimeNow = DateTime.Now;
+            Expect.Call(() => taskService.AssignNewTaskTip(null, null, dateTimeNow));
             mocks.ReplayAll();
-            service.AssignNewTaskTip(null, null, DateTime.Now);
+            service.AssignNewTaskTip(null, null, dateTimeNow);
             mocks.VerifyAll();
         }
 
         [Test]
         public void CanTaskServiceAccelerateTaskTest()
         {
-            Expect.Call(() => taskService.AccelerateTask(null, DateTime.Now)).IgnoreArguments();
+            DateTime dateTimeNow = DateTime.Now;
+            Expect.Call(() => taskService.AccelerateTask(null, dateTimeNow));
             mocks.ReplayAll();
-            service.AccelerateTask(null, DateTime.Now);
+            service.AccelerateTask(null, dateTimeNow);
             mocks.VerifyAll();
         }
 
         [Test]
         public void CanTaskServiceCheckExceededBadCodesTest()
         {
-            Expect.Call(() => taskService.CheckExceededBadCodes(null, DateTime.Now)).IgnoreArguments();
+            DateTime dateTimeNow = DateTime.Now;
+            Expect.Call(() => taskService.CheckExceededBadCodes(null, dateTimeNow));
             mocks.ReplayAll();
-            service.CheckExceededBadCodes(null, DateTime.Now);
+            service.CheckExceededBadCodes(null, dateTimeNow);
             mocks.VerifyAll();
         }
 
         [Test]
         public void CanTaskServiceGetSuggestTipsTest()
         {
-            Expect.Call(taskService.GetSuggestTips(null)).IgnoreArguments();
+            DateTime recalcTime = DateTime.Now;
+
+            Expect.Call(taskService.GetSuggestTips(null, recalcTime));
             mocks.ReplayAll();
-            service.GetSuggestTips(null);
+            service.GetSuggestTips(null, recalcTime);
             mocks.VerifyAll();
         }
 

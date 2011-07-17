@@ -1,3 +1,4 @@
+using System;
 using System.Data;
 using System.Web.Mvc;
 using System.Collections.Generic;
@@ -71,7 +72,7 @@ namespace Beavers.Encounter.Web.Controllers
         [AcceptVerbs(HttpVerbs.Get)]
         public ActionResult StopGame(int id)
         {
-            gameService.StopGame(gameRepository.Get(id));
+            gameService.StopGame(gameRepository.Get(id), DateTime.Now);
             return this.RedirectToAction(c => c.Edit(id));
         }
 

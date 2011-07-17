@@ -82,7 +82,7 @@ namespace Beavers.Encounter.Web.Controllers
                 if (viewModel.ActiveTaskState != null &&
                     viewModel.ActiveTaskState.Task.TaskType == TaskTypes.RussianRoulette)
                 {
-                    viewModel.SuggestTips = gameService.GetSuggestTips(viewModel.ActiveTaskState);
+                    viewModel.SuggestTips = gameService.GetSuggestTips(viewModel.ActiveTaskState, DateTime.Now);
 
                     if (viewModel.SuggestTips != null)
                     {
@@ -139,7 +139,7 @@ namespace Beavers.Encounter.Web.Controllers
                 Task oldTask = team.TeamGameState.ActiveTaskState.Task;
                 if (team.TeamGameState.ActiveTaskState.AcceptedCodes.Count(x => !x.Code.IsBonus) == team.TeamGameState.ActiveTaskState.Task.Codes.Count(x => !x.IsBonus))
                 {
-                    gameService.CloseTaskForTeam(team.TeamGameState.ActiveTaskState, TeamTaskStateFlag.Success);
+                    gameService.CloseTaskForTeam(team.TeamGameState.ActiveTaskState, TeamTaskStateFlag.Success, DateTime.Now);
                     gameService.AssignNewTask(team.TeamGameState, oldTask, DateTime.Now);
                 }
             }
@@ -161,7 +161,7 @@ namespace Beavers.Encounter.Web.Controllers
                 team.TeamGameState.ActiveTaskState.Id == activeTaskStateId)
             { // TODO: Перенести в gameService
                 Task oldTask = team.TeamGameState.ActiveTaskState.Task;
-                gameService.CloseTaskForTeam(team.TeamGameState.ActiveTaskState, TeamTaskStateFlag.Canceled);
+                gameService.CloseTaskForTeam(team.TeamGameState.ActiveTaskState, TeamTaskStateFlag.Canceled, DateTime.Now);
                 gameService.AssignNewTask(team.TeamGameState, oldTask, DateTime.Now);
             }
 
