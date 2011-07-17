@@ -35,7 +35,7 @@
                                 <li><%= Html.ActionLinkForAreas<TeamsController>(c => c.Index(), "Команды")%></li>
                                 <li><%= Html.ActionLinkForAreas<GamesController>(c => c.Index(), "Игры")%></li>
                         <%
-                                if (((User)HttpContext.Current.User).Role.IsAdministrator)
+                                if (HttpContext.Current.User.IsInRole("Administrator"))
                                 {
                         %>
                                 <li><%= Html.ActionLinkForAreas<AdminController>(c => c.Index(), "Администрирование")%></li>
